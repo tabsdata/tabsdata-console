@@ -6,6 +6,7 @@ from rich.table import Table
 
 from tdtui.core.find_instances import main as find_instances
 
+
 console = Console()
 
 

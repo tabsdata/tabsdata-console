@@ -2,7 +2,8 @@ import typer
 from InquirerPy import inquirer
 from rich.console import Console
 from rich.panel import Panel
-from tdtui.instance.main import run_instance_management
+from tdtui.instance.cli import run_instance_management
+from yaspin import yaspin
 
 
 app = typer.Typer()

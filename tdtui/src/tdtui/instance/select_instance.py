@@ -1,10 +1,9 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Static
-from textual.containers import Vertical
+from textual.containers import VerticalScroll  # 👈 changed this
 from textual import events
 
 from tdtui.core.find_instances import main as find_instances
-
 
 import logging
 import os
@@ -88,37 +87,37 @@ class InstanceCard(Static):
         content = f"{header}\n{line1}\n{line2}"
 
         if self.is_selected:
-            # Only wrap in style tags when selected
             return f"[bold white on #3b3b4f]{content}[/]"
         else:
-            # No extra tags when not selected
             return content
 
 
 class InstanceSelector(App):
     CSS = """
+    Screen {
+        background: black;
+    }
+
+    #list {
+        height: 100%;
+    }
 
     ExitCard {
-        width: auto;               /* size to content, not 100% */
         padding: 1 1;
-        border: round #404040;
-        width: 40; 
         border: round red;
+        width: 40;
     }
 
     CreateCard {
-        width: auto;               /* size to content, not 100% */
         padding: 1 1;
-        border: round #404040;
-        width: 40; 
         border: round blue;
+        width: 40;
     }
 
     InstanceCard {
-        width: auto;               /* size to content, not 100% */
         padding: 1 1;
         border: round #404040;
-        width: 40; 
+        width: 40;
     }
 
     InstanceCard.running {
@@ -132,17 +131,17 @@ class InstanceSelector(App):
 
     def __init__(self, instances=None):
         super().__init__()
-        if instances == None:
+        if instances is None:
             self.instances = find_instances()
         else:
             self.instances = instances
         self.cards: list[InstanceCard] = []
         self.index = 0
-        self.selected: InstanceCard = None
-        self.log("started1234")
+        self.selected: InstanceCard | None = None
 
     def compose(self) -> ComposeResult:
-        yield Vertical(id="list")
+        # 👇 use a scrollable container
+        yield VerticalScroll(id="list")
 
     def on_mount(self) -> None:
         container = self.query_one("#list")
@@ -151,7 +150,6 @@ class InstanceSelector(App):
         self.cards.append(create_card)
         container.mount(create_card)
 
-        # build cards
         for inst in self.instances:
             card = InstanceCard(inst)
             self.cards.append(card)
@@ -164,18 +162,19 @@ class InstanceSelector(App):
         if self.cards:
             self.cards[0].is_selected = True
             self.cards[0].refresh()
+            # optional: focus first card so keyboard focus is “inside”
+            self.cards[0].focus()
 
     def update_selection(self, new_index: int):
         if not self.cards:
             return
 
-        # unselect old
         self.cards[self.index].is_selected = False
         self.cards[self.index].refresh()
 
-        # select new
         self.index = new_index
         self.cards[self.index].is_selected = True
+        # 👇 this now actually scrolls because parent is scrollable
         self.cards[self.index].scroll_visible()
         self.cards[self.index].refresh()
 
@@ -185,22 +184,23 @@ class InstanceSelector(App):
 
         if event.key in ["ctrl+c", "escape", "ctrl+q"]:
             await self.action_quit()
+            return
 
         key = event.key
 
         if key == "down":
             if self.index < len(self.cards) - 1:
                 self.update_selection(self.index + 1)
-
+                event.stop()
         elif key == "up":
             if self.index > 0:
                 self.update_selection(self.index - 1)
-
+                event.stop()
         elif key == "enter":
             inst = self.cards[self.index].inst
             self.selected = inst
             await self.action_quit()
-            # instance dict has "name", n
+            event.stop()
 
 
 def run_instance_selector(instances=None):
@@ -210,4 +210,4 @@ def run_instance_selector(instances=None):
 
 
 if __name__ == "__main__":
-    run_instance_selector()
+    print(run_instance_selector())

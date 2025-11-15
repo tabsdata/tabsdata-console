@@ -5,6 +5,7 @@ import typer
 from InquirerPy import inquirer
 from rich.console import Console
 from rich.panel import Panel
+from yaspin import yaspin
 
 
 def run_instance_management():
@@ -22,6 +23,7 @@ def run_instance_management():
         display_instances_rich(instances)
     elif selection == "Start An Instance":
         instance = run_instance_selector(instances)
+        print(instance)
     elif selection == "Stop An Instance":
         instance = run_instance_selector(instances)
     elif selection == "Set Working Instance":

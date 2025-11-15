@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tdtui"
-version = "0.1.0.0"                # bump
+version = "0.1.0.1"                # bump
 description = "Interactive CLI for Tabsdata"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -15,7 +15,7 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["tdui*"]
+include = ["tdtui*"]
 
 [project.scripts]
-tdtui = "tdtui.main:main"
+tdtui = "tdtui.cli:main"
