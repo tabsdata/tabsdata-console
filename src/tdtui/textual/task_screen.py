@@ -61,6 +61,7 @@ class SequentialTasksScreenTemplate(Screen):
     .task-label { padding-left: 1; }
     #task-log { padding: 1 2; border: round $accent; overflow-y: auto; height: 20; width: 80%;}
     #task-box {align: center top;}
+    VerticalScroll { height: 1fr; overflow-y: auto; }
     """
 
     COLOR_PALETTE = [
@@ -112,7 +113,7 @@ class SequentialTasksScreenTemplate(Screen):
     async def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "close-btn":
             active_screen = self.app.screen
-            self.app.push_screen("main")
+            self.app.push_screen("GettingStarted")
 
     def log_line(self, task: str | None, msg: str) -> None:
         if task:

@@ -20,7 +20,10 @@ src/tdtui/instance/select_instance.py
 src/tdtui/textual/__init__.py
 src/tdtui/textual/api_processor.py
 src/tdtui/textual/screen_template.py
+src/tdtui/textual/spinners.py
+src/tdtui/textual/task_screen.py
 src/tdtui/textual/test_footer.py
 src/tdtui/textual/textual_instance_config.py
 src/tdtui/textual/textual_main.py
+src/tdtui/textual/textual_screens.py
 src/tdtui/textual/textual_simple.py
