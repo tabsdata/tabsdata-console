@@ -67,8 +67,13 @@ class InstanceWidget(Static):
             cfg_int = inst.get("cfg_int", None)
             arg_ext = inst.get("arg_ext", None)
             arg_int = inst.get("arg_int", None)
-
-        if status == "Running":
+        if inst_name == "_Create_Instance":
+            status_color = "#1F66D1"
+            status_line = f"Create a New Instance"
+            line1 = f""
+            line2 = f""
+            self.app.port_selection["status"] = "Running"
+        elif status == "Running":
             status_color = "#22c55e"
             status_line = f"{name}  ● Running"
             line1 = f"running on → ext: {arg_ext}"
