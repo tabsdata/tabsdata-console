@@ -2394,3 +2394,397 @@ c: []
 {'name': 'kdfjgbkfsd', 'external_port': 6678, 'internal_port': 5654, 'status': 'Not Running'}
 instance chosen is kdfjgbkfsd at type <class 'str'>
 GettingStartedScreen
+{'name': None, 'external_port': None, 'internal_port': None, 'status': 'Not Running'}
+instance chosen is None at type <class 'NoneType'>
+GettingStartedScreen
+InstanceSelectionScreen
+Size(width=0, height=0)
+Size(width=0, height=0)
+Size(width=311, height=20)
+Size(width=311, height=20)
+Size(width=311, height=20)
+{'name': 'tabsdata', 'external_port': 2457, 'internal_port': 2458, 'status': 'Not Running'}
+Starting setup tasks…
+[cyan][Preparing Instance]:[/] Starting
+a: Not Running
+b: {'name': 'tabsdata', 'external_port': 2457, 'internal_port': 2458, 'status': 'Not Running'}
+c: []
+[cyan][Preparing Instance]:[/] START SERVER
+[cyan][Preparing Instance]:[/] 
+[cyan][Preparing Instance]:[/] ╭──────────────────────────────────────────────────────────────────────────────────╮
+[cyan][Preparing Instance]:[/] │                                     Tabsdata                                     │
+[cyan][Preparing Instance]:[/] │                                                                                  │
+[cyan][Preparing Instance]:[/] │                          Thank you for using Tabsdata!                           │
+[cyan][Preparing Instance]:[/] │                                                                                  │
+[cyan][Preparing Instance]:[/] │       Your use of this product is subject to the terms of use available at       │
+[cyan][Preparing Instance]:[/] │                          https://tabsdata.com/license.                           │
+[cyan][Preparing Instance]:[/] ╰──────────────────────────────────────────────────────────────────────────────────╯
+[cyan][Preparing Instance]:[/] 2025-11-26T21:21:15.381357Z  INFO td_supervisor::services::tdserver: Instance '/Users/danieladayev/.tabsdata/instances/tabsdata' successfully created!
+[cyan][Preparing Instance]:[/] 2025-11-26T21:21:15.397607Z  INFO td_supervisor::services::tdserver: Database '/Users/danieladayev/.tabsdata/instances/tabsdata/repository/database/tabsdata.db' successfully created!
+[cyan][Preparing Instance]:[/] Exited with code 0
+[cyan][Preparing Instance]:[/] Finished
+[magenta][Binding Ports]:[/] Starting
+/Users/danieladayev/.tabsdata/instances/tabsdata/workspace/config/proc/regular/apiserver/config/config.yaml
+[magenta][Binding Ports]:[/] Successfully set 127.0.0.1:2457 on addresses
+[magenta][Binding Ports]:[/] Successfully set 127.0.0.1:2458 on internal_addresses
+[magenta][Binding Ports]:[/] Finished
+[magenta][Connecting to Tabsdata instance]:[/] Starting
+[magenta][Connecting to Tabsdata instance]:[/] Running tdserver status…
+[magenta][Connecting to Tabsdata instance]:[/] 2025-11-26T21:21:15.681112Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[magenta][Connecting to Tabsdata instance]:[/] 2025-11-26T21:21:19.681645Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[magenta][Connecting to Tabsdata instance]:[/] 2025-11-26T21:21:19.681652Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[magenta][Connecting to Tabsdata instance]:[/] 2025-11-26T21:21:19.914774Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[magenta][Connecting to Tabsdata instance]:[/] 2025-11-26T21:21:25.159230Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 5s out of 5m. Waiting…
+[magenta][Connecting to Tabsdata instance]:[/] 2025-11-26T21:21:30.181103Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 10s out of 5m. Waiting…
+[magenta][Connecting to Tabsdata instance]:[/] 2025-11-26T21:21:35.198057Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 15s out of 5m. Waiting…
+unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-360' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py:144> exception=NoMatches("No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py", line 136, in run_single_task
+    await task.func(task.description)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py", line 267, in connect_tabsdata
+    line = await process.stdout.readline()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 568, in readline
+    line = await self.readuntil(sep)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 660, in readuntil
+    await self._wait_for_data('readuntil')
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 545, in _wait_for_data
+    await self._waiter
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py", line 152, in run_tasks
+    await self.run_single_task(i, t)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py", line 142, in run_single_task
+    row.set_done()
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py", line 52, in set_done
+    self.query_one(f"#{self.id}-spinner").display = False
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/site-packages/textual/dom.py", line 1484, in query_one
+    raise NoMatches(f"No nodes match {query_selector!r} on {base_node!r}")
+textual.css.query.NoMatches: No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')
+{'name': None, 'external_port': None, 'internal_port': None, 'status': 'Not Running'}
+instance chosen is None at type <class 'NoneType'>
+GettingStartedScreen
+{'name': None, 'external_port': None, 'internal_port': None, 'status': 'Not Running'}
+instance chosen is None at type <class 'NoneType'>
+GettingStartedScreen
+InstanceSelectionScreen
+Size(width=0, height=0)
+Size(width=0, height=0)
+Size(width=311, height=51)
+Size(width=311, height=51)
+Size(width=311, height=51)
+{'name': 'tabsdata', 'external_port': 2457, 'internal_port': 2458, 'status': 'Not Running'}
+Starting setup tasks…
+[deep_sky_blue1][Preparing Instance]:[/] Starting
+a: Not Running
+b: {'name': 'tabsdata', 'external_port': 2457, 'internal_port': 2458, 'status': 'Not Running'}
+c: []
+[deep_sky_blue1][Preparing Instance]:[/] START SERVER
+[deep_sky_blue1][Preparing Instance]:[/] 
+[deep_sky_blue1][Preparing Instance]:[/] ╭──────────────────────────────────────────────────────────────────────────────────╮
+[deep_sky_blue1][Preparing Instance]:[/] │                                     Tabsdata                                     │
+[deep_sky_blue1][Preparing Instance]:[/] │                                                                                  │
+[deep_sky_blue1][Preparing Instance]:[/] │                          Thank you for using Tabsdata!                           │
+[deep_sky_blue1][Preparing Instance]:[/] │                                                                                  │
+[deep_sky_blue1][Preparing Instance]:[/] │       Your use of this product is subject to the terms of use available at       │
+[deep_sky_blue1][Preparing Instance]:[/] │                          https://tabsdata.com/license.                           │
+[deep_sky_blue1][Preparing Instance]:[/] ╰──────────────────────────────────────────────────────────────────────────────────╯
+[deep_sky_blue1][Preparing Instance]:[/] 2025-11-26T21:22:11.052630Z  INFO td_supervisor::services::tdserver: Instance '/Users/danieladayev/.tabsdata/instances/tabsdata' successfully created!
+[deep_sky_blue1][Preparing Instance]:[/] 2025-11-26T21:22:11.069632Z  INFO td_supervisor::services::tdserver: Database '/Users/danieladayev/.tabsdata/instances/tabsdata/repository/database/tabsdata.db' successfully created!
+[deep_sky_blue1][Preparing Instance]:[/] Exited with code 0
+[deep_sky_blue1][Preparing Instance]:[/] Finished
+[spring_green2][Binding Ports]:[/] Starting
+/Users/danieladayev/.tabsdata/instances/tabsdata/workspace/config/proc/regular/apiserver/config/config.yaml
+[spring_green2][Binding Ports]:[/] Successfully set 127.0.0.1:2457 on addresses
+[spring_green2][Binding Ports]:[/] Successfully set 127.0.0.1:2458 on internal_addresses
+[spring_green2][Binding Ports]:[/] Finished
+[deep_sky_blue1][Connecting to Tabsdata instance]:[/] Starting
+[deep_sky_blue1][Connecting to Tabsdata instance]:[/] Running tdserver status…
+[deep_sky_blue1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:11.350887Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[deep_sky_blue1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:15.825006Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[deep_sky_blue1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:15.825014Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[deep_sky_blue1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:16.059685Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[deep_sky_blue1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:21.299207Z  INFO td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/tabsdata' started with pid '98233'
+[deep_sky_blue1][Connecting to Tabsdata instance]:[/] Exited with code 0
+[deep_sky_blue1][Connecting to Tabsdata instance]:[/] Finished
+[orange1][Checking Server Status]:[/] Starting
+[orange1][Checking Server Status]:[/] Running tdserver status…
+[orange1][Checking Server Status]:[/] 2025-11-26T21:22:21.844155Z  INFO td_supervisor::services::tdserver: 
+[orange1][Checking Server Status]:[/] 
+[orange1][Checking Server Status]:[/] ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+[orange1][Checking Server Status]:[/] │ Instance: /Users/danieladayev/.tabsdata/instances/tabsdata                                                                                                                                                          │
+[orange1][Checking Server Status]:[/] │ Listening ports: 2457, 2458                                                                                                                                                                                         │
+[orange1][Checking Server Status]:[/] ├─────────┬────────┬────────────────┬────────────┬──────────┬────────┬─────────┬─────┬─────────────────┬────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────┤
+[orange1][Checking Server Status]:[/] │ Process │ Parent │ Name           │ Collection │ Function │ Worker │ Attempt │ CPU │ Physical Memory │ Virtual Memory │ Program / Working Directory                                                                 │
+[orange1][Checking Server Status]:[/] ├─────────┼────────┼────────────────┼────────────┼──────────┼────────┼─────────┼─────┼─────────────────┼────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────┤
+[orange1][Checking Server Status]:[/] │   98233 │      1 │ ► supervisor   │            │          │        │         │  0% │           27 mb │     402,463 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/supervisor                               │
+[orange1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work                             │
+[orange1][Checking Server Status]:[/] │   98310 │  98233 │   ► apiserver  │            │          │        │         │  0% │           24 mb │     401,247 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/apiserver                                │
+[orange1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work/proc/regular/apiserver/work │
+[orange1][Checking Server Status]:[/] │   98312 │  98233 │   ► tdvenv     │            │          │        │         │  0% │           83 mb │     402,533 mb │ /Users/danieladayev/.tabsdata/environments/9cdd496082/bin/python                            │
+[orange1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work                             │
+[orange1][Checking Server Status]:[/] │   98334 │  98312 │     ► uv       │            │          │        │         │  0% │           12 mb │     400,513 mb │ /Users/danieladayev/.tabsdata/environments/9cdd496082/bin/uv                                │
+[orange1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work                             │
+[orange1][Checking Server Status]:[/] │   98335 │  98334 │       ► python │            │          │        │         │  0% │            0 mb │     400,465 mb │ /Users/danieladayev/.tabsdata/environments/ca0620319d/bin/python                            │
+[orange1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work                             │
+[orange1][Checking Server Status]:[/] │   98313 │  98233 │   ► janitor    │            │          │        │         │  0% │           71 mb │     401,981 mb │ /Users/danieladayev/.tabsdata/environments/9cdd496082/bin/python                            │
+[orange1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work/proc/regular/janitor/work   │
+[orange1][Checking Server Status]:[/] └─────────┴────────┴────────────────┴────────────┴──────────┴────────┴─────────┴─────┴─────────────────┴────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────┘
+[orange1][Checking Server Status]:[/] 
+[orange1][Checking Server Status]:[/] Exited with code 0
+[orange1][Checking Server Status]:[/] Finished
+🎉 All tasks complete.
+{'name': 'tabsdata', 'external_port': 2457, 'internal_port': 2458, 'status': 'Not Running'}
+instance chosen is tabsdata at type <class 'str'>
+GettingStartedScreen
+InstanceSelectionScreen
+Size(width=0, height=0)
+Size(width=0, height=0)
+Size(width=311, height=51)
+Size(width=311, height=51)
+{'name': 'tabsdata', 'external_port': 3355, 'internal_port': 6677, 'status': 'Running'}
+Starting setup tasks…
+[deep_sky_blue1][Preparing Instance]:[/] Starting
+a: Running
+b: {'name': 'tabsdata', 'external_port': 3355, 'internal_port': 6677, 'status': 'Running'}
+c: ['tabsdata']
+[deep_sky_blue1][Preparing Instance]:[/] STOP SERVER
+[deep_sky_blue1][Preparing Instance]:[/] 2025-11-26T21:22:30.540144Z  INFO td_common::os: Process with pid '98233' found: '"supervisor"'
+[deep_sky_blue1][Preparing Instance]:[/] 2025-11-26T21:22:30.551682Z  WARN td_common::os: Killing process tree '98233' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[deep_sky_blue1][Preparing Instance]:[/] 2025-11-26T21:22:30.553971Z  WARN td_common::os: Killing process '98233' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[deep_sky_blue1][Preparing Instance]:[/] 2025-11-26T21:22:30.572767Z  INFO td_supervisor::services::tdserver: Waiting for Tabsdata instance '/Users/danieladayev/.tabsdata/instances/tabsdata' with pid 98233 to stop...
+[deep_sky_blue1][Preparing Instance]:[/] 2025-11-26T21:22:32.597632Z  INFO td_supervisor::services::tdserver: Tabs Data instance '/Users/danieladayev/.tabsdata/instances/tabsdata' with pid '98233' stopped
+[deep_sky_blue1][Preparing Instance]:[/] Exited with code 0
+[deep_sky_blue1][Preparing Instance]:[/] Finished
+[deep_sky_blue1][Binding Ports]:[/] Starting
+/Users/danieladayev/.tabsdata/instances/tabsdata/workspace/config/proc/regular/apiserver/config/config.yaml
+[deep_sky_blue1][Binding Ports]:[/] Successfully set 127.0.0.1:3355 on addresses
+[deep_sky_blue1][Binding Ports]:[/] Successfully set 127.0.0.1:6677 on internal_addresses
+[deep_sky_blue1][Binding Ports]:[/] Finished
+[orange1][Connecting to Tabsdata instance]:[/] Starting
+[orange1][Connecting to Tabsdata instance]:[/] Running tdserver status…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:32.889915Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[orange1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:33.511635Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[orange1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:33.511644Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[orange1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:33.749313Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:38.769019Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 5s out of 5m. Waiting…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:43.789698Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 10s out of 5m. Waiting…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:48.809201Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 15s out of 5m. Waiting…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:53.830786Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 20s out of 5m. Waiting…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:22:58.850060Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 25s out of 5m. Waiting…
+unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-956' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py:144> exception=NoMatches("No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py", line 136, in run_single_task
+    await task.func(task.description)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py", line 267, in connect_tabsdata
+    line = await process.stdout.readline()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 568, in readline
+    line = await self.readuntil(sep)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 660, in readuntil
+    await self._wait_for_data('readuntil')
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 545, in _wait_for_data
+    await self._waiter
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py", line 152, in run_tasks
+    await self.run_single_task(i, t)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py", line 142, in run_single_task
+    row.set_done()
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual/task_screen.py", line 52, in set_done
+    self.query_one(f"#{self.id}-spinner").display = False
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/site-packages/textual/dom.py", line 1484, in query_one
+    raise NoMatches(f"No nodes match {query_selector!r} on {base_node!r}")
+textual.css.query.NoMatches: No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')
+{'name': None, 'external_port': None, 'internal_port': None, 'status': 'Not Running'}
+instance chosen is None at type <class 'NoneType'>
+GettingStartedScreen
+InstanceSelectionScreen
+Size(width=0, height=0)
+Size(width=0, height=0)
+Size(width=311, height=51)
+Size(width=311, height=51)
+{'name': 'tabsdata', 'external_port': 3355, 'internal_port': 6677, 'status': 'Not Running'}
+Starting setup tasks…
+[cyan][Preparing Instance]:[/] Starting
+a: Not Running
+b: {'name': 'tabsdata', 'external_port': 3355, 'internal_port': 6677, 'status': 'Not Running'}
+c: ['tabsdata']
+[cyan][Preparing Instance]:[/] Finished
+[deep_sky_blue1][Binding Ports]:[/] Starting
+/Users/danieladayev/.tabsdata/instances/tabsdata/workspace/config/proc/regular/apiserver/config/config.yaml
+[deep_sky_blue1][Binding Ports]:[/] Successfully set 127.0.0.1:3355 on addresses
+[deep_sky_blue1][Binding Ports]:[/] Successfully set 127.0.0.1:6677 on internal_addresses
+[deep_sky_blue1][Binding Ports]:[/] Finished
+[cyan][Connecting to Tabsdata instance]:[/] Starting
+[cyan][Connecting to Tabsdata instance]:[/] Running tdserver status…
+[cyan][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:09.460820Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[cyan][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:10.210572Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[cyan][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:10.210580Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[cyan][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:10.443373Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[cyan][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:15.697241Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 5s out of 5m. Waiting…
+[cyan][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:20.948925Z  INFO td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/tabsdata' started with pid '99305'
+[cyan][Connecting to Tabsdata instance]:[/] Exited with code 0
+[cyan][Connecting to Tabsdata instance]:[/] Finished
+[spring_green2][Checking Server Status]:[/] Starting
+[spring_green2][Checking Server Status]:[/] Running tdserver status…
+[spring_green2][Checking Server Status]:[/] 2025-11-26T21:27:21.472786Z  INFO td_supervisor::services::tdserver: 
+[spring_green2][Checking Server Status]:[/] 
+[spring_green2][Checking Server Status]:[/] ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+[spring_green2][Checking Server Status]:[/] │ Instance: /Users/danieladayev/.tabsdata/instances/tabsdata                                                                                                                                                         │
+[spring_green2][Checking Server Status]:[/] │ Listening ports: 3355, 6677                                                                                                                                                                                        │
+[spring_green2][Checking Server Status]:[/] ├─────────┬────────┬───────────────┬────────────┬──────────┬────────┬─────────┬─────┬─────────────────┬────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────┤
+[spring_green2][Checking Server Status]:[/] │ Process │ Parent │ Name          │ Collection │ Function │ Worker │ Attempt │ CPU │ Physical Memory │ Virtual Memory │ Program / Working Directory                                                                 │
+[spring_green2][Checking Server Status]:[/] ├─────────┼────────┼───────────────┼────────────┼──────────┼────────┼─────────┼─────┼─────────────────┼────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────┤
+[spring_green2][Checking Server Status]:[/] │   99305 │      1 │ ► supervisor  │            │          │        │         │  0% │           29 mb │     402,463 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/supervisor                               │
+[spring_green2][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work                             │
+[spring_green2][Checking Server Status]:[/] │   99382 │  99305 │   ► apiserver │            │          │        │         │  0% │           24 mb │     401,257 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/apiserver                                │
+[spring_green2][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work/proc/regular/apiserver/work │
+[spring_green2][Checking Server Status]:[/] │   99385 │  99305 │   ► janitor   │            │          │        │         │  0% │           69 mb │     401,580 mb │ /Users/danieladayev/.tabsdata/environments/9cdd496082/bin/python                            │
+[spring_green2][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work/proc/regular/janitor/work   │
+[spring_green2][Checking Server Status]:[/] └─────────┴────────┴───────────────┴────────────┴──────────┴────────┴─────────┴─────┴─────────────────┴────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────┘
+[spring_green2][Checking Server Status]:[/] 
+[spring_green2][Checking Server Status]:[/] Exited with code 0
+[spring_green2][Checking Server Status]:[/] Finished
+🎉 All tasks complete.
+{'name': 'tabsdata', 'external_port': 3355, 'internal_port': 6677, 'status': 'Not Running'}
+instance chosen is tabsdata at type <class 'str'>
+GettingStartedScreen
+InstanceSelectionScreen
+Size(width=0, height=0)
+Size(width=0, height=0)
+Size(width=311, height=51)
+Size(width=311, height=51)
+{'name': 'tabsdata', 'external_port': 1122, 'internal_port': 3344, 'status': 'Running'}
+Starting setup tasks…
+[orange1][Preparing Instance]:[/] Starting
+a: Running
+b: {'name': 'tabsdata', 'external_port': 1122, 'internal_port': 3344, 'status': 'Running'}
+c: ['tabsdata']
+[orange1][Preparing Instance]:[/] STOP SERVER
+[orange1][Preparing Instance]:[/] 2025-11-26T21:27:28.150134Z  INFO td_common::os: Process with pid '99305' found: '"supervisor"'
+[orange1][Preparing Instance]:[/] 2025-11-26T21:27:28.163857Z  WARN td_common::os: Killing process tree '99305' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[orange1][Preparing Instance]:[/] 2025-11-26T21:27:28.166526Z  WARN td_common::os: Killing process '99305' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[orange1][Preparing Instance]:[/] 2025-11-26T21:27:28.183850Z  INFO td_supervisor::services::tdserver: Waiting for Tabsdata instance '/Users/danieladayev/.tabsdata/instances/tabsdata' with pid 99305 to stop...
+[orange1][Preparing Instance]:[/] 2025-11-26T21:27:30.209750Z  INFO td_supervisor::services::tdserver: Tabs Data instance '/Users/danieladayev/.tabsdata/instances/tabsdata' with pid '99305' stopped
+[orange1][Preparing Instance]:[/] Exited with code 0
+[orange1][Preparing Instance]:[/] Finished
+[orange1][Binding Ports]:[/] Starting
+/Users/danieladayev/.tabsdata/instances/tabsdata/workspace/config/proc/regular/apiserver/config/config.yaml
+[orange1][Binding Ports]:[/] Successfully set 127.0.0.1:1122 on addresses
+[orange1][Binding Ports]:[/] Successfully set 127.0.0.1:3344 on internal_addresses
+[orange1][Binding Ports]:[/] Finished
+[yellow1][Connecting to Tabsdata instance]:[/] Starting
+[yellow1][Connecting to Tabsdata instance]:[/] Running tdserver status…
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:30.488661Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:31.083942Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:31.083949Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:31.321400Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:36.566778Z  INFO td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/tabsdata' started with pid '99444'
+[yellow1][Connecting to Tabsdata instance]:[/] Exited with code 0
+[yellow1][Connecting to Tabsdata instance]:[/] Finished
+[orange1][Checking Server Status]:[/] Starting
+[orange1][Checking Server Status]:[/] Running tdserver status…
+[orange1][Checking Server Status]:[/] 2025-11-26T21:27:37.089996Z  INFO td_supervisor::services::tdserver: 
+[orange1][Checking Server Status]:[/] 
+[orange1][Checking Server Status]:[/] ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+[orange1][Checking Server Status]:[/] │ Instance: /Users/danieladayev/.tabsdata/instances/tabsdata                                                                                                                                                         │
+[orange1][Checking Server Status]:[/] │ Listening ports: 1122, 3344                                                                                                                                                                                        │
+[orange1][Checking Server Status]:[/] ├─────────┬────────┬───────────────┬────────────┬──────────┬────────┬─────────┬─────┬─────────────────┬────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────┤
+[orange1][Checking Server Status]:[/] │ Process │ Parent │ Name          │ Collection │ Function │ Worker │ Attempt │ CPU │ Physical Memory │ Virtual Memory │ Program / Working Directory                                                                 │
+[orange1][Checking Server Status]:[/] ├─────────┼────────┼───────────────┼────────────┼──────────┼────────┼─────────┼─────┼─────────────────┼────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────┤
+[orange1][Checking Server Status]:[/] │   99444 │      1 │ ► supervisor  │            │          │        │         │  0% │           29 mb │     402,463 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/supervisor                               │
+[orange1][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work                             │
+[orange1][Checking Server Status]:[/] │   99520 │  99444 │   ► apiserver │            │          │        │         │  0% │           24 mb │     401,384 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/apiserver                                │
+[orange1][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work/proc/regular/apiserver/work │
+[orange1][Checking Server Status]:[/] │   99523 │  99444 │   ► janitor   │            │          │        │         │  0% │           69 mb │     401,718 mb │ /Users/danieladayev/.tabsdata/environments/9cdd496082/bin/python                            │
+[orange1][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/work/proc/regular/janitor/work   │
+[orange1][Checking Server Status]:[/] └─────────┴────────┴───────────────┴────────────┴──────────┴────────┴─────────┴─────┴─────────────────┴────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────┘
+[orange1][Checking Server Status]:[/] 
+[orange1][Checking Server Status]:[/] Exited with code 0
+[orange1][Checking Server Status]:[/] Finished
+🎉 All tasks complete.
+{'name': 'tabsdata', 'external_port': 1122, 'internal_port': 3344, 'status': 'Running'}
+instance chosen is tabsdata at type <class 'str'>
+GettingStartedScreen
+InstanceSelectionScreen
+Size(width=0, height=0)
+Size(width=0, height=0)
+Size(width=311, height=51)
+Size(width=311, height=51)
+Size(width=311, height=51)
+{'name': 'testing', 'external_port': 3366, 'internal_port': 7755, 'status': 'Not Running'}
+Starting setup tasks…
+[yellow1][Preparing Instance]:[/] Starting
+a: Not Running
+b: {'name': 'testing', 'external_port': 3366, 'internal_port': 7755, 'status': 'Not Running'}
+c: []
+[yellow1][Preparing Instance]:[/] START SERVER
+[yellow1][Preparing Instance]:[/] 2025-11-26T21:27:49.037802Z  INFO td_supervisor::services::tdserver: Instance '/Users/danieladayev/.tabsdata/instances/testing' successfully created!
+[yellow1][Preparing Instance]:[/] 2025-11-26T21:27:49.054667Z  INFO td_supervisor::services::tdserver: Database '/Users/danieladayev/.tabsdata/instances/testing/repository/database/tabsdata.db' successfully created!
+[yellow1][Preparing Instance]:[/] Exited with code 0
+[yellow1][Preparing Instance]:[/] Finished
+[deep_sky_blue1][Binding Ports]:[/] Starting
+/Users/danieladayev/.tabsdata/instances/testing/workspace/config/proc/regular/apiserver/config/config.yaml
+[deep_sky_blue1][Binding Ports]:[/] Successfully set 127.0.0.1:3366 on addresses
+[deep_sky_blue1][Binding Ports]:[/] Successfully set 127.0.0.1:7755 on internal_addresses
+[deep_sky_blue1][Binding Ports]:[/] Finished
+[spring_green2][Connecting to Tabsdata instance]:[/] Starting
+[spring_green2][Connecting to Tabsdata instance]:[/] Running tdserver status…
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:49.324974Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:54.177870Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:54.177877Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:54.414346Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-11-26T21:27:59.655184Z  INFO td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing' started with pid '99575'
+[spring_green2][Connecting to Tabsdata instance]:[/] Exited with code 0
+[spring_green2][Connecting to Tabsdata instance]:[/] Finished
+[plum1][Checking Server Status]:[/] Starting
+[plum1][Checking Server Status]:[/] Running tdserver status…
+[plum1][Checking Server Status]:[/] 2025-11-26T21:28:00.189054Z  INFO td_supervisor::services::tdserver: 
+[plum1][Checking Server Status]:[/] 
+[plum1][Checking Server Status]:[/] ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+[plum1][Checking Server Status]:[/] │ Instance: /Users/danieladayev/.tabsdata/instances/testing                                                                                                                                                          │
+[plum1][Checking Server Status]:[/] │ Listening ports: 3366, 7755                                                                                                                                                                                        │
+[plum1][Checking Server Status]:[/] ├─────────┬────────┬────────────────┬────────────┬──────────┬────────┬─────────┬─────┬─────────────────┬────────────────┬────────────────────────────────────────────────────────────────────────────────────────────┤
+[plum1][Checking Server Status]:[/] │ Process │ Parent │ Name           │ Collection │ Function │ Worker │ Attempt │ CPU │ Physical Memory │ Virtual Memory │ Program / Working Directory                                                                │
+[plum1][Checking Server Status]:[/] ├─────────┼────────┼────────────────┼────────────┼──────────┼────────┼─────────┼─────┼─────────────────┼────────────────┼────────────────────────────────────────────────────────────────────────────────────────────┤
+[plum1][Checking Server Status]:[/] │   99575 │      1 │ ► supervisor   │            │          │        │         │  0% │           29 mb │     402,463 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/supervisor                              │
+[plum1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/testing/workspace/work                             │
+[plum1][Checking Server Status]:[/] │   99655 │  99575 │   ► apiserver  │            │          │        │         │  0% │           25 mb │     401,386 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/apiserver                               │
+[plum1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/testing/workspace/work/proc/regular/apiserver/work │
+[plum1][Checking Server Status]:[/] │   99657 │  99575 │   ► tdvenv     │            │          │        │         │  1% │           82 mb │     402,009 mb │ /Users/danieladayev/.tabsdata/environments/a66499ecba/bin/python                           │
+[plum1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/testing/workspace/work                             │
+[plum1][Checking Server Status]:[/] │   99680 │  99657 │     ► uv       │            │          │        │         │  0% │            0 mb │           0 mb │ !                                                                                          │
+[plum1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ !                                                                                          │
+[plum1][Checking Server Status]:[/] │   99681 │  99680 │       ► python │            │          │        │         │  0% │            0 mb │           0 mb │ !                                                                                          │
+[plum1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ !                                                                                          │
+[plum1][Checking Server Status]:[/] │   99658 │  99575 │   ► janitor    │            │          │        │         │  0% │           70 mb │     401,846 mb │ /Users/danieladayev/.tabsdata/environments/a66499ecba/bin/python                           │
+[plum1][Checking Server Status]:[/] │         │        │                │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/testing/workspace/work/proc/regular/janitor/work   │
+[plum1][Checking Server Status]:[/] └─────────┴────────┴────────────────┴────────────┴──────────┴────────┴─────────┴─────┴─────────────────┴────────────────┴────────────────────────────────────────────────────────────────────────────────────────────┘
+[plum1][Checking Server Status]:[/] 
+[plum1][Checking Server Status]:[/] Exited with code 0
+[plum1][Checking Server Status]:[/] Finished
+🎉 All tasks complete.
+{'name': 'testing', 'external_port': 3366, 'internal_port': 7755, 'status': 'Not Running'}
+instance chosen is testing at type <class 'str'>
+GettingStartedScreen
+GettingStartedScreen
+GettingStartedScreen
+GettingStartedScreen
+{'name': None, 'external_port': None, 'internal_port': None, 'status': 'Not Running'}
+instance chosen is None at type <class 'NoneType'>
+GettingStartedScreen
+screen is {'styles': RenderStyles(InstanceSelectionScreen(), layout=<vertical>, background=Color(18, 18, 18), overflow_y='auto', scrollbar_color=Color(0, 48, 84), scrollbar_color_hover=Color(0, 60, 106), scrollbar_color_active=Color(1, 120, 212), scrollbar_corner_color=Color(0, 0, 0), scrollbar_background=Color(0, 0, 0), scrollbar_background_hover=Color(0, 0, 0), scrollbar_background_active=Color(0, 0, 0), scrollbar_size_vertical=2, scrollbar_size_horizontal=1, link_color=Color(255, 255, 255, a=0.87), auto_link_color=True, link_background=Color(0, 0, 0, a=0), link_style=Style(underline=True), link_color_hover=Color(255, 255, 255, a=0.87), auto_link_color_hover=True, link_background_hover=Color(1, 120, 212), link_style_hover=Style(bold=True, underline=False)), '_css_types': {'Widget', 'DOMNode', 'InstanceSelectionScreen', 'Screen'}, '_task': <Task pending name='message pump InstanceSelectionScreen()' coro=<MessagePump._process_messages() running at /Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/site-packages/textual/message_pump.py:562> wait_for=<Future pending cb=[Task.task_wakeup()]>>, 'message_signal': <Signal owner=InstanceSelectionScreen() name='messages' subscriptions=[]>, '_compositor': <Compositor size=Size(width=311, height=51) widgets={InstanceWidget(), LabelItem(), ListView(), InstanceSelectionScreen(), LabelItem(classes='-highlight'), LabelItem(), InstanceWidget(), InstanceWidget(), FooterKey(), Footer(), VerticalScroll(), FooterKey(classes='-compact -command-palette')}>, 'screen_layout_refresh_signal': <Signal owner=InstanceSelectionScreen() name='layout-refresh' subscriptions=[InstanceSelectionScreen()]>, 'bindings_updated_signal': <Signal owner=InstanceSelectionScreen() name='bindings_updated' subscriptions=[Footer()]>, 'text_selection_started_signal': <Signal owner=InstanceSelectionScreen() name='selection_started' subscriptions=[]>}
+GettingStartedScreen

@@ -308,7 +308,6 @@ class NestedMenuApp(App):
         "main": MainScreen,
         "instancemanagement": InstanceManagementScreen,
         "PortConfig": lambda: PortConfigScreen(),
-        "InstanceSelection": InstanceSelectionScreen,
         "Overflow": OverflowScreen,
         "InstanceStartup": lambda: InstanceStartup(),
     }
