@@ -1,17 +1,22 @@
 from __future__ import annotations
 from textual.app import App, ComposeResult
 from textual.screen import Screen
-from textual.widgets import ListView, ListItem, Label, Static
+from textual.widgets import ListView, ListItem, Label, Static, Button
 from pathlib import Path
 from tdtui.textual_assets.spinners import SpinnerWidget
+from typing import Awaitable, Callable, List
+from textual.widgets import RichLog
 
 from tdtui.core.find_instances import (
     pull_all_tabsdata_instance_data,
     instance_name_to_instance,
+    manage_working_instance,
+    print_all_instance_data,
+    sync_filesystem_instances_to_db,
 )
 import logging
 from typing import Optional, Dict, Any, List
-from textual.containers import VerticalScroll
+from textual.containers import VerticalScroll, Container
 from dataclasses import dataclass
 
 from textual.widgets import Static
@@ -43,6 +48,7 @@ from typing import Optional, Dict, List, Union
 import asyncio.subprocess
 import random
 import asyncio
+from tdtui.core.yaml_getter_setter import get_yaml_value, set_yaml_value
 
 from tdtui.core.find_instances import (
     pull_all_tabsdata_instance_data as pull_all_tabsdata_instance_data,
@@ -57,9 +63,10 @@ from tdtui.textual_assets.textual_instance_config import (
 )
 
 logging.basicConfig(
-    filename=Path.home() / "tabsdata-vm" / "log.log",
+    filename="/Users/danieladayev/test-tui/tabsdata-tui/logger.log",
     level=logging.INFO,
     format="%(message)s",
+    force=True,
 )
 
 
@@ -68,18 +75,24 @@ class InstanceWidget(Static):
 
     def __init__(self, inst: Optional[str] = None):
         super().__init__()
+        if isinstance(inst, str):
+            inst = instance_name_to_instance(inst)
         self.inst = inst
 
     def _make_instance_panel(self) -> Panel:
 
         inst = self.inst
+        try:
+            logging.info([(i, inst[i]) for i in inst])
+        except:
+            pass
 
         if inst is None:
             status_color = "#e4e4e6"
             status_line = f"○ No Instance Selected"
             line1 = f"No External Running Port"
             line2 = f"No Internal Running Port"
-        elif inst == "_Create_Instance":
+        elif inst.name == "_Create_Instance":
             status_color = "#1F66D1"
             status_line = f"Create a New Instance"
             line1 = f""
@@ -111,6 +124,17 @@ class InstanceWidget(Static):
 
 
 class CurrentInstanceWidget(InstanceWidget):
+    def __init__(self, inst: Optional[str] = None):
+        sync_filesystem_instances_to_db(app=self.app)
+        super().__init__()
+        if isinstance(inst, str):
+            inst = instance_name_to_instance(inst)
+        working_instance = self.app.app_query_session("instances", working=True)
+        if working_instance is not None:
+            self.inst = inst
+        else:
+            self.inst = working_instance
+
     def render(self) -> RenderableType:
         # inner instance panel
         instance_panel = self._make_instance_panel()
@@ -152,12 +176,15 @@ class ScreenTemplate(Screen):
         if id is not None:
             self.id = id
         self.header = header
+        self.app.working_instance = self.app.app_query_session(
+            "instances", working=True
+        )
 
     def compose(self) -> ComposeResult:
         with VerticalScroll():
             if self.header is not None:
                 yield Label(self.header, id="listHeader")
-            yield CurrentInstanceWidget()
+            yield CurrentInstanceWidget(self.app.working_instance)
             choiceLabels = [LabelItem(i) for i in self.choices]
             self.list = ListView(*choiceLabels)
             yield self.list
@@ -279,7 +306,7 @@ class PortConfigScreen(Screen):
             try:
                 instance = self.app.app_query_session(
                     "instances", limit=1, name=instance
-                )[0]
+                )
             except:
                 raise TypeError(f"Instance Name not found")
         else:
@@ -421,7 +448,23 @@ class PortConfigScreen(Screen):
             return
 
         # Valid and free
+        print(
+            print(
+                {
+                    c.name: getattr(self.instance, c.name)
+                    for c in self.instance.__table__.columns
+                }
+            )
+        )
         self.instance.name = value
+        print(
+            print(
+                {
+                    c.name: getattr(self.instance, c.name)
+                    for c in self.instance.__table__.columns
+                }
+            )
+        )
         instance_confirm.update(
             Text(
                 f"Defined an Instance with the following Name: {value}",
@@ -575,11 +618,9 @@ class SequentialTasksScreenTemplate(Screen):
         asyncio.create_task(self.run_tasks())
 
     async def on_button_pressed(self, event: Button.Pressed) -> None:
-        from tdtui.app_start import GettingStartedScreen
 
         if event.button.id == "close-btn":
-            active_screen = self.app.screen
-            self.app.push_screen(GettingStartedScreen())
+            self.app.handle_api_response(self)
 
     def log_line(self, task: str | None, msg: str) -> None:
         if task:
@@ -635,22 +676,15 @@ class InstanceStartupTask(SequentialTasksScreenTemplate):
         #     "internal_port": 2458,
         #     "status": "Running",
         # }
+        self.instance = instance
+        self.instance.working = True
         self.instance_name = instance.name
         self.ext_port = instance.arg_ext
         self.int_port = instance.arg_int
         super().__init__(tasks)
 
     async def prepare_instance(self, label=None):
-        logging.info("a: " + self.app.instance_start_configuration["status"])
-        logging.info(f"b: {self.app.instance_start_configuration}")
-        logging.info(
-            f"c: {[
-            i["name"]
-            for i in pull_all_tabsdata_instance_data()
-            if i["name"] == self.app.instance_start_configuration["name"]
-        ]}"
-        )
-        if self.app.instance_start_configuration["status"] == "Running":
+        if self.instance.status == "Running":
             self.log_line(label, "STOP SERVER")
             process = await asyncio.create_subprocess_exec(
                 "tdserver",
@@ -660,11 +694,7 @@ class InstanceStartupTask(SequentialTasksScreenTemplate):
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.STDOUT,
             )
-        elif self.app.instance_start_configuration["name"] not in [
-            i["name"]
-            for i in pull_all_tabsdata_instance_data()
-            if i["name"] == self.app.instance_start_configuration["name"]
-        ]:
+        elif self.instance.status == "Not Running":
             self.log_line(label, "START SERVER")
             process = await asyncio.create_subprocess_exec(
                 "tdserver",
@@ -752,3 +782,5 @@ class InstanceStartupTask(SequentialTasksScreenTemplate):
             self.log_line(label, line.decode().rstrip("\n"))
         code = await process.wait()
         self.log_line(label, f"Exited with code {code}")
+        manage_working_instance(self.app.session, self.instance)
+        self.app.session.merge(self.instance)

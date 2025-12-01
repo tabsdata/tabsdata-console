@@ -16,8 +16,9 @@ src/tdtui/core/models.py
 src/tdtui/core/subprocess_runner.py
 src/tdtui/core/td_dataclasses.py
 src/tdtui/core/yaml_getter_setter.py
-src/tdtui/textual/__init__.py
-src/tdtui/textual/api_processor.py
-src/tdtui/textual/spinners.py
-src/tdtui/textual/textual_instance_config.py
-src/tdtui/textual/textual_screens.py
+src/tdtui/textual_assets/__init__.py
+src/tdtui/textual_assets/api_processor.py
+src/tdtui/textual_assets/screen_templates.py
+src/tdtui/textual_assets/spinners.py
+src/tdtui/textual_assets/textual_instance_config.py
+src/tdtui/textual_assets/textual_screens.py

@@ -137,7 +137,16 @@ def instance_name_to_instance(instance_name: str) -> Instance:
     """
     available_instances = find_tabsdata_instance_names()
     if instance_name not in available_instances:
-        return Instance(name=instance_name)
+        return Instance(
+            name=instance_name,
+            status="Not Running",
+            cfg_ext="2457",
+            cfg_int="2458",
+            arg_ext="2457",
+            arg_int="2458",
+            public_ip="127.0.0.1",
+            private_ip="127.0.0.1",
+        )
 
     pid = find_instance_pid(instance_name)
     sockets = find_sockets(instance_name, pid)
@@ -176,9 +185,15 @@ def sync_filesystem_instances_to_db(app=None, session=None) -> list[Instance]:
     instance_names = find_tabsdata_instance_names()
 
     with session as session:
+        working_instance = session.query(Instance).filter_by(working=True).first()
         for name in instance_names:
             # Instance from filesystem only
             fs_instance = instance_name_to_instance(name)
+            if (
+                working_instance is not None
+                and fs_instance.name == working_instance.name
+            ):
+                fs_instance.working = True
 
             # Try to find existing record in DB
             db_instance = session.query(Instance).filter_by(name=name).first()
@@ -187,13 +202,7 @@ def sync_filesystem_instances_to_db(app=None, session=None) -> list[Instance]:
                 # Create if not found
                 session.add(fs_instance)
             else:
-                # Update existing with latest filesystem values
-                db_instance.pid = fs_instance.pid
-                db_instance.status = fs_instance.status
-                db_instance.cfg_ext = fs_instance.cfg_ext
-                db_instance.cfg_int = fs_instance.cfg_int
-                db_instance.arg_ext = fs_instance.arg_ext
-                db_instance.arg_int = fs_instance.arg_int
+                session.merge(fs_instance)
 
         session.query(Instance).filter(~Instance.name.in_(instance_names)).delete(
             synchronize_session=False
@@ -222,8 +231,26 @@ def query_session(session, model, limit=None, *conditions, **filters):
 
     if query.all() == []:
         return None
+    elif len(query.all()) == 1:
+        return query.all()[0]
 
     return query.all()
+
+
+def manage_working_instance(session, instance):
+    # Make sure we have a session-attached object
+    db_instance = session.merge(instance)
+
+    # Clear working on all others
+    (
+        session.query(Instance)
+        .filter(Instance.name != db_instance.name, Instance.working.is_(True))
+        .update({Instance.working: False}, synchronize_session=False)
+    )
+
+    db_instance.working = True
+    session.commit()
+    return True
 
 
 # session = start_session()
@@ -231,3 +258,10 @@ def query_session(session, model, limit=None, *conditions, **filters):
 # x = query_session(session, Instance, status="Running")
 # for inst in x:
 #     print({c.name: getattr(inst, c.name) for c in inst.__table__.columns})
+
+
+def print_all_instance_data(session):
+    sync_filesystem_instances_to_db(session=session)
+    x = query_session(session, Instance)
+    for inst in x:
+        print({c.name: getattr(inst, c.name) for c in inst.__table__.columns})

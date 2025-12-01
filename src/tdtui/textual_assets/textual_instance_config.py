@@ -92,7 +92,7 @@ def name_in_use(selected_name: str) -> bool:
     Return True if an instance already uses this name.
     """
     for inst in pull_all_tabsdata_instance_data():
-        name = inst.get("name")
+        name = inst.name
         if selected_name == name:
             return True
     return False

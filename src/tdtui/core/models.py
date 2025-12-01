@@ -9,8 +9,7 @@ Base = declarative_base()
 class Instance(Base):
     __tablename__ = "instances"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, unique=True, nullable=False)
+    name = Column(String, unique=True, nullable=False, primary_key=True)
 
     pid = Column(String, nullable=True, default=None)
     working = Column(Boolean, nullable=False, default=False)

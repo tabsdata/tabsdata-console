@@ -34,4 +34,6 @@ def process_response(screen: Screen, label=None):
         app.push_screen(InstanceStartupTask(label))
     elif screen_name == "GettingStartedScreen" and label == "Exit":
         app.exit()
+    elif screen_name == "InstanceStartupTask":
+        app.push_screen(GettingStartedScreen())
     return
