@@ -9,7 +9,7 @@ from textual.containers import Vertical, VerticalScroll
 from rich.text import Text
 
 from tdtui.core.find_instances import (
-    pull_all_tabsdata_instance_data as pull_all_tabsdata_instance_data,
+    sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
 )
 import logging
 from pathlib import Path
@@ -39,7 +39,7 @@ def get_running_ports() -> List[Dict[str, Any]]:
     Returns a list of dicts for running instances, each with:
       name, status, external_port, internal_port
     """
-    instances = pull_all_tabsdata_instance_data()
+    instances = sync_filesystem_instances_to_db()
     running = []
 
     for inst in instances:
@@ -91,7 +91,7 @@ def name_in_use(selected_name: str) -> bool:
     """
     Return True if an instance already uses this name.
     """
-    for inst in pull_all_tabsdata_instance_data():
+    for inst in sync_filesystem_instances_to_db():
         name = inst.name
         if selected_name == name:
             return True

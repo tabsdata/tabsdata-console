@@ -4,7 +4,7 @@ from textual.widgets import ListView, ListItem, Label, Static
 from pathlib import Path
 from tdtui.textual_assets.api_processor import process_response
 from tdtui.core.find_instances import (
-    pull_all_tabsdata_instance_data as pull_all_tabsdata_instance_data,
+    sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
 )
 import logging
 from typing import Optional, Dict, Any, List
@@ -39,7 +39,12 @@ logging.basicConfig(
 
 class NestedMenuApp(App):
     CSS = """
-
+    * {
+#   height: auto;
+    }
+    ListView {
+    height: 1fr;
+}
     VerticalScroll {
         width: 1fr;
     }

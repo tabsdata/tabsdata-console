@@ -10,6 +10,7 @@ from tdtui.core.td_dataclasses import TabsdataInstance, FieldChange
 from pathlib import Path
 from typing import Optional, Dict, List, Union
 from tdtui.core.models import Instance
+from textual.app import App
 
 
 def define_root(*parts):
@@ -113,16 +114,6 @@ def find_sockets(instance_name: str, pid=None):
         "arg_ext": arg_ext,
         "arg_int": arg_int,
     }
-
-
-def pull_all_tabsdata_instance_data() -> list[TabsdataInstance]:
-    instances: list[TabsdataInstance] = []
-    for name in find_tabsdata_instance_names():
-        pid = find_instance_pid(name)
-        sockets = find_sockets(name, pid)
-
-        instances.append(instance_name_to_instance(name))
-    return instances
 
 
 from tdtui.core.models import Instance as InstanceRow  # avoid name clash

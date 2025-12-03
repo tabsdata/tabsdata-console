@@ -8,7 +8,7 @@ from typing import Awaitable, Callable, List
 from textual.widgets import RichLog
 
 from tdtui.core.find_instances import (
-    pull_all_tabsdata_instance_data,
+    sync_filesystem_instances_to_db,
     instance_name_to_instance,
     manage_working_instance,
     print_all_instance_data,
@@ -51,7 +51,7 @@ import asyncio
 from tdtui.core.yaml_getter_setter import get_yaml_value, set_yaml_value
 
 from tdtui.core.find_instances import (
-    pull_all_tabsdata_instance_data as pull_all_tabsdata_instance_data,
+    sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
 )
 import logging
 from pathlib import Path
@@ -202,11 +202,15 @@ class ScreenTemplate(Screen):
 
 
 class InstanceSelectionScreen(Screen):
-    def __init__(self, id=None):
+    def __init__(self, instances=None):
         super().__init__()
+        if instances is None:
+            self.instances = sync_filesystem_instances_to_db(app=self.app)
+        else:
+            self.instances = instances
 
     def compose(self) -> ComposeResult:
-        instances = pull_all_tabsdata_instance_data()
+        instances = sync_filesystem_instances_to_db(self.app)
         instanceWidgets = [
             LabelItem(label=InstanceWidget(i), override_label=i.name) for i in instances
         ]
@@ -219,7 +223,9 @@ class InstanceSelectionScreen(Screen):
         )
         with VerticalScroll():
             # self.list = ListView(*[LabelItem('a'), LabelItem('b')])
-            self.list = ListView(*instanceWidgets)
+            self.list = ListView(
+                *instanceWidgets,
+            )
             yield self.list
         yield Footer()
 
@@ -260,7 +266,12 @@ class InstanceManagementScreen(ScreenTemplate):
 class GettingStartedScreen(ScreenTemplate):
     def __init__(self):
         super().__init__(
-            choices=["Bind An Instance", "Help", "Exit"],
+            choices=[
+                "Bind An Instance",
+                "Start an Instance",
+                "Stop An Instance" "Help",
+                "Exit",
+            ],
             header="Welcome to Tabsdata. Select an Option to get started below",
         )
 
@@ -281,6 +292,9 @@ class PortConfigScreen(Screen):
     """
 
     CSS = """
+    * {
+  height: auto;
+    }
     Screen {
         layout: vertical;
     }
@@ -562,6 +576,9 @@ class TaskRow(Horizontal):
 
 class SequentialTasksScreenTemplate(Screen):
     CSS = """
+        * {
+  height: auto;
+    }
     #tasks-header { padding: 1 2; text-style: bold; }
     .task-row { height: 1; content-align: left middle; }
     .task-spinner { width: 3; }
@@ -662,7 +679,7 @@ class SequentialTasksScreenTemplate(Screen):
         await self.mount(Button("Done", id="close-btn"), before=footer)
 
 
-class InstanceStartupTask(SequentialTasksScreenTemplate):
+class BindAndStartInstance(SequentialTasksScreenTemplate):
     def __init__(self, instance) -> None:
         tasks = [
             TaskSpec("Preparing Instance", self.prepare_instance),
@@ -670,12 +687,6 @@ class InstanceStartupTask(SequentialTasksScreenTemplate):
             TaskSpec("Connecting to Tabsdata instance", self.connect_tabsdata),
             TaskSpec("Checking Server Status", self.run_tdserver_status),
         ]
-        # self.app.instance_start_configuration = {
-        #     "name": "tabsdata",
-        #     "external_port": 2457,
-        #     "internal_port": 2458,
-        #     "status": "Running",
-        # }
         self.instance = instance
         self.instance.working = True
         self.instance_name = instance.name
