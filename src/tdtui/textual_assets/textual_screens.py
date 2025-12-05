@@ -343,9 +343,9 @@ class MainScreen(ScreenTemplate):
         super().__init__(
             choices=[
                 "Instance Management",
-                "Workflow Management",
-                "Asset Management",
-                "Config Management",
+                "Workflow Management (Not Built Yet)",
+                "Asset Management (Not Built Yet)",
+                "Config Management (Not Built Yet)",
                 "Exit",
             ],
         )
@@ -843,3 +843,9 @@ class StopInstance(SequentialTasksScreenTemplate):
         ]
 
         super().__init__(tasks)
+
+    def conclude_tasks(self):
+        super().conclude_tasks()
+        self.instance.working = False
+        self.app.session.merge(self.instance)
+        self.app.session.commit()
