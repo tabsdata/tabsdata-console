@@ -299,43 +299,77 @@ class ScreenTemplate(Screen):
 
 
 class InstanceSelectionScreen(Screen):
+    BINDINGS = [
+        ("enter", "press_close", "Done"),
+    ]
+
     def __init__(self, instances=None):
         super().__init__()
-        if instances is None:
+        if instances is None and self.app.flow_mode != "stop":
             self.instances = sync_filesystem_instances_to_db(app=self.app)
         else:
             self.instances = instances
 
     def compose(self) -> ComposeResult:
         instances = self.instances
-        if isinstance(instances, Instance):
-            instances = [instances]
-        instanceWidgets = [
-            LabelItem(label=InstanceWidget(i), override_label=i.name) for i in instances
-        ]
-        instanceWidgets.insert(
-            0,
-            LabelItem(
-                label=InstanceWidget(inst="_Create_Instance"),
-                override_label="_Create_Instance",
-            ),
-        )
-        with VerticalScroll():
-            # self.list = ListView(*[LabelItem('a'), LabelItem('b')])
+        if instances is None:
+            self.list = Vertical(
+                Static("No Instances Found"), Button("Back", id="back-btn")
+            )
+        else:
+            if isinstance(instances, Instance):
+                instances = [instances]
+
+            instanceWidgets = [
+                LabelItem(label=InstanceWidget(i), override_label=i.name)
+                for i in instances
+            ]
+
+            if self.app.flow_mode != "stop":
+                instanceWidgets.insert(
+                    0,
+                    LabelItem(
+                        label=InstanceWidget(inst="_Create_Instance"),
+                        override_label="_Create_Instance",
+                    ),
+                )
             self.list = ListView(
                 *instanceWidgets,
             )
+        with VerticalScroll():
+            # self.list = ListView(*[LabelItem('a'), LabelItem('b')])
             yield self.list
         yield Footer()
+        try:
+            btn = self.query_one("#back-btn")
+            btn.focus()
+        except:
+            pass
 
-    def on_show(self) -> None:
-        # called again when you push this screen a
-        #  second time (if reused)
-        self.set_focus(self.list)
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "back-btn":
+            self.app.pop_screen()
 
     def on_list_view_selected(self, event: ListView.Selected) -> None:
         selected = event.item.label
         self.app.handle_api_response(self, selected)  # push instance
+
+    def action_press_close(self) -> None:
+        # Only act if the button exists
+        try:
+            btn = self.query_one("#close-btn", Button)
+        except Exception:
+            return
+        btn.press()
+
+    def on_mount(self) -> None:
+        """Called after the screen is added to the app and widgets are mounted."""
+        try:
+            btn = self.query_one("#back-btn", Button)
+            btn.focus()
+        except:
+            # This is fine when instances is not None and there is no back button
+            pass
 
 
 class MainScreen(ScreenTemplate):

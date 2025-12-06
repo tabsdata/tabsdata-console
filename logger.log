@@ -4232,3 +4232,463 @@ MainScreen
 {'name': 'salesforce', 'pid': '1063', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
 MainScreen
 InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '1063', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[spring_green2][Preparing Instance]:[/] Starting
+[spring_green2][Preparing Instance]:[/] Stopping instance testing456...
+[spring_green2][Preparing Instance]:[/] Running: tdserver stop --instance testing456
+[spring_green2][Preparing Instance]:[/] 2025-12-06T00:32:18.159340Z  INFO td_common::os: Process with pid '14530' found: '"supervisor"'
+[spring_green2][Preparing Instance]:[/] 2025-12-06T00:32:18.173148Z  WARN td_common::os: Killing process tree '14530' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[spring_green2][Preparing Instance]:[/] 2025-12-06T00:32:18.175849Z  WARN td_common::os: Killing process '14530' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[spring_green2][Preparing Instance]:[/] 2025-12-06T00:32:18.201314Z  INFO td_supervisor::services::tdserver: Waiting for Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing456' with pid 14530 to stop...
+[spring_green2][Preparing Instance]:[/] 2025-12-06T00:32:20.230338Z  INFO td_supervisor::services::tdserver: Tabs Data instance '/Users/danieladayev/.tabsdata/instances/testing456' with pid '14530' stopped
+[spring_green2][Preparing Instance]:[/] Exited with code 0
+[spring_green2][Preparing Instance]:[/] Stop command exited with code 0
+[spring_green2][Preparing Instance]:[/] Finished
+[deep_sky_blue1][Stopping Tabsdata instance]:[/] Starting
+[deep_sky_blue1][Stopping Tabsdata instance]:[/] Stopping instance testing456...
+[deep_sky_blue1][Stopping Tabsdata instance]:[/] Running: tdserver stop --instance testing456
+[deep_sky_blue1][Stopping Tabsdata instance]:[/] 2025-12-06T00:32:20.522466Z  WARN td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing456' not running: 'NotRunning { pid: 14530 }'
+[deep_sky_blue1][Stopping Tabsdata instance]:[/] Exited with code 0
+[deep_sky_blue1][Stopping Tabsdata instance]:[/] Stop command exited with code 0
+[deep_sky_blue1][Stopping Tabsdata instance]:[/] Finished
+[yellow1][Checking Server Status]:[/] Starting
+[yellow1][Checking Server Status]:[/] Checking Tabsdata server status...
+[yellow1][Checking Server Status]:[/] Running: tdserver status --instance testing456
+[yellow1][Checking Server Status]:[/] 2025-12-06T00:32:20.809553Z  INFO td_supervisor::services::tdserver: 
+[yellow1][Checking Server Status]:[/] 
+[yellow1][Checking Server Status]:[/] Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing456' not running: '(NotRunning { pid: 14530 }, None)'
+[yellow1][Checking Server Status]:[/] 
+[yellow1][Checking Server Status]:[/] Exited with code 0
+[yellow1][Checking Server Status]:[/] Status command exited with code 0
+[yellow1][Checking Server Status]:[/] Updating working instance record in the database...
+[yellow1][Checking Server Status]:[/] Finished
+[orange1][Logging you Out]:[/] Starting
+[orange1][Logging you Out]:[/] Logging User into testing456...
+[orange1][Logging you Out]:[/] Running: td logout
+[orange1][Logging you Out]:[/] Hint: It seems like you might have an expired session. You can log in again with 'td login'.
+[orange1][Logging you Out]:[/] Use 'td hints off' to stop seeing these hints.
+[orange1][Logging you Out]:[/] ╭─ Error ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+[orange1][Logging you Out]:[/] │ Failed to logout: 'NoneType' object has no attribute 'logout'                                                                                 │
+[orange1][Logging you Out]:[/] ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[orange1][Logging you Out]:[/]                                                                                                                                                  
+[orange1][Logging you Out]:[/] Exited with code 1
+[orange1][Logging you Out]:[/] Logout command exited with code 1
+[orange1][Logging you Out]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-334' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:750> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 765, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[orange1][Preparing Instance]:[/] Starting
+[orange1][Preparing Instance]:[/] Creating instance new1...
+[orange1][Preparing Instance]:[/] Running: tdserver create --instance new1
+[orange1][Preparing Instance]:[/] 2025-12-06T00:32:33.473944Z  INFO td_supervisor::services::tdserver: Instance '/Users/danieladayev/.tabsdata/instances/new1' successfully created!
+[orange1][Preparing Instance]:[/] 2025-12-06T00:32:33.492183Z  INFO td_supervisor::services::tdserver: Database '/Users/danieladayev/.tabsdata/instances/new1/repository/database/tabsdata.db' successfully created!
+[orange1][Preparing Instance]:[/] Exited with code 0
+[orange1][Preparing Instance]:[/] Create command exited with code 0
+[orange1][Preparing Instance]:[/] Finished
+[orange1][Binding Ports]:[/] Starting
+[orange1][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/new1/workspace/config/proc/regular/apiserver/config/config.yaml
+[orange1][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2457 on addresses
+[orange1][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2458 on internal_addresses
+[orange1][Binding Ports]:[/] Finished
+[cyan][Connecting to Tabsdata instance]:[/] Starting
+[cyan][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[cyan][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance new1
+[cyan][Connecting to Tabsdata instance]:[/] 2025-12-06T00:32:33.764827Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[cyan][Connecting to Tabsdata instance]:[/] 2025-12-06T00:32:38.688984Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[cyan][Connecting to Tabsdata instance]:[/] 2025-12-06T00:32:38.688993Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[cyan][Connecting to Tabsdata instance]:[/] 2025-12-06T00:32:38.935332Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[cyan][Connecting to Tabsdata instance]:[/] 2025-12-06T00:32:44.191477Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 5s out of 5m. Waiting…
+[cyan][Connecting to Tabsdata instance]:[/] 2025-12-06T00:32:49.493520Z  INFO td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/new1' started with pid '15751'
+[cyan][Connecting to Tabsdata instance]:[/] Exited with code 0
+[cyan][Connecting to Tabsdata instance]:[/] Start command exited with code 0
+[cyan][Connecting to Tabsdata instance]:[/] Finished
+[plum1][Checking Server Status]:[/] Starting
+[plum1][Checking Server Status]:[/] Checking Tabsdata server status...
+[plum1][Checking Server Status]:[/] Running: tdserver status --instance new1
+[plum1][Checking Server Status]:[/] 2025-12-06T00:32:51.918892Z  INFO td_supervisor::services::tdserver: 
+[plum1][Checking Server Status]:[/] 
+[plum1][Checking Server Status]:[/] ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+[plum1][Checking Server Status]:[/] │ Instance: /Users/danieladayev/.tabsdata/instances/new1                                                                                                                                                          │
+[plum1][Checking Server Status]:[/] │ Listening ports: 2457, 2458                                                                                                                                                                                     │
+[plum1][Checking Server Status]:[/] ├─────────┬────────┬───────────────┬────────────┬──────────┬────────┬─────────┬──────┬─────────────────┬────────────────┬─────────────────────────────────────────────────────────────────────────────────────────┤
+[plum1][Checking Server Status]:[/] │ Process │ Parent │ Name          │ Collection │ Function │ Worker │ Attempt │  CPU │ Physical Memory │ Virtual Memory │ Program / Working Directory                                                             │
+[plum1][Checking Server Status]:[/] ├─────────┼────────┼───────────────┼────────────┼──────────┼────────┼─────────┼──────┼─────────────────┼────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤
+[plum1][Checking Server Status]:[/] │   15751 │      1 │ ► supervisor  │            │          │        │         │   0% │           40 mb │     402,463 mb │ /Users/danieladayev/miniconda3/envs/tdtui_git/bin/supervisor                            │
+[plum1][Checking Server Status]:[/] │         │        │               │            │          │        │         │      │                 │                │ /Users/danieladayev/.tabsdata/instances/new1/workspace/work                             │
+[plum1][Checking Server Status]:[/] │   15828 │  15751 │   ► apiserver │            │          │        │         │   0% │           27 mb │     401,437 mb │ /Users/danieladayev/miniconda3/envs/tdtui_git/bin/apiserver                             │
+[plum1][Checking Server Status]:[/] │         │        │               │            │          │        │         │      │                 │                │ /Users/danieladayev/.tabsdata/instances/new1/workspace/work/proc/regular/apiserver/work │
+[plum1][Checking Server Status]:[/] │   15830 │  15751 │   ► tdvenv    │            │          │        │         │   0% │           86 mb │     402,532 mb │ /Users/danieladayev/.tabsdata/environments/3e16103c0b/bin/python                        │
+[plum1][Checking Server Status]:[/] │         │        │               │            │          │        │         │      │                 │                │ /Users/danieladayev/.tabsdata/instances/new1/workspace/work                             │
+[plum1][Checking Server Status]:[/] │   15852 │  15830 │     ► uv      │            │          │        │         │ 855% │          286 mb │     402,448 mb │ /Users/danieladayev/.tabsdata/environments/3e16103c0b/bin/uv                            │
+[plum1][Checking Server Status]:[/] │         │        │               │            │          │        │         │      │                 │                │ /Users/danieladayev/.tabsdata/instances/new1/workspace/work                             │
+[plum1][Checking Server Status]:[/] │   15831 │  15751 │   ► janitor   │            │          │        │         │   0% │           70 mb │     401,845 mb │ /Users/danieladayev/.tabsdata/environments/3e16103c0b/bin/python                        │
+[plum1][Checking Server Status]:[/] │         │        │               │            │          │        │         │      │                 │                │ /Users/danieladayev/.tabsdata/instances/new1/workspace/work/proc/regular/janitor/work   │
+[plum1][Checking Server Status]:[/] └─────────┴────────┴───────────────┴────────────┴──────────┴────────┴─────────┴──────┴─────────────────┴────────────────┴─────────────────────────────────────────────────────────────────────────────────────────┘
+[plum1][Checking Server Status]:[/] 
+[plum1][Checking Server Status]:[/] Exited with code 0
+[plum1][Checking Server Status]:[/] Status command exited with code 0
+[plum1][Checking Server Status]:[/] Updating working instance record in the database...
+[plum1][Checking Server Status]:[/] Finished
+[yellow1][Logging you In]:[/] Starting
+[yellow1][Logging you In]:[/] Logging User into new1...
+[yellow1][Logging you In]:[/] Running: td login --server 127.0.0.1:2457 --user admin --role sys_admin --password tabsdata
+[yellow1][Logging you In]:[/] Login successful.
+[yellow1][Logging you In]:[/] Exited with code 0
+[yellow1][Logging you In]:[/] Stop command exited with code 0
+[yellow1][Logging you In]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-1076' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:750> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 765, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[magenta][Preparing Instance]:[/] Starting
+[magenta][Preparing Instance]:[/] Stopping instance new1...
+[magenta][Preparing Instance]:[/] Running: tdserver stop --instance new1
+[magenta][Preparing Instance]:[/] 2025-12-06T00:33:03.025007Z  INFO td_common::os: Process with pid '15751' found: '"supervisor"'
+[magenta][Preparing Instance]:[/] 2025-12-06T00:33:03.040187Z  WARN td_common::os: Killing process tree '15751' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[magenta][Preparing Instance]:[/] 2025-12-06T00:33:03.043052Z  WARN td_common::os: Killing process '15751' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[magenta][Preparing Instance]:[/] 2025-12-06T00:33:03.067842Z  INFO td_supervisor::services::tdserver: Waiting for Tabsdata instance '/Users/danieladayev/.tabsdata/instances/new1' with pid 15751 to stop...
+[magenta][Preparing Instance]:[/] 2025-12-06T00:33:05.096956Z  INFO td_supervisor::services::tdserver: Tabs Data instance '/Users/danieladayev/.tabsdata/instances/new1' with pid '15751' stopped
+[magenta][Preparing Instance]:[/] Exited with code 0
+[magenta][Preparing Instance]:[/] Stop command exited with code 0
+[magenta][Preparing Instance]:[/] Finished
+[yellow1][Stopping Tabsdata instance]:[/] Starting
+[yellow1][Stopping Tabsdata instance]:[/] Stopping instance new1...
+[yellow1][Stopping Tabsdata instance]:[/] Running: tdserver stop --instance new1
+[yellow1][Stopping Tabsdata instance]:[/] 2025-12-06T00:33:05.405992Z  WARN td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/new1' not running: 'NotRunning { pid: 15751 }'
+[yellow1][Stopping Tabsdata instance]:[/] Exited with code 0
+[yellow1][Stopping Tabsdata instance]:[/] Stop command exited with code 0
+[yellow1][Stopping Tabsdata instance]:[/] Finished
+[orchid][Checking Server Status]:[/] Starting
+[orchid][Checking Server Status]:[/] Checking Tabsdata server status...
+[orchid][Checking Server Status]:[/] Running: tdserver status --instance new1
+[orchid][Checking Server Status]:[/] 2025-12-06T00:33:05.716923Z  INFO td_supervisor::services::tdserver: 
+[orchid][Checking Server Status]:[/] 
+[orchid][Checking Server Status]:[/] Tabsdata instance '/Users/danieladayev/.tabsdata/instances/new1' not running: '(NotRunning { pid: 15751 }, None)'
+[orchid][Checking Server Status]:[/] 
+[orchid][Checking Server Status]:[/] Exited with code 0
+[orchid][Checking Server Status]:[/] Status command exited with code 0
+[orchid][Checking Server Status]:[/] Updating working instance record in the database...
+[orchid][Checking Server Status]:[/] Finished
+[magenta][Logging you Out]:[/] Starting
+[magenta][Logging you Out]:[/] Logging User into new1...
+[magenta][Logging you Out]:[/] Running: td logout
+[magenta][Logging you Out]:[/] Hint: It seems like there is no Tabsdata server at the provided URL: http://127.0.0.1:2457.
+[magenta][Logging you Out]:[/]  Please ensure that the URL is correct and the server is running and reachable.
+[magenta][Logging you Out]:[/]  If started locally, the status can be checked by executing 'tdserver status'.
+[magenta][Logging you Out]:[/] Use 'td hints off' to stop seeing these hints.
+[magenta][Logging you Out]:[/] ╭─ Error ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+[magenta][Logging you Out]:[/] │ Failed to logout: HTTPConnectionPool(host='127.0.0.1', port=2457): Max retries exceeded with url: /api/v1/auth/logout (Caused by              │
+[magenta][Logging you Out]:[/] │ NewConnectionError("HTTPConnection(host='127.0.0.1', port=2457): Failed to establish a new connection: [Errno 61] Connection refused"))       │
+[magenta][Logging you Out]:[/] ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[magenta][Logging you Out]:[/]                                                                                                                                                  
+[magenta][Logging you Out]:[/] Exited with code 1
+[magenta][Logging you Out]:[/] Logout command exited with code 1
+[magenta][Logging you Out]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-2120' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:750> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 765, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '1063', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '1063', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '1063', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '1063', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '1063', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[spring_green2][Preparing Instance]:[/] Starting
+[spring_green2][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[spring_green2][Preparing Instance]:[/] Finished
+[spring_green2][Stopping Tabsdata instance]:[/] Starting
+[spring_green2][Stopping Tabsdata instance]:[/] Stopping instance salesforce...
+[spring_green2][Stopping Tabsdata instance]:[/] Running: tdserver stop --instance salesforce
+[spring_green2][Stopping Tabsdata instance]:[/] 2025-12-06T00:37:31.603295Z  WARN td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/salesforce' not running: 'NotRunning { pid: 990 }'
+[spring_green2][Stopping Tabsdata instance]:[/] Exited with code 0
+[spring_green2][Stopping Tabsdata instance]:[/] Stop command exited with code 0
+[spring_green2][Stopping Tabsdata instance]:[/] Finished
+[magenta][Checking Server Status]:[/] Starting
+[magenta][Checking Server Status]:[/] Checking Tabsdata server status...
+[magenta][Checking Server Status]:[/] Running: tdserver status --instance salesforce
+[magenta][Checking Server Status]:[/] 2025-12-06T00:37:31.880474Z  INFO td_supervisor::services::tdserver: 
+[magenta][Checking Server Status]:[/] 
+[magenta][Checking Server Status]:[/] Tabsdata instance '/Users/danieladayev/.tabsdata/instances/salesforce' not running: '(NotRunning { pid: 990 }, None)'
+[magenta][Checking Server Status]:[/] 
+[magenta][Checking Server Status]:[/] Exited with code 0
+[magenta][Checking Server Status]:[/] Status command exited with code 0
+[magenta][Checking Server Status]:[/] Updating working instance record in the database...
+[magenta][Checking Server Status]:[/] Finished
+[orchid][Logging you Out]:[/] Starting
+[orchid][Logging you Out]:[/] Logging User into salesforce...
+[orchid][Logging you Out]:[/] Running: td logout
+[orchid][Logging you Out]:[/] Hint: It seems like you might have an expired session. You can log in again with 'td login'.
+[orchid][Logging you Out]:[/] Use 'td hints off' to stop seeing these hints.
+[orchid][Logging you Out]:[/] ╭─ Error ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+[orchid][Logging you Out]:[/] │ Failed to logout: 'NoneType' object has no attribute 'logout'                                                                                 │
+[orchid][Logging you Out]:[/] ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[orchid][Logging you Out]:[/]                                                                                                                                                  
+[orchid][Logging you Out]:[/] Exited with code 1
+[orchid][Logging you Out]:[/] Logout command exited with code 1
+[orchid][Logging you Out]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-565' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:751> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 766, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[yellow1][Preparing Instance]:[/] Starting
+[yellow1][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[yellow1][Preparing Instance]:[/] Finished
+[cyan][Binding Ports]:[/] Starting
+[cyan][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/salesforce/workspace/config/proc/regular/apiserver/config/config.yaml
+[cyan][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2457 on addresses
+[cyan][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2458 on internal_addresses
+[cyan][Binding Ports]:[/] Finished
+[plum1][Connecting to Tabsdata instance]:[/] Starting
+[plum1][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[plum1][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance salesforce
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-06T00:37:39.322144Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-06T00:37:39.950564Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-06T00:37:39.950572Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-06T00:37:40.199292Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-06T00:37:45.515132Z  INFO td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/salesforce' started with pid '16314'
+[plum1][Connecting to Tabsdata instance]:[/] Exited with code 0
+[plum1][Connecting to Tabsdata instance]:[/] Start command exited with code 0
+[plum1][Connecting to Tabsdata instance]:[/] Finished
+[orange1][Checking Server Status]:[/] Starting
+[orange1][Checking Server Status]:[/] Checking Tabsdata server status...
+[orange1][Checking Server Status]:[/] Running: tdserver status --instance salesforce
+[orange1][Checking Server Status]:[/] 2025-12-06T00:37:46.312255Z  INFO td_supervisor::services::tdserver: 
+[orange1][Checking Server Status]:[/] 
+[orange1][Checking Server Status]:[/] ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+[orange1][Checking Server Status]:[/] │ Instance: /Users/danieladayev/.tabsdata/instances/salesforce                                                                                                                                                         │
+[orange1][Checking Server Status]:[/] │ Listening ports: 2457, 2458                                                                                                                                                                                          │
+[orange1][Checking Server Status]:[/] ├─────────┬────────┬───────────────┬────────────┬──────────┬────────┬─────────┬─────┬─────────────────┬────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────┤
+[orange1][Checking Server Status]:[/] │ Process │ Parent │ Name          │ Collection │ Function │ Worker │ Attempt │ CPU │ Physical Memory │ Virtual Memory │ Program / Working Directory                                                                   │
+[orange1][Checking Server Status]:[/] ├─────────┼────────┼───────────────┼────────────┼──────────┼────────┼─────────┼─────┼─────────────────┼────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────┤
+[orange1][Checking Server Status]:[/] │   16314 │      1 │ ► supervisor  │            │          │        │         │  0% │           41 mb │     402,464 mb │ /Users/danieladayev/miniconda3/envs/tdtui_git/bin/supervisor                                  │
+[orange1][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/salesforce/workspace/work                             │
+[orange1][Checking Server Status]:[/] │   16391 │  16314 │   ► apiserver │            │          │        │         │  0% │           26 mb │     401,418 mb │ /Users/danieladayev/miniconda3/envs/tdtui_git/bin/apiserver                                   │
+[orange1][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/salesforce/workspace/work/proc/regular/apiserver/work │
+[orange1][Checking Server Status]:[/] │   16394 │  16314 │   ► janitor   │            │          │        │         │  0% │           71 mb │     401,991 mb │ /Users/danieladayev/.tabsdata/environments/64f75016ec/bin/python                              │
+[orange1][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/salesforce/workspace/work/proc/regular/janitor/work   │
+[orange1][Checking Server Status]:[/] │   16399 │  16314 │   ► aiagent   │            │          │        │         │ 79% │           26 mb │     401,447 mb │ /Users/danieladayev/.tabsdata/environments/73abad754b/bin/python                              │
+[orange1][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/salesforce/workspace/work/proc/regular/aiagent/work   │
+[orange1][Checking Server Status]:[/] └─────────┴────────┴───────────────┴────────────┴──────────┴────────┴─────────┴─────┴─────────────────┴────────────────┴───────────────────────────────────────────────────────────────────────────────────────────────┘
+[orange1][Checking Server Status]:[/] 
+[orange1][Checking Server Status]:[/] Exited with code 0
+[orange1][Checking Server Status]:[/] Status command exited with code 0
+[orange1][Checking Server Status]:[/] Updating working instance record in the database...
+[orange1][Checking Server Status]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-1239' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:751> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 766, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[magenta][Preparing Instance]:[/] Starting
+[magenta][Preparing Instance]:[/] Stopping instance salesforce...
+[magenta][Preparing Instance]:[/] Running: tdserver stop --instance salesforce
+[magenta][Preparing Instance]:[/] 2025-12-06T00:37:54.851085Z  INFO td_common::os: Process with pid '16314' found: '"supervisor"'
+[magenta][Preparing Instance]:[/] 2025-12-06T00:37:54.866243Z  WARN td_common::os: Killing process tree '16314' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[magenta][Preparing Instance]:[/] 2025-12-06T00:37:54.869209Z  WARN td_common::os: Killing process '16314' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[magenta][Preparing Instance]:[/] 2025-12-06T00:37:54.893602Z  INFO td_supervisor::services::tdserver: Waiting for Tabsdata instance '/Users/danieladayev/.tabsdata/instances/salesforce' with pid 16314 to stop...
+[magenta][Preparing Instance]:[/] 2025-12-06T00:37:56.917162Z  INFO td_supervisor::services::tdserver: Tabs Data instance '/Users/danieladayev/.tabsdata/instances/salesforce' with pid '16314' stopped
+[magenta][Preparing Instance]:[/] Exited with code 0
+[magenta][Preparing Instance]:[/] Stop command exited with code 0
+[magenta][Preparing Instance]:[/] Finished
+[cyan][Stopping Tabsdata instance]:[/] Starting
+[cyan][Stopping Tabsdata instance]:[/] Stopping instance salesforce...
+[cyan][Stopping Tabsdata instance]:[/] Running: tdserver stop --instance salesforce
+[cyan][Stopping Tabsdata instance]:[/] 2025-12-06T00:37:57.203325Z  WARN td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/salesforce' not running: 'NotRunning { pid: 16314 }'
+[cyan][Stopping Tabsdata instance]:[/] Exited with code 0
+[cyan][Stopping Tabsdata instance]:[/] Stop command exited with code 0
+[cyan][Stopping Tabsdata instance]:[/] Finished
+[magenta][Checking Server Status]:[/] Starting
+[magenta][Checking Server Status]:[/] Checking Tabsdata server status...
+[magenta][Checking Server Status]:[/] Running: tdserver status --instance salesforce
+[magenta][Checking Server Status]:[/] 2025-12-06T00:37:57.487720Z  INFO td_supervisor::services::tdserver: 
+[magenta][Checking Server Status]:[/] 
+[magenta][Checking Server Status]:[/] Tabsdata instance '/Users/danieladayev/.tabsdata/instances/salesforce' not running: '(NotRunning { pid: 16314 }, None)'
+[magenta][Checking Server Status]:[/] 
+[magenta][Checking Server Status]:[/] Exited with code 0
+[magenta][Checking Server Status]:[/] Status command exited with code 0
+[magenta][Checking Server Status]:[/] Updating working instance record in the database...
+[magenta][Checking Server Status]:[/] Finished
+[magenta][Logging you Out]:[/] Starting
+[magenta][Logging you Out]:[/] Logging User into salesforce...
+[magenta][Logging you Out]:[/] Running: td logout
+[magenta][Logging you Out]:[/] Hint: It seems like you might have an expired session. You can log in again with 'td login'.
+[magenta][Logging you Out]:[/] Use 'td hints off' to stop seeing these hints.
+[magenta][Logging you Out]:[/] ╭─ Error ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+[magenta][Logging you Out]:[/] │ Failed to logout: 'NoneType' object has no attribute 'logout'                                                                                 │
+[magenta][Logging you Out]:[/] ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+[magenta][Logging you Out]:[/]                                                                                                                                                  
+[magenta][Logging you Out]:[/] Exited with code 1
+[magenta][Logging you Out]:[/] Logout command exited with code 1
+[magenta][Logging you Out]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-2014' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:751> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 766, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '14601', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+InstanceManagementScreen
+InstanceManagementScreen
