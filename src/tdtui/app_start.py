@@ -1,4 +1,5 @@
 from textual.app import App, ComposeResult
+from textual import on
 from textual.screen import Screen
 from textual.widgets import ListView, ListItem, Label, Static
 from pathlib import Path
@@ -91,6 +92,13 @@ class NestedMenuApp(App):
         session = self.session
         query = query_session(session, model, limit, *conditions, **filters)
         return query
+
+    @on(ListView.Highlighted)
+    async def on_select_highlighted(self, event: ListView.Highlighted):
+        # Scroll the highlighted list itself into view
+        item = event.list_view.highlighted_child
+        if item:
+            item.scroll_visible()
 
 
 def run_app():
