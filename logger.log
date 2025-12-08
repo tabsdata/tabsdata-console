@@ -5781,3 +5781,1341 @@ InstanceManagementScreen
 {'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
 MainScreen
 InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[orchid][Preparing Instance]:[/] Starting
+[orchid][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[orchid][Preparing Instance]:[/] Finished
+[magenta][Binding Ports]:[/] Starting
+[magenta][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/testing745/workspace/config/proc/regular/apiserver/config/config.yaml
+[magenta][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:1111 on addresses
+[magenta][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2222 on internal_addresses
+[magenta][Binding Ports]:[/] Finished
+[spring_green2][Connecting to Tabsdata instance]:[/] Starting
+[spring_green2][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[spring_green2][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance testing745
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-12-08T18:27:51.044099Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-12-08T18:27:51.045068Z  WARN td_supervisor::services::tdserver: The instance is not up to date. An upgrade is required before starting.
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-12-08T18:27:51.045074Z  WARN td_supervisor::services::tdserver: To upgrade, run: 'tdserver upgrade --instance <instance>'.
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-12-08T18:27:51.045076Z  WARN td_supervisor::services::tdserver: (or just 'tdserver upgrade' to upgrade the default instance.)
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-12-08T18:27:51.045077Z  WARN td_supervisor::services::tdserver: For a dry run before upgrading, use: 'tdserver upgrade --instance <instance>'.
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-12-08T18:27:51.045080Z  WARN td_supervisor::services::tdserver: (or just 'tdserver upgrade' for the default instance.)
+[spring_green2][Connecting to Tabsdata instance]:[/] 2025-12-08T18:27:51.045082Z  WARN td_supervisor::services::tdserver: It is strongly recommended to back up your instance before proceeding with the upgrade.
+[spring_green2][Connecting to Tabsdata instance]:[/] Exited with code 201
+[spring_green2][Connecting to Tabsdata instance]:[/] Start command exited with code 201
+[spring_green2][Connecting to Tabsdata instance]:[/] Finished
+[orchid][Checking Server Status]:[/] Starting
+[orchid][Checking Server Status]:[/] Checking Tabsdata server status...
+[orchid][Checking Server Status]:[/] Running: tdserver status --instance testing745
+[orchid][Checking Server Status]:[/] 2025-12-08T18:27:51.373382Z  INFO td_supervisor::services::tdserver: 
+[orchid][Checking Server Status]:[/] 
+[orchid][Checking Server Status]:[/] Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing745' not running: '(NotRunning { pid: 64435 }, None)'
+[orchid][Checking Server Status]:[/] 
+[orchid][Checking Server Status]:[/] Exited with code 0
+[orchid][Checking Server Status]:[/] Status command exited with code 0
+[orchid][Checking Server Status]:[/] Updating working instance record in the database...
+[orchid][Checking Server Status]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-485' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/miniconda3/envs/tdtui_current/lib/python3.12/site-packages/tdtui/textual_assets/textual_screens.py:789> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/miniconda3/envs/tdtui_current/lib/python3.12/site-packages/tdtui/textual_assets/textual_screens.py", line 804, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:1111', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '1111', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[magenta][Preparing Instance]:[/] Starting
+[magenta][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[magenta][Preparing Instance]:[/] Finished
+[deep_sky_blue1][Binding Ports]:[/] Starting
+[deep_sky_blue1][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/testing745/workspace/config/proc/regular/apiserver/config/config.yaml
+[deep_sky_blue1][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1: on addresses
+[deep_sky_blue1][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2222 on internal_addresses
+[deep_sky_blue1][Binding Ports]:[/] Finished
+[yellow1][Connecting to Tabsdata instance]:[/] Starting
+[yellow1][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[yellow1][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance testing745
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:14.311226Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:14.311335Z  WARN td_supervisor::services::tdserver: The instance is not up to date. An upgrade is required before starting.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:14.311338Z  WARN td_supervisor::services::tdserver: To upgrade, run: 'tdserver upgrade --instance <instance>'.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:14.311340Z  WARN td_supervisor::services::tdserver: (or just 'tdserver upgrade' to upgrade the default instance.)
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:14.311341Z  WARN td_supervisor::services::tdserver: For a dry run before upgrading, use: 'tdserver upgrade --instance <instance>'.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:14.311343Z  WARN td_supervisor::services::tdserver: (or just 'tdserver upgrade' for the default instance.)
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:14.311344Z  WARN td_supervisor::services::tdserver: It is strongly recommended to back up your instance before proceeding with the upgrade.
+[yellow1][Connecting to Tabsdata instance]:[/] Exited with code 201
+[yellow1][Connecting to Tabsdata instance]:[/] Start command exited with code 201
+[yellow1][Connecting to Tabsdata instance]:[/] Finished
+[magenta][Checking Server Status]:[/] Starting
+[magenta][Checking Server Status]:[/] Checking Tabsdata server status...
+[magenta][Checking Server Status]:[/] Running: tdserver status --instance testing745
+[magenta][Checking Server Status]:[/] 2025-12-08T18:29:14.588792Z  INFO td_supervisor::services::tdserver: 
+[magenta][Checking Server Status]:[/] 
+[magenta][Checking Server Status]:[/] Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing745' not running: '(NotRunning { pid: 64435 }, None)'
+[magenta][Checking Server Status]:[/] 
+[magenta][Checking Server Status]:[/] Exited with code 0
+[magenta][Checking Server Status]:[/] Status command exited with code 0
+[magenta][Checking Server Status]:[/] Updating working instance record in the database...
+[magenta][Checking Server Status]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-498' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:755> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 770, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+MainScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[spring_green2][Preparing Instance]:[/] Starting
+[spring_green2][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[spring_green2][Preparing Instance]:[/] Finished
+[magenta][Binding Ports]:[/] Starting
+[magenta][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/testing745/workspace/config/proc/regular/apiserver/config/config.yaml
+[magenta][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2244 on addresses
+[magenta][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2222 on internal_addresses
+[magenta][Binding Ports]:[/] Finished
+[magenta][Connecting to Tabsdata instance]:[/] Starting
+[magenta][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[magenta][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance testing745
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:38.837273Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:38.837356Z  WARN td_supervisor::services::tdserver: The instance is not up to date. An upgrade is required before starting.
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:38.837359Z  WARN td_supervisor::services::tdserver: To upgrade, run: 'tdserver upgrade --instance <instance>'.
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:38.837360Z  WARN td_supervisor::services::tdserver: (or just 'tdserver upgrade' to upgrade the default instance.)
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:38.837362Z  WARN td_supervisor::services::tdserver: For a dry run before upgrading, use: 'tdserver upgrade --instance <instance>'.
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:38.837364Z  WARN td_supervisor::services::tdserver: (or just 'tdserver upgrade' for the default instance.)
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T18:29:38.837365Z  WARN td_supervisor::services::tdserver: It is strongly recommended to back up your instance before proceeding with the upgrade.
+[magenta][Connecting to Tabsdata instance]:[/] Exited with code 201
+[magenta][Connecting to Tabsdata instance]:[/] Start command exited with code 201
+[magenta][Connecting to Tabsdata instance]:[/] Finished
+[yellow1][Checking Server Status]:[/] Starting
+[yellow1][Checking Server Status]:[/] Checking Tabsdata server status...
+[yellow1][Checking Server Status]:[/] Running: tdserver status --instance testing745
+[yellow1][Checking Server Status]:[/] 2025-12-08T18:29:39.111819Z  INFO td_supervisor::services::tdserver: 
+[yellow1][Checking Server Status]:[/] 
+[yellow1][Checking Server Status]:[/] Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing745' not running: '(NotRunning { pid: 64435 }, None)'
+[yellow1][Checking Server Status]:[/] 
+[yellow1][Checking Server Status]:[/] Exited with code 0
+[yellow1][Checking Server Status]:[/] Status command exited with code 0
+[yellow1][Checking Server Status]:[/] Updating working instance record in the database...
+[yellow1][Checking Server Status]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-651' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:755> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 770, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[plum1][Preparing Instance]:[/] Starting
+[plum1][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[plum1][Preparing Instance]:[/] Finished
+[orchid][Binding Ports]:[/] Starting
+[orchid][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/testing745/workspace/config/proc/regular/apiserver/config/config.yaml
+[orchid][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2255 on addresses
+[orchid][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2222 on internal_addresses
+[orchid][Binding Ports]:[/] Finished
+[yellow1][Connecting to Tabsdata instance]:[/] Starting
+[yellow1][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[yellow1][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance testing745
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:30:04.173057Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:30:04.173145Z  WARN td_supervisor::services::tdserver: The instance is not up to date. An upgrade is required before starting.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:30:04.173149Z  WARN td_supervisor::services::tdserver: To upgrade, run: 'tdserver upgrade --instance <instance>'.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:30:04.173150Z  WARN td_supervisor::services::tdserver: (or just 'tdserver upgrade' to upgrade the default instance.)
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:30:04.173151Z  WARN td_supervisor::services::tdserver: For a dry run before upgrading, use: 'tdserver upgrade --instance <instance>'.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:30:04.173153Z  WARN td_supervisor::services::tdserver: (or just 'tdserver upgrade' for the default instance.)
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:30:04.173154Z  WARN td_supervisor::services::tdserver: It is strongly recommended to back up your instance before proceeding with the upgrade.
+[yellow1][Connecting to Tabsdata instance]:[/] Exited with code 201
+[yellow1][Connecting to Tabsdata instance]:[/] Start command exited with code 201
+[yellow1][Connecting to Tabsdata instance]:[/] Finished
+[spring_green2][Checking Server Status]:[/] Starting
+[spring_green2][Checking Server Status]:[/] Checking Tabsdata server status...
+[spring_green2][Checking Server Status]:[/] Running: tdserver status --instance testing745
+[spring_green2][Checking Server Status]:[/] 2025-12-08T18:30:04.454282Z  INFO td_supervisor::services::tdserver: 
+[spring_green2][Checking Server Status]:[/] 
+[spring_green2][Checking Server Status]:[/] Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing745' not running: '(NotRunning { pid: 64435 }, None)'
+[spring_green2][Checking Server Status]:[/] 
+[spring_green2][Checking Server Status]:[/] Exited with code 0
+[spring_green2][Checking Server Status]:[/] Status command exited with code 0
+[spring_green2][Checking Server Status]:[/] Updating working instance record in the database...
+[spring_green2][Checking Server Status]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-1826' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:755> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 770, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2255', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2255', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2255', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2255', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2255', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2255', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2255', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2255', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2255', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2255', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[magenta][Preparing Instance]:[/] Starting
+[magenta][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[magenta][Preparing Instance]:[/] Finished
+[cyan][Binding Ports]:[/] Starting
+[cyan][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/testing745/workspace/config/proc/regular/apiserver/config/config.yaml
+[cyan][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2222 on addresses
+[cyan][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2222 on internal_addresses
+[cyan][Binding Ports]:[/] Finished
+[yellow1][Connecting to Tabsdata instance]:[/] Starting
+[yellow1][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[yellow1][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance testing745
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:44:44.855804Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:44:44.855894Z  WARN td_supervisor::services::tdserver: The instance is not up to date. An upgrade is required before starting.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:44:44.855898Z  WARN td_supervisor::services::tdserver: To upgrade, run: 'tdserver upgrade --instance <instance>'.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:44:44.855899Z  WARN td_supervisor::services::tdserver: (or just 'tdserver upgrade' to upgrade the default instance.)
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:44:44.855900Z  WARN td_supervisor::services::tdserver: For a dry run before upgrading, use: 'tdserver upgrade --instance <instance>'.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:44:44.855902Z  WARN td_supervisor::services::tdserver: (or just 'tdserver upgrade' for the default instance.)
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:44:44.855903Z  WARN td_supervisor::services::tdserver: It is strongly recommended to back up your instance before proceeding with the upgrade.
+[yellow1][Connecting to Tabsdata instance]:[/] Exited with code 201
+[yellow1][Connecting to Tabsdata instance]:[/] Start command exited with code 201
+[yellow1][Connecting to Tabsdata instance]:[/] Finished
+[cyan][Checking Server Status]:[/] Starting
+[cyan][Checking Server Status]:[/] Checking Tabsdata server status...
+[cyan][Checking Server Status]:[/] Running: tdserver status --instance testing745
+[cyan][Checking Server Status]:[/] 2025-12-08T18:44:45.126144Z  INFO td_supervisor::services::tdserver: 
+[cyan][Checking Server Status]:[/] 
+[cyan][Checking Server Status]:[/] Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing745' not running: '(NotRunning { pid: 64435 }, None)'
+[cyan][Checking Server Status]:[/] 
+[cyan][Checking Server Status]:[/] Exited with code 0
+[cyan][Checking Server Status]:[/] Status command exited with code 0
+[cyan][Checking Server Status]:[/] Updating working instance record in the database...
+[cyan][Checking Server Status]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-494' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:771> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 786, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '7232', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4477', 'cfg_int': '127.0.0.1:8877', 'arg_ext': '4477', 'arg_int': '8877', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[orchid][Preparing Instance]:[/] Starting
+[orchid][Preparing Instance]:[/] Creating instance tabsdata...
+[orchid][Preparing Instance]:[/] Running: tdserver create --instance tabsdata
+[orchid][Preparing Instance]:[/] 2025-12-08T18:50:01.960462Z ERROR td_supervisor::services::tdserver: Instance folder '/Users/danieladayev/.tabsdata/instances/tabsdata' already exists. Please use a non existing folder/instance.
+[orchid][Preparing Instance]:[/] Exited with code 201
+[orchid][Preparing Instance]:[/] Create command exited with code 201
+[orchid][Preparing Instance]:[/] Finished
+[orange1][Binding Ports]:[/] Starting
+[orange1][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/tabsdata/workspace/config/proc/regular/apiserver/config/config.yaml
+[orange1][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2458 on addresses
+[orange1][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2458 on internal_addresses
+[orange1][Binding Ports]:[/] Finished
+[plum1][Connecting to Tabsdata instance]:[/] Starting
+[plum1][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[plum1][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance tabsdata
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:50:02.225556Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:50:03.022145Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:50:03.022152Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:50:03.269087Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:50:08.517971Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 5s out of 5m. Waiting…
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:50:13.546948Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 10s out of 5m. Waiting…
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:50:18.578501Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 15s out of 5m. Waiting…
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:50:23.609792Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 20s out of 5m. Waiting…
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:50:28.638485Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 25s out of 5m. Waiting…
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:50:33.672375Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 30s out of 5m. Waiting…
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T18:50:38.699767Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 35s out of 5m. Waiting…
+unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-505' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:789> exception=NoMatches("No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 773, in run_single_task
+    await task.func(task.description)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/core/instance_tasks.py", line 152, in connect_tabsdata
+    code = await runner.run_logged_subprocess(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 758, in run_logged_subprocess
+    line = await process.stdout.readline()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 568, in readline
+    line = await self.readuntil(sep)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 660, in readuntil
+    await self._wait_for_data('readuntil')
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 545, in _wait_for_data
+    await self._waiter
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 797, in run_tasks
+    await self.run_single_task(i, t)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 779, in run_single_task
+    row.set_done()
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 658, in set_done
+    self.query_one(f"#{self.id}-spinner").display = False
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/site-packages/textual/dom.py", line 1484, in query_one
+    raise NoMatches(f"No nodes match {query_selector!r} on {base_node!r}")
+textual.css.query.NoMatches: No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[yellow1][Preparing Instance]:[/] Starting
+[yellow1][Preparing Instance]:[/] Creating instance test...
+[yellow1][Preparing Instance]:[/] Running: tdserver create --instance test
+[yellow1][Preparing Instance]:[/] 2025-12-08T19:39:04.127613Z  INFO td_supervisor::services::tdserver: Instance '/Users/danieladayev/.tabsdata/instances/test' successfully created!
+[yellow1][Preparing Instance]:[/] 2025-12-08T19:39:04.179443Z  INFO td_supervisor::services::tdserver: Database '/Users/danieladayev/.tabsdata/instances/test/repository/database/tabsdata.db' successfully created!
+[yellow1][Preparing Instance]:[/] Exited with code 0
+[yellow1][Preparing Instance]:[/] Create command exited with code 0
+[yellow1][Preparing Instance]:[/] Finished
+[orange1][Binding Ports]:[/] Starting
+[orange1][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/test/workspace/config/proc/regular/apiserver/config/config.yaml
+[orange1][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2458 on addresses
+[orange1][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2458 on internal_addresses
+[orange1][Binding Ports]:[/] Finished
+[orchid][Connecting to Tabsdata instance]:[/] Starting
+[orchid][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[orchid][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance test
+[orchid][Connecting to Tabsdata instance]:[/] 2025-12-08T19:39:04.443016Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[orchid][Connecting to Tabsdata instance]:[/] 2025-12-08T19:39:09.423767Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[orchid][Connecting to Tabsdata instance]:[/] 2025-12-08T19:39:09.423774Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[orchid][Connecting to Tabsdata instance]:[/] 2025-12-08T19:39:09.673874Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[orchid][Connecting to Tabsdata instance]:[/] 2025-12-08T19:39:14.926483Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 5s out of 5m. Waiting…
+[orchid][Connecting to Tabsdata instance]:[/] 2025-12-08T19:39:19.949044Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 10s out of 5m. Waiting…
+[orchid][Connecting to Tabsdata instance]:[/] 2025-12-08T19:39:24.973522Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 15s out of 5m. Waiting…
+[orchid][Connecting to Tabsdata instance]:[/] 2025-12-08T19:39:29.994832Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 20s out of 5m. Waiting…
+[orchid][Connecting to Tabsdata instance]:[/] 2025-12-08T19:39:35.022213Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 25s out of 5m. Waiting…
+[orchid][Connecting to Tabsdata instance]:[/] 2025-12-08T19:39:40.050273Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 30s out of 5m. Waiting…
+unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-599' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:800> exception=NoMatches("No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 784, in run_single_task
+    await task.func(task.description)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/core/instance_tasks.py", line 152, in connect_tabsdata
+    code = await runner.run_logged_subprocess(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 769, in run_logged_subprocess
+    line = await process.stdout.readline()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 568, in readline
+    line = await self.readuntil(sep)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 660, in readuntil
+    await self._wait_for_data('readuntil')
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 545, in _wait_for_data
+    await self._waiter
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 808, in run_tasks
+    await self.run_single_task(i, t)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 790, in run_single_task
+    row.set_done()
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 669, in set_done
+    self.query_one(f"#{self.id}-spinner").display = False
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/site-packages/textual/dom.py", line 1484, in query_one
+    raise NoMatches(f"No nodes match {query_selector!r} on {base_node!r}")
+textual.css.query.NoMatches: No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')
+{'name': 'test', 'pid': '54672', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'test', 'pid': '54672', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'test', 'pid': '54672', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'test', 'pid': '54672', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'test', 'pid': '54672', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'test', 'pid': '54672', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'test', 'pid': '54672', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[plum1][Preparing Instance]:[/] Starting
+[plum1][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[plum1][Preparing Instance]:[/] Finished
+[magenta][Binding Ports]:[/] Starting
+[magenta][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/test/workspace/config/proc/regular/apiserver/config/config.yaml
+[magenta][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2458 on addresses
+[magenta][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:4466 on internal_addresses
+[magenta][Binding Ports]:[/] Finished
+[cyan][Connecting to Tabsdata instance]:[/] Starting
+[cyan][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[cyan][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance test
+[cyan][Connecting to Tabsdata instance]:[/] 2025-12-08T19:55:20.054615Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[cyan][Connecting to Tabsdata instance]:[/] 2025-12-08T19:55:20.668448Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[cyan][Connecting to Tabsdata instance]:[/] 2025-12-08T19:55:20.668456Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[cyan][Connecting to Tabsdata instance]:[/] 2025-12-08T19:55:20.912831Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[cyan][Connecting to Tabsdata instance]:[/] 2025-12-08T19:55:26.168031Z  INFO td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/test' started with pid '55972'
+[cyan][Connecting to Tabsdata instance]:[/] Exited with code 0
+[cyan][Connecting to Tabsdata instance]:[/] Start command exited with code 0
+[cyan][Connecting to Tabsdata instance]:[/] Finished
+[magenta][Checking Server Status]:[/] Starting
+[magenta][Checking Server Status]:[/] Checking Tabsdata server status...
+[magenta][Checking Server Status]:[/] Running: tdserver status --instance test
+[magenta][Checking Server Status]:[/] 2025-12-08T19:55:26.785176Z  INFO td_supervisor::services::tdserver: 
+[magenta][Checking Server Status]:[/] 
+[magenta][Checking Server Status]:[/] ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+[magenta][Checking Server Status]:[/] │ Instance: /Users/danieladayev/.tabsdata/instances/test                                                                                                                                                           │
+[magenta][Checking Server Status]:[/] │ Listening ports: 2458, 4466                                                                                                                                                                                      │
+[magenta][Checking Server Status]:[/] ├─────────┬────────┬───────────────┬────────────┬──────────┬────────┬─────────┬───────┬─────────────────┬────────────────┬─────────────────────────────────────────────────────────────────────────────────────────┤
+[magenta][Checking Server Status]:[/] │ Process │ Parent │ Name          │ Collection │ Function │ Worker │ Attempt │   CPU │ Physical Memory │ Virtual Memory │ Program / Working Directory                                                             │
+[magenta][Checking Server Status]:[/] ├─────────┼────────┼───────────────┼────────────┼──────────┼────────┼─────────┼───────┼─────────────────┼────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤
+[magenta][Checking Server Status]:[/] │   55972 │      1 │ ► supervisor  │            │          │        │         │ 1119% │           43 mb │     402,463 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/supervisor                           │
+[magenta][Checking Server Status]:[/] │         │        │               │            │          │        │         │       │                 │                │ /Users/danieladayev/.tabsdata/instances/test/workspace/work                             │
+[magenta][Checking Server Status]:[/] │   56052 │  55972 │   ► apiserver │            │          │        │         │    0% │           24 mb │     401,241 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/apiserver                            │
+[magenta][Checking Server Status]:[/] │         │        │               │            │          │        │         │       │                 │                │ /Users/danieladayev/.tabsdata/instances/test/workspace/work/proc/regular/apiserver/work │
+[magenta][Checking Server Status]:[/] │   56054 │  55972 │   ► tdvenv    │            │          │        │         │    0% │           77 mb │     401,582 mb │ /Users/danieladayev/.tabsdata/environments/1411d53938/bin/python                        │
+[magenta][Checking Server Status]:[/] │         │        │               │            │          │        │         │       │                 │                │ /Users/danieladayev/.tabsdata/instances/test/workspace/work                             │
+[magenta][Checking Server Status]:[/] │   56075 │  56054 │     ► uv      │            │          │        │         │   10% │           12 mb │     400,513 mb │ /Users/danieladayev/.tabsdata/environments/1411d53938/bin/uv                            │
+[magenta][Checking Server Status]:[/] │         │        │               │            │          │        │         │       │                 │                │ /Users/danieladayev/.tabsdata/instances/test/workspace/work                             │
+[magenta][Checking Server Status]:[/] │   56055 │  55972 │   ► janitor   │            │          │        │         │    0% │           69 mb │     401,297 mb │ /Users/danieladayev/.tabsdata/environments/1411d53938/bin/python                        │
+[magenta][Checking Server Status]:[/] │         │        │               │            │          │        │         │       │                 │                │ /Users/danieladayev/.tabsdata/instances/test/workspace/work/proc/regular/janitor/work   │
+[magenta][Checking Server Status]:[/] └─────────┴────────┴───────────────┴────────────┴──────────┴────────┴─────────┴───────┴─────────────────┴────────────────┴─────────────────────────────────────────────────────────────────────────────────────────┘
+[magenta][Checking Server Status]:[/] 
+[magenta][Checking Server Status]:[/] Exited with code 0
+[magenta][Checking Server Status]:[/] Status command exited with code 0
+[magenta][Checking Server Status]:[/] Updating working instance record in the database...
+[magenta][Checking Server Status]:[/] Finished
+[yellow1][Logging you In]:[/] Starting
+[yellow1][Logging you In]:[/] Logging User into test...
+[yellow1][Logging you In]:[/] Running: td login --server 127.0.0.1:2458 --user admin --role sys_admin --password tabsdata
+[yellow1][Logging you In]:[/] Login successful.
+[yellow1][Logging you In]:[/] Exited with code 0
+[yellow1][Logging you In]:[/] Stop command exited with code 0
+[yellow1][Logging you In]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-519' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:798> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 813, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+MainScreen
+{'name': 'test', 'pid': '56052', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:4466', 'arg_ext': '2458', 'arg_int': '4466', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[yellow1][Preparing Instance]:[/] Starting
+[yellow1][Preparing Instance]:[/] Creating instance testuig...
+[yellow1][Preparing Instance]:[/] Running: tdserver create --instance testuig
+[yellow1][Preparing Instance]:[/] 2025-12-08T19:57:19.899040Z  INFO td_supervisor::services::tdserver: Instance '/Users/danieladayev/.tabsdata/instances/testuig' successfully created!
+[yellow1][Preparing Instance]:[/] 2025-12-08T19:57:19.915950Z  INFO td_supervisor::services::tdserver: Database '/Users/danieladayev/.tabsdata/instances/testuig/repository/database/tabsdata.db' successfully created!
+[yellow1][Preparing Instance]:[/] Exited with code 0
+[yellow1][Preparing Instance]:[/] Create command exited with code 0
+[yellow1][Preparing Instance]:[/] Finished
+[orange1][Binding Ports]:[/] Starting
+[orange1][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/testuig/workspace/config/proc/regular/apiserver/config/config.yaml
+[orange1][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2457 on addresses
+[orange1][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2458 on internal_addresses
+[orange1][Binding Ports]:[/] Finished
+[orange1][Connecting to Tabsdata instance]:[/] Starting
+[orange1][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[orange1][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance testuig
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:57:20.181270Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:57:24.780914Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:57:24.780921Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:57:25.030297Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:57:30.274683Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 5s out of 5m. Waiting…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:57:35.310506Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 10s out of 5m. Waiting…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:57:40.340085Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 15s out of 5m. Waiting…
+unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-535' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:798> exception=NoMatches("No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 782, in run_single_task
+    await task.func(task.description)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/core/instance_tasks.py", line 152, in connect_tabsdata
+    code = await runner.run_logged_subprocess(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 767, in run_logged_subprocess
+    line = await process.stdout.readline()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 568, in readline
+    line = await self.readuntil(sep)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 660, in readuntil
+    await self._wait_for_data('readuntil')
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 545, in _wait_for_data
+    await self._waiter
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 806, in run_tasks
+    await self.run_single_task(i, t)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 788, in run_single_task
+    row.set_done()
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 667, in set_done
+    self.query_one(f"#{self.id}-spinner").display = False
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/site-packages/textual/dom.py", line 1484, in query_one
+    raise NoMatches(f"No nodes match {query_selector!r} on {base_node!r}")
+textual.css.query.NoMatches: No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')
+{'name': 'test', 'pid': '56052', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:4466', 'arg_ext': '2458', 'arg_int': '4466', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testuig', 'pid': '56414', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[yellow1][Preparing Instance]:[/] Starting
+[yellow1][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[yellow1][Preparing Instance]:[/] Finished
+[orange1][Binding Ports]:[/] Starting
+[orange1][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/testuig/workspace/config/proc/regular/apiserver/config/config.yaml
+[orange1][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2457 on addresses
+[orange1][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2458 on internal_addresses
+[orange1][Binding Ports]:[/] Finished
+[orange1][Connecting to Tabsdata instance]:[/] Starting
+[orange1][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[orange1][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance testuig
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:58:19.866755Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:58:20.466892Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:58:20.466899Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:58:20.713028Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:58:25.959491Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 5s out of 5m. Waiting…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:58:30.997622Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 10s out of 5m. Waiting…
+[orange1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:58:36.032175Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 15s out of 5m. Waiting…
+unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-1215' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:798> exception=NoMatches("No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 782, in run_single_task
+    await task.func(task.description)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/core/instance_tasks.py", line 152, in connect_tabsdata
+    code = await runner.run_logged_subprocess(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 767, in run_logged_subprocess
+    line = await process.stdout.readline()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 568, in readline
+    line = await self.readuntil(sep)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 660, in readuntil
+    await self._wait_for_data('readuntil')
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 545, in _wait_for_data
+    await self._waiter
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 806, in run_tasks
+    await self.run_single_task(i, t)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 788, in run_single_task
+    row.set_done()
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 667, in set_done
+    self.query_one(f"#{self.id}-spinner").display = False
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/site-packages/textual/dom.py", line 1484, in query_one
+    raise NoMatches(f"No nodes match {query_selector!r} on {base_node!r}")
+textual.css.query.NoMatches: No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')
+{'name': 'test', 'pid': '56052', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:4466', 'arg_ext': '2458', 'arg_int': '4466', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testuig', 'pid': '56579', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[orange1][Preparing Instance]:[/] Starting
+[orange1][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[orange1][Preparing Instance]:[/] Finished
+[yellow1][Binding Ports]:[/] Starting
+[yellow1][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/testuig/workspace/config/proc/regular/apiserver/config/config.yaml
+[yellow1][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2457 on addresses
+[yellow1][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2458 on internal_addresses
+[yellow1][Binding Ports]:[/] Finished
+[yellow1][Connecting to Tabsdata instance]:[/] Starting
+[yellow1][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[yellow1][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance testuig
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:59:53.424772Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:59:54.025675Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:59:54.025683Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[yellow1][Connecting to Tabsdata instance]:[/] 2025-12-08T19:59:54.272382Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-920' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:798> exception=NoMatches("No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 782, in run_single_task
+    await task.func(task.description)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/core/instance_tasks.py", line 152, in connect_tabsdata
+    code = await runner.run_logged_subprocess(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 767, in run_logged_subprocess
+    line = await process.stdout.readline()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 568, in readline
+    line = await self.readuntil(sep)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 660, in readuntil
+    await self._wait_for_data('readuntil')
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/asyncio/streams.py", line 545, in _wait_for_data
+    await self._waiter
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 806, in run_tasks
+    await self.run_single_task(i, t)
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 788, in run_single_task
+    row.set_done()
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 667, in set_done
+    self.query_one(f"#{self.id}-spinner").display = False
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danieladayev/miniconda3/envs/tdtui_test/lib/python3.12/site-packages/textual/dom.py", line 1484, in query_one
+    raise NoMatches(f"No nodes match {query_selector!r} on {base_node!r}")
+textual.css.query.NoMatches: No nodes match '#task-2-spinner' on TaskRow(id='task-2', classes='task-row')
+{'name': 'test', 'pid': '56052', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:4466', 'arg_ext': '2458', 'arg_int': '4466', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testuig', 'pid': '57000', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+{'name': 'test', 'pid': '56052', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:4466', 'arg_ext': '2458', 'arg_int': '4466', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing745', 'pid': '64513', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2222', 'cfg_int': '127.0.0.1:2222', 'arg_ext': '2222', 'arg_int': '2222', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing456', 'pid': '30928', 'working': False, 'status': 'Running', 'cfg_ext': '127.0.0.1:5577', 'cfg_int': '127.0.0.1:2244', 'arg_ext': '5577', 'arg_int': '2244', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'f', 'pid': '63817', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:5566', 'cfg_int': '127.0.0.1:7889', 'arg_ext': '5566', 'arg_int': '7889', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'tabsdata', 'pid': '52264', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2458', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2458', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testing', 'pid': '11749', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:4466', 'cfg_int': '127.0.0.1:3344', 'arg_ext': '4466', 'arg_int': '3344', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'gghhf', 'pid': '23062', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'new1', 'pid': '15828', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'salesforce', 'pid': '16391', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+{'name': 'testuig', 'pid': '57000', 'working': False, 'status': 'Not Running', 'cfg_ext': '127.0.0.1:2457', 'cfg_int': '127.0.0.1:2458', 'arg_ext': '2457', 'arg_int': '2458', 'private_ip': '127.0.0.1', 'public_ip': '127.0.0.1'}
+MainScreen
+InstanceManagementScreen
+InstanceManagementScreen
+Starting setup tasks…
+[cyan][Preparing Instance]:[/] Starting
+[cyan][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[cyan][Preparing Instance]:[/] Finished
+[deep_sky_blue1][Binding Ports]:[/] Starting
+[deep_sky_blue1][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/testuig/workspace/config/proc/regular/apiserver/config/config.yaml
+[deep_sky_blue1][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:2457 on addresses
+[deep_sky_blue1][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:3344 on internal_addresses
+[deep_sky_blue1][Binding Ports]:[/] Finished
+[magenta][Connecting to Tabsdata instance]:[/] Starting
+[magenta][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[magenta][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance testuig
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T20:03:29.964641Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T20:03:30.566143Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T20:03:30.566150Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T20:03:30.813904Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[magenta][Connecting to Tabsdata instance]:[/] 2025-12-08T20:03:36.070917Z  INFO td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testuig' started with pid '57147'
+[magenta][Connecting to Tabsdata instance]:[/] Exited with code 0
+[magenta][Connecting to Tabsdata instance]:[/] Start command exited with code 0
+[magenta][Connecting to Tabsdata instance]:[/] Finished
+[plum1][Checking Server Status]:[/] Starting
+[plum1][Checking Server Status]:[/] Checking Tabsdata server status...
+[plum1][Checking Server Status]:[/] Running: tdserver status --instance testuig
+[plum1][Checking Server Status]:[/] 2025-12-08T20:03:36.673488Z  INFO td_supervisor::services::tdserver: 
+[plum1][Checking Server Status]:[/] 
+[plum1][Checking Server Status]:[/] ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+[plum1][Checking Server Status]:[/] │ Instance: /Users/danieladayev/.tabsdata/instances/testuig                                                                                                                                                          │
+[plum1][Checking Server Status]:[/] │ Listening ports: 2457, 3344                                                                                                                                                                                        │
+[plum1][Checking Server Status]:[/] ├─────────┬────────┬───────────────┬────────────┬──────────┬────────┬─────────┬──────┬─────────────────┬────────────────┬────────────────────────────────────────────────────────────────────────────────────────────┤
+[plum1][Checking Server Status]:[/] │ Process │ Parent │ Name          │ Collection │ Function │ Worker │ Attempt │  CPU │ Physical Memory │ Virtual Memory │ Program / Working Directory                                                                │
+[plum1][Checking Server Status]:[/] ├─────────┼────────┼───────────────┼────────────┼──────────┼────────┼─────────┼──────┼─────────────────┼────────────────┼────────────────────────────────────────────────────────────────────────────────────────────┤
+[plum1][Checking Server Status]:[/] │   57147 │      1 │ ► supervisor  │            │          │        │         │ 642% │           40 mb │     402,463 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/supervisor                              │
+[plum1][Checking Server Status]:[/] │         │        │               │            │          │        │         │      │                 │                │ /Users/danieladayev/.tabsdata/instances/testuig/workspace/work                             │
+[plum1][Checking Server Status]:[/] │   57220 │  57147 │   ► apiserver │            │          │        │         │   0% │           25 mb │     401,514 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/apiserver                               │
+[plum1][Checking Server Status]:[/] │         │        │               │            │          │        │         │      │                 │                │ /Users/danieladayev/.tabsdata/instances/testuig/workspace/work/proc/regular/apiserver/work │
+[plum1][Checking Server Status]:[/] │   57222 │  57147 │   ► tdvenv    │            │          │        │         │   0% │           82 mb │     401,994 mb │ /Users/danieladayev/.tabsdata/environments/129d6c0f31/bin/python                           │
+[plum1][Checking Server Status]:[/] │         │        │               │            │          │        │         │      │                 │                │ /Users/danieladayev/.tabsdata/instances/testuig/workspace/work                             │
+[plum1][Checking Server Status]:[/] │   57248 │  57222 │     ► uv      │            │          │        │         │   0% │            0 mb │           0 mb │ !                                                                                          │
+[plum1][Checking Server Status]:[/] │         │        │               │            │          │        │         │      │                 │                │ !                                                                                          │
+[plum1][Checking Server Status]:[/] │   57223 │  57147 │   ► janitor   │            │          │        │         │   0% │           69 mb │     401,314 mb │ /Users/danieladayev/.tabsdata/environments/129d6c0f31/bin/python                           │
+[plum1][Checking Server Status]:[/] │         │        │               │            │          │        │         │      │                 │                │ /Users/danieladayev/.tabsdata/instances/testuig/workspace/work/proc/regular/janitor/work   │
+[plum1][Checking Server Status]:[/] └─────────┴────────┴───────────────┴────────────┴──────────┴────────┴─────────┴──────┴─────────────────┴────────────────┴────────────────────────────────────────────────────────────────────────────────────────────┘
+[plum1][Checking Server Status]:[/] 
+[plum1][Checking Server Status]:[/] Exited with code 0
+[plum1][Checking Server Status]:[/] Status command exited with code 0
+[plum1][Checking Server Status]:[/] Updating working instance record in the database...
+[plum1][Checking Server Status]:[/] Finished
+[deep_sky_blue1][Logging you In]:[/] Starting
+[deep_sky_blue1][Logging you In]:[/] Logging User into testuig...
+[deep_sky_blue1][Logging you In]:[/] Running: td login --server 127.0.0.1:2457 --user admin --role sys_admin --password tabsdata
+[deep_sky_blue1][Logging you In]:[/] Login successful.
+[deep_sky_blue1][Logging you In]:[/] Exited with code 0
+[deep_sky_blue1][Logging you In]:[/] Stop command exited with code 0
+[deep_sky_blue1][Logging you In]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-1022' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:798> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 813, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+MainScreen
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[orchid][Preparing Instance]:[/] Starting
+[orchid][Preparing Instance]:[/] Stopping instance testing456...
+[orchid][Preparing Instance]:[/] Running: tdserver stop --instance testing456
+[orchid][Preparing Instance]:[/] 2025-12-08T20:05:14.186545Z  INFO td_common::os: Process with pid '30853' found: '"supervisor"'
+[orchid][Preparing Instance]:[/] 2025-12-08T20:05:14.202431Z  WARN td_common::os: Killing process tree '30853' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[orchid][Preparing Instance]:[/] 2025-12-08T20:05:14.205251Z  WARN td_common::os: Killing process '30853' result: 'ExitStatus(unix_wait_status(0))' - 'true'
+[orchid][Preparing Instance]:[/] 2025-12-08T20:05:14.228879Z  INFO td_supervisor::services::tdserver: Waiting for Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing456' with pid 30853 to stop...
+[orchid][Preparing Instance]:[/] 2025-12-08T20:05:16.257607Z  INFO td_supervisor::services::tdserver: Tabs Data instance '/Users/danieladayev/.tabsdata/instances/testing456' with pid '30853' stopped
+[orchid][Preparing Instance]:[/] Exited with code 0
+[orchid][Preparing Instance]:[/] Stop command exited with code 0
+[orchid][Preparing Instance]:[/] Finished
+[yellow1][Stopping Tabsdata instance]:[/] Starting
+[yellow1][Stopping Tabsdata instance]:[/] Stopping instance testing456...
+[yellow1][Stopping Tabsdata instance]:[/] Running: tdserver stop --instance testing456
+[yellow1][Stopping Tabsdata instance]:[/] 2025-12-08T20:05:16.564822Z  WARN td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing456' not running: 'NotRunning { pid: 30853 }'
+[yellow1][Stopping Tabsdata instance]:[/] Exited with code 0
+[yellow1][Stopping Tabsdata instance]:[/] Stop command exited with code 0
+[yellow1][Stopping Tabsdata instance]:[/] Finished
+[deep_sky_blue1][Checking Server Status]:[/] Starting
+[deep_sky_blue1][Checking Server Status]:[/] Checking Tabsdata server status...
+[deep_sky_blue1][Checking Server Status]:[/] Running: tdserver status --instance testing456
+[deep_sky_blue1][Checking Server Status]:[/] 2025-12-08T20:05:16.861808Z  INFO td_supervisor::services::tdserver: 
+[deep_sky_blue1][Checking Server Status]:[/] 
+[deep_sky_blue1][Checking Server Status]:[/] Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing456' not running: '(NotRunning { pid: 30853 }, None)'
+[deep_sky_blue1][Checking Server Status]:[/] 
+[deep_sky_blue1][Checking Server Status]:[/] Exited with code 0
+[deep_sky_blue1][Checking Server Status]:[/] Status command exited with code 0
+[deep_sky_blue1][Checking Server Status]:[/] Updating working instance record in the database...
+[deep_sky_blue1][Checking Server Status]:[/] Finished
+[plum1][Logging you Out]:[/] Starting
+[plum1][Logging you Out]:[/] Logging User into testing456...
+[plum1][Logging you Out]:[/] Running: td logout
+[plum1][Logging you Out]:[/] Logout successful.
+[plum1][Logging you Out]:[/] Exited with code 0
+[plum1][Logging you Out]:[/] Logout command exited with code 0
+[plum1][Logging you Out]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-1856' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:798> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 813, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+MainScreen
+InstanceManagementScreen
+Starting setup tasks…
+[magenta][Preparing Instance]:[/] Starting
+[magenta][Preparing Instance]:[/] No server preparation steps required (status=Not Running).
+[magenta][Preparing Instance]:[/] Finished
+[spring_green2][Binding Ports]:[/] Starting
+[spring_green2][Binding Ports]:[/] Updating port config at /Users/danieladayev/.tabsdata/instances/testing456/workspace/config/proc/regular/apiserver/config/config.yaml
+[spring_green2][Binding Ports]:[/] Set external port -> Successfully set 127.0.0.1:5577 on addresses
+[spring_green2][Binding Ports]:[/] Set internal port -> Successfully set 127.0.0.1:2244 on internal_addresses
+[spring_green2][Binding Ports]:[/] Finished
+[plum1][Connecting to Tabsdata instance]:[/] Starting
+[plum1][Connecting to Tabsdata instance]:[/] Starting Tabsdata server...
+[plum1][Connecting to Tabsdata instance]:[/] Running: tdserver start --instance testing456
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T20:06:09.973945Z  INFO td_supervisor::services::tdserver: Setting up and launching instance...
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T20:06:10.598474Z  INFO td_supervisor::services::tdserver: Waiting for the instance to complete startup.
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T20:06:10.598482Z  INFO td_supervisor::services::tdserver: Use the '--no-wait' flag to skip waiting and proceed immediately.
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T20:06:10.839639Z  INFO td_supervisor::services::tdserver: The supervisor hasn’t started after 0s out of 5m. Waiting…
+[plum1][Connecting to Tabsdata instance]:[/] 2025-12-08T20:06:16.094335Z  INFO td_supervisor::services::tdserver: Tabsdata instance '/Users/danieladayev/.tabsdata/instances/testing456' started with pid '57383'
+[plum1][Connecting to Tabsdata instance]:[/] Exited with code 0
+[plum1][Connecting to Tabsdata instance]:[/] Start command exited with code 0
+[plum1][Connecting to Tabsdata instance]:[/] Finished
+[yellow1][Checking Server Status]:[/] Starting
+[yellow1][Checking Server Status]:[/] Checking Tabsdata server status...
+[yellow1][Checking Server Status]:[/] Running: tdserver status --instance testing456
+[yellow1][Checking Server Status]:[/] 2025-12-08T20:06:16.667900Z  INFO td_supervisor::services::tdserver: 
+[yellow1][Checking Server Status]:[/] 
+[yellow1][Checking Server Status]:[/] ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+[yellow1][Checking Server Status]:[/] │ Instance: /Users/danieladayev/.tabsdata/instances/testing456                                                                                                                                                         │
+[yellow1][Checking Server Status]:[/] │ Listening ports: 2244, 5577                                                                                                                                                                                          │
+[yellow1][Checking Server Status]:[/] ├─────────┬────────┬───────────────┬────────────┬──────────┬────────┬─────────┬─────┬─────────────────┬────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────┤
+[yellow1][Checking Server Status]:[/] │ Process │ Parent │ Name          │ Collection │ Function │ Worker │ Attempt │ CPU │ Physical Memory │ Virtual Memory │ Program / Working Directory                                                                   │
+[yellow1][Checking Server Status]:[/] ├─────────┼────────┼───────────────┼────────────┼──────────┼────────┼─────────┼─────┼─────────────────┼────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────┤
+[yellow1][Checking Server Status]:[/] │   57383 │      1 │ ► supervisor  │            │          │        │         │ 96% │           45 mb │     402,464 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/supervisor                                 │
+[yellow1][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/testing456/workspace/work                             │
+[yellow1][Checking Server Status]:[/] │   57460 │  57383 │   ► apiserver │            │          │        │         │  0% │           26 mb │     401,513 mb │ /Users/danieladayev/miniconda3/envs/tdtui_test/bin/apiserver                                  │
+[yellow1][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/testing456/workspace/work/proc/regular/apiserver/work │
+[yellow1][Checking Server Status]:[/] │   57463 │  57383 │   ► janitor   │            │          │        │         │  0% │           71 mb │     401,980 mb │ /Users/danieladayev/.tabsdata/environments/0bfe93460e/bin/python                              │
+[yellow1][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/testing456/workspace/work/proc/regular/janitor/work   │
+[yellow1][Checking Server Status]:[/] │   57465 │  57383 │   ► aiagent   │            │          │        │         │ 80% │           64 mb │     401,875 mb │ /Users/danieladayev/.tabsdata/environments/a2a80a5449/bin/python                              │
+[yellow1][Checking Server Status]:[/] │         │        │               │            │          │        │         │     │                 │                │ /Users/danieladayev/.tabsdata/instances/testing456/workspace/work/proc/regular/aiagent/work   │
+[yellow1][Checking Server Status]:[/] └─────────┴────────┴───────────────┴────────────┴──────────┴────────┴─────────┴─────┴─────────────────┴────────────────┴───────────────────────────────────────────────────────────────────────────────────────────────┘
+[yellow1][Checking Server Status]:[/] 
+[yellow1][Checking Server Status]:[/] Exited with code 0
+[yellow1][Checking Server Status]:[/] Status command exited with code 0
+[yellow1][Checking Server Status]:[/] Updating working instance record in the database...
+[yellow1][Checking Server Status]:[/] Finished
+🎉 All tasks complete.
+Task exception was never retrieved
+future: <Task finished name='Task-2828' coro=<SequentialTasksScreenTemplate.run_tasks() done, defined at /Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py:798> exception=AttributeError("'NoneType' object has no attribute 'focus'")>
+Traceback (most recent call last):
+  File "/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui/textual_assets/textual_screens.py", line 813, in run_tasks
+    button.focus()
+    ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'focus'
+MainScreen

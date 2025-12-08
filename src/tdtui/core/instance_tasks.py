@@ -46,7 +46,7 @@ async def tabsdata_login(runner, instance, label=None) -> int:
 
 async def tabsdata_logout(runner, instance, label=None) -> int:
     """Login to a Tabsdata Instance"""
-    runner.log_line(label, f"Logging User into {instance.name}...")
+    runner.log_line(label, f"Logging User out of {instance.name}...")
     code = await runner.run_logged_subprocess(label, "td", "logout")
     runner.log_line(label, f"Logout command exited with code {code}")
     return code

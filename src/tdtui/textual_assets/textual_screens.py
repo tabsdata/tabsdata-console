@@ -5,7 +5,7 @@ from textual.widgets import ListView, ListItem, Label, Static, Button
 from pathlib import Path
 from tdtui.textual_assets.spinners import SpinnerWidget
 from typing import Awaitable, Callable, List, Iterable
-from textual.widgets import RichLog, DirectoryTree
+from textual.widgets import RichLog, DirectoryTree, Pretty
 from textual.containers import Center
 from tdtui.core import input_validators
 from textual import on
@@ -494,15 +494,18 @@ class PortConfigScreen(Screen):
                     ),
                     Input(
                         placeholder=self.placeholder,
+                        validate_on=["submitted"],
+                        validators=[
+                            input_validators.ValidInstanceName(self.app, self.instance)
+                        ],
                         id="instance-input",
                         classes="inputs",
                     ),
                 ),
-                Label("", id="instance-message"),
+                Pretty("", id="instance-message"),
                 id="instance-container",
                 classes="input_container",
             ),
-            Label("Configure Tabsdata ports", id="title"),
             Vertical(
                 Horizontal(
                     Label("External port:", id="ext-label"),
@@ -518,7 +521,7 @@ class PortConfigScreen(Screen):
                         classes="inputs",
                     ),
                 ),
-                Label("", id="ext-message"),
+                Pretty("", id="ext-message"),
                 id="ext-container",
                 classes="input_container",
             ),
@@ -537,7 +540,7 @@ class PortConfigScreen(Screen):
                         classes="inputs",
                     ),
                 ),
-                Label("", id="int-message"),
+                Pretty("", id="int-message"),
                 id="int-container",
                 classes="input_container",
             ),
@@ -573,10 +576,71 @@ class PortConfigScreen(Screen):
     def on_screen_resume(self, event) -> None:
         self.set_visibility()
 
-    @on(Input.Submitted, ".inputs")
-    def handle_input(self, event: Input.Submitted) -> None:
+    @on(Input.Submitted, "#instance-input")
+    def handle_instance_input(self, event: Input.Submitted) -> None:
         value = event.value
-        source = event
+        if value == "":
+            value = "tabsdata"
+            event.input.value = value  # update UI
+            validation_result = event.input.validate(
+                value
+            )  # re-run validators with new value
+        else:
+            validation_result = event.validation_result
+
+        if not validation_result.is_valid:
+            ext_message = self.query_one("#instance-message")
+            ext_message.update(validation_result.failure_descriptions)
+            event.input.clear()
+        else:
+            self.instance.name = value
+            ext_message = self.query_one("#instance-message")
+            ext_message.update(f"Instance Name Set to {value}")
+            ext_container = self.query_one("#ext-container")
+            ext_input = self.query_one("#ext-input")
+            ext_container.display = True
+            self.set_focus(ext_input)
+
+    @on(Input.Submitted, "#ext-input")
+    async def handle_ext_input(self, event: Input.Submitted) -> None:
+        value = event.value
+        if value == "":
+            value = self.instance.arg_ext
+            event.input.value = value
+            await event.input.action_submit()
+            return
+
+        if not event.validation_result.is_valid:
+            ext_message = self.query_one("#ext-message")
+            ext_message.update(event.validation_result.failure_descriptions)
+            event.input.clear()
+        else:
+            self.instance.arg_ext = value
+            ext_message = self.query_one("#ext-message")
+            ext_message.update(f"External Port Set to {value}")
+            int_container = self.query_one("#int-container")
+            int_input = self.query_one("#int-input")
+            int_container.display = True
+            self.set_focus(int_input)
+
+    @on(Input.Submitted, "#int-input")
+    async def handle_int_input(self, event: Input.Submitted) -> None:
+        value = event.value
+        if value == "":
+            value = self.instance.arg_int
+            event.input.value = value
+            await event.input.action_submit()
+            return
+
+        if not event.validation_result.is_valid:
+            ext_message = self.query_one("#int-message")
+            ext_message.update(event.validation_result.failure_descriptions)
+            event.input.clear()
+        else:
+            self.instance.arg_int = value
+            ext_message = self.query_one("#int-message")
+            ext_message.update(f"External Port Set to {value}")
+            self.app.handle_api_response(self, self.instance)
 
 
 @dataclass
