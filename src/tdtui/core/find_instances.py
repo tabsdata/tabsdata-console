@@ -251,8 +251,8 @@ def manage_working_instance(session, instance):
 #     print({c.name: getattr(inst, c.name) for c in inst.__table__.columns})
 
 
-def print_all_instance_data(session):
-    sync_filesystem_instances_to_db(session=session)
-    x = query_session(session, Instance)
-    for inst in x:
-        print({c.name: getattr(inst, c.name) for c in inst.__table__.columns})
+# def print_all_instance_data(session):
+#     sync_filesystem_instances_to_db(session=session)
+#     x = query_session(session, Instance)
+#     for inst in x:
+#         print({c.name: getattr(inst, c.name) for c in inst.__table__.columns})

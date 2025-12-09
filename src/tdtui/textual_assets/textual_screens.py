@@ -5,7 +5,7 @@ from textual.widgets import ListView, ListItem, Label, Static, Button
 from pathlib import Path
 from tdtui.textual_assets.spinners import SpinnerWidget
 from typing import Awaitable, Callable, List, Iterable
-from textual.widgets import RichLog, DirectoryTree, Pretty
+from textual.widgets import RichLog, DirectoryTree, Pretty, Tree
 from textual.containers import Center
 from tdtui.core import input_validators
 from textual import on
@@ -16,7 +16,6 @@ from tdtui.core.find_instances import (
     sync_filesystem_instances_to_db,
     instance_name_to_instance,
     manage_working_instance,
-    print_all_instance_data,
     sync_filesystem_instances_to_db,
 )
 import logging
@@ -663,26 +662,31 @@ class TaskRow(Horizontal):
         self.query_one(f"#{self.id}-spinner").display = True
         self.query_one(f"#{self.id}-label", Label).update(self.description)
 
-    def set_done(self) -> None:
+    def set_done(self, exit_code: Optional[int] = None) -> None:
         self.query_one(f"#{self.id}-spinner").display = False
-        self.query_one(f"#{self.id}-label", Label).update(f"✅ {self.description}")
+        print(self.description, exit_code)
+        if exit_code == 0 or exit_code is None:
+            self.query_one(f"#{self.id}-label", Label).update(f"✅ {self.description}")
+        else:
+            self.query_one(f"#{self.id}-label", Label).update(f"❌ {self.description}")
 
 
 class SequentialTasksScreenTemplate(Screen):
     BINDINGS = [
         ("enter", "press_close", "Done"),
     ]
+
     CSS = """
         * {
-  height: auto;
-    }
-    #tasks-header { padding: 1 2; text-style: bold; }
-    .task-row { height: 1; content-align: left middle; }
-    .task-spinner { width: 3; }
-    .task-label { padding-left: 1; }
-    #task-log { padding: 1 2; border: round $accent; overflow-y: auto; height: 20; width: 80%;}
-    #task-box {align: center top;}
-    VerticalScroll { height: 1fr; overflow-y: auto; }
+            height: auto;
+        }
+        #tasks-header { padding: 1 2; text-style: bold; }
+        .task-row { height: 1; content-align: left middle; }
+        .task-spinner { width: 3; }
+        .task-label { padding-left: 1; }
+        #task-log { padding: 1 2; border: round $accent; overflow-y: auto; height: 20; width: 80%;}
+        #task-box {align: center top;}
+        VerticalScroll { height: 1fr; overflow-y: auto; }
     """
 
     COLOR_PALETTE = [
@@ -705,6 +709,10 @@ class SequentialTasksScreenTemplate(Screen):
             task.description: random.choice(self.COLOR_PALETTE) for task in self.tasks
         }
 
+        # fail-fast state
+        self.failed: bool = False
+        self._background_tasks: list[asyncio.Task] = []
+
     def compose(self) -> ComposeResult:
         for index, task in enumerate(self.tasks):
             row = TaskRow(task.description, task_id=f"task-{index}")
@@ -726,7 +734,7 @@ class SequentialTasksScreenTemplate(Screen):
             ),
         )
 
-    def conclude_tasks(self):
+    def conclude_tasks(self) -> None:
         self.query_one(VerticalScroll).scroll_end(animate=False)
 
     async def on_mount(self) -> None:
@@ -774,18 +782,62 @@ class SequentialTasksScreenTemplate(Screen):
         self.log_line(label, f"Exited with code {code}")
         return code
 
-    async def run_single_task(self, idx: int, task: TaskSpec) -> None:
+    async def run_single_task(self, idx: int, task: TaskSpec) -> int | None:
+        """
+        Run a single task and return its exit code.
+        Success = 0 or None.
+        Failure = any other int.
+        """
         row = self.task_rows[idx]
         row.set_running()
         self.log_line(task.description, "Starting")
+        code: int | None
+
         try:
-            await task.func(task.description)
+            # allow task.func to return either None or an int
+            result = await task.func(task.description)
+            code = result if isinstance(result, int) else None
             self.log_line(task.description, "Finished")
         except Exception as e:
             self.log_line(task.description, f"Error: {e!r}")
-            raise
+            code = 1  # treat exception as failure
         finally:
-            row.set_done()
+            row.set_done(code)
+
+        return code
+
+    async def abort_all_tasks(self) -> None:
+        """Fail-fast: cancel all background tasks and mark remaining rows as failed."""
+        if self.failed:
+            return  # idempotent
+
+        self.failed = True
+        self.log_line(None, "❌ Aborting remaining tasks due to failure.")
+
+        # Cancel background tasks
+        for task in self._background_tasks:
+            if not task.done():
+                task.cancel()
+
+        # Mark any still-running rows as failed
+        for row in self.task_rows:
+            spinner = row.query_one(f"#{row.id}-spinner")
+            if getattr(spinner, "display", False):
+                # If spinner is still visible, treat it as failed
+                row.set_done(exit_code=1)
+
+        self.conclude_tasks()
+
+    async def _background_wrapper(self, idx: int, task: TaskSpec) -> None:
+        """Wrapper for background tasks so they can trigger fail-fast."""
+        try:
+            code = await self.run_single_task(idx, task)
+        except asyncio.CancelledError:
+            self.log_line(task.description, "Cancelled")
+            return
+
+        if code not in (0, None):
+            await self.abort_all_tasks()
 
     def action_press_close(self) -> None:
         # Only act if the button exists
@@ -796,18 +848,37 @@ class SequentialTasksScreenTemplate(Screen):
         btn.press()
 
     async def run_tasks(self) -> None:
-        background = []
+        # Start background tasks first
+        self._background_tasks = []
         for i, t in enumerate(self.tasks):
             if t.background:
                 self.log_line(t.description, "Scheduling background task")
-                background.append(asyncio.create_task(self.run_single_task(i, t)))
+                self._background_tasks.append(
+                    asyncio.create_task(self._background_wrapper(i, t))
+                )
+
+        # Run foreground tasks sequentially
         for i, t in enumerate(self.tasks):
+            if self.failed:
+                break  # already failed; stop starting new tasks
+
             if not t.background:
-                await self.run_single_task(i, t)
-        if background:
-            await asyncio.gather(*background)
-        self.log_line(None, "🎉 All tasks complete.")
-        self.conclude_tasks()
+                code = await self.run_single_task(i, t)
+                if code not in (0, None):
+                    await self.abort_all_tasks()
+                    break
+
+        # Wait for background tasks to finish / cancel
+        if self._background_tasks:
+            await asyncio.gather(*self._background_tasks, return_exceptions=True)
+
+        if self.failed:
+            self.log_line(None, "⚠️ Tasks aborted due to failure.")
+        else:
+            self.log_line(None, "🎉 All tasks complete.")
+            self.conclude_tasks()
+
+        # Show “Done” button either way
         footer = self.query_one(Footer)
         button = await self.mount(Button("Done", id="close-btn"), before=footer)
         button.focus()
@@ -843,7 +914,7 @@ class BindAndStartInstance(SequentialTasksScreenTemplate):
 
         super().__init__(tasks)
 
-    def conclude_tasks(self):
+    def conclude_tasks(self, status=None):
         super().conclude_tasks()
         manage_working_instance(self.app.session, self.instance)
         self.app.session.merge(self.instance)
@@ -893,10 +964,6 @@ class StopInstance(SequentialTasksScreenTemplate):
                 "Checking Server Status",
                 partial(instance_tasks.run_tdserver_status, self, self.instance),
             ),
-            TaskSpec(
-                "Logging you Out",
-                partial(instance_tasks.tabsdata_logout, self, self.instance),
-            ),
         ]
 
         super().__init__(tasks)
@@ -911,7 +978,10 @@ class StopInstance(SequentialTasksScreenTemplate):
 class PyOnlyDirectoryTree(DirectoryTree):
     """DirectoryTree that:
     - only shows .py files (but keeps directories)
-    - auto-expands directories that contain .py files, up to a given depth.
+    - only shows .py files that contain td publisher/subscriber/transformer
+    - only shows directories that (recursively) contain such .py files
+    - limits recursive search to `auto_expand_depth` levels
+    - auto-expands the first `auto_expand_depth` levels on mount
     """
 
     DEFAULT_CSS = """
@@ -956,53 +1026,38 @@ class PyOnlyDirectoryTree(DirectoryTree):
         }
 
     }
-
     """
 
     def __init__(
         self,
         path: str | Path,
         *,
-        auto_expand_depth: int = 2,
+        auto_expand_depth: int = 5,  # <- 3 levels on first mount
         **kwargs,
     ) -> None:
         self.auto_expand_depth = auto_expand_depth
         super().__init__(path, **kwargs)
 
-    # 1) Only show dirs + .py files in each directory
+    # ---------- filtering ----------
+
     def filter_paths(self, paths: Iterable[Path]) -> Iterable[Path]:
-        result = []
+        """Keep only:
+        - .py files that match _file_is_tabsdata_function
+        - directories that (within depth) contain at least one such file
+        """
+        result: list[Path] = []
         for p in paths:
-            if p.suffix == ".py":
+            if p.is_file() and p.suffix == ".py":
                 if self._file_is_tabsdata_function(p):
                     result.append(p)
-            if p.is_dir():
-                if self._dir_has_py(p):
+            elif p.is_dir():
+                if self._dir_has_py(p, depth=0, max_depth=self.auto_expand_depth):
                     result.append(p)
+
         return result
 
-    # def filter_path(self, path: Path) -> Iterable[Path]:
-    #     result = []
-    #     if path.is_file():
-    #         if path.suffix != ".py":
-    #             return []
-    #         else:
-    #             if self._file_is_tabsdata_function(path):
-    #                 return [path]
-    #     if path.is_dir():
-    #         child_list = []
-    #         for p in path.iterdir():
-    #             result.extend(self.filter_paths(p))
-    #     return result
-
-    def _file_is_tabsdata_function(self, path: Path):
-        """
-        Docstring for _file_is_tabsdata_function
-
-        :param self: DirectoryTree Override Class
-        :param path: Path to the File
-        :type path: Path
-        """
+    def _file_is_tabsdata_function(self, path: Path) -> bool:
+        """Return True if the .py file contains a td.publisher/subscriber/transformer-decorated function."""
         if path.suffix != ".py":
             return False
 
@@ -1017,10 +1072,9 @@ class PyOnlyDirectoryTree(DirectoryTree):
             return False
 
         for node in ast.walk(tree):
-            if isinstance(node, ast.FunctionDef):  # or ast.AsyncFunctionDef if needed
+            if isinstance(node, ast.FunctionDef):  # or ast.AsyncFunctionDef
                 for deco in node.decorator_list:
                     func = deco.func if isinstance(deco, ast.Call) else deco
-
                     if isinstance(func, ast.Attribute) and isinstance(
                         func.value, ast.Name
                     ):
@@ -1032,52 +1086,57 @@ class PyOnlyDirectoryTree(DirectoryTree):
                             return True
         return False
 
-    # 2) Helper: does this directory contain any .py file (recursively)?
-    def _dir_has_py(self, path: Path) -> bool:
+    def _dir_has_py(self, path: Path, depth: int = 0, max_depth: int = 5) -> bool:
+        """Return True if directory contains a matching .py file within max_depth levels."""
+        if depth > max_depth:
+            return False
+
         try:
-            for root, dirs, files in os.walk(path):
-                # files is a list of filenames (str), not Paths
-                for f in files:
-                    if not f.endswith(".py"):
-                        continue
-                    file_path = Path(root) / f
-                    if self._file_is_tabsdata_function(file_path):
+            for entry in path.iterdir():
+                if entry.is_file() and entry.suffix == ".py":
+                    if self._file_is_tabsdata_function(entry):
+                        return True
+                elif entry.is_dir():
+                    if self._dir_has_py(entry, depth + 1, max_depth):
                         return True
         except PermissionError:
             return False
+
         return False
 
-    # 3) After a node is populated, optionally expand children that have .py under them
-    def _populate_node(self, node: TreeNode, content: Iterable[Path]) -> None:
-        # Let the base class actually add children + call node.expand()
-        super()._populate_node(node, content)
+    # ---------- auto expand on mount ----------
 
-        # If node has no data, bail
-        if node.data is None:
+    async def on_mount(self) -> None:
+        """When the tree is first mounted, auto-expand N levels."""
+        await self._expand_to_depth(
+            self.root, depth=0, max_depth=self.auto_expand_depth
+        )
+
+    async def _expand_to_depth(
+        self, node: TreeNode, depth: int, max_depth: int
+    ) -> None:
+        """Recursively expand nodes up to `max_depth` levels deep."""
+        if depth >= max_depth:
             return
 
-        # Compute depth of this node relative to the root path
-        parent_path: Path = node.data.path
-        try:
-            rel = parent_path.relative_to(self.path)
-            depth = 0 if str(rel) == "." else len(rel.parts)
-        except ValueError:
-            depth = 0
+        await self._add_to_load_queue(node)
 
-        # If we've already reached the configured depth, stop
-        if depth >= self.auto_expand_depth:
-            return
-
-        # For each child directory that has any .py below it,
-        # queue it for loading and expand it.
-        for child in list(node.children):
-            if child.data is None:
+        # Recurse into child directories only
+        for child in node.children:
+            data = child.data
+            if data is None:
                 continue
-            child_path: Path = child.data.path
-            if self._safe_is_dir(child_path) and self._dir_has_py(child_path):
-                # Ask DirectoryTree to load this directory in the background
-                self._add_to_load_queue(child)
-                child.expand()
+
+            path = getattr(data, "path", None)
+            if isinstance(path, Path) and path.is_dir():
+                await self._expand_to_depth(child, depth + 1, max_depth)
+
+    @on(DirectoryTree.NodeExpanded)
+    def set_file_color(self, event: DirectoryTree.NodeExpanded):
+        for i in event.node.children:
+            if i.data.path.is_file():
+                i.label.stylize("green")
+        self.refresh()
 
 
 class PyFileTreeScreen(Screen):
@@ -1121,6 +1180,5 @@ class PyFileTreeScreen(Screen):
     ) -> None:
         """Handle selection of a file in the directory tree."""
         selected_path: Path = event.path
-        print(str(event.path), event.path)
-        self.app.exit()
-        # self.app.handle_api_response(self, str(selected_path))
+        print(event.path)
+        self.app.handle_api_response(self, event.path)

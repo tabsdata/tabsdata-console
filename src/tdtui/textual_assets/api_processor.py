@@ -2,6 +2,7 @@ from textual.screen import Screen
 from tdtui.textual_assets import textual_screens
 from tdtui.core.find_instances import instance_name_to_instance
 import os
+from pathlib import Path
 
 
 def process_response(screen: Screen, label=None):
@@ -32,8 +33,8 @@ def process_response(screen: Screen, label=None):
             app.flow_mode = "start"
             # only instances that are not running
             instances = app.app_query_session("instances", status="Not Running")
-            for inst in instances:
-                print({c.name: getattr(inst, c.name) for c in inst.__table__.columns})
+            # for inst in instances:
+            #     print({c.name: getattr(inst, c.name) for c in inst.__table__.columns})
             app.push_screen(
                 textual_screens.InstanceSelectionScreen(instances=instances)
             )
@@ -61,7 +62,13 @@ def process_response(screen: Screen, label=None):
             return
 
         if label == "Asset Management":
-            app.push_screen(textual_screens.PyFileTreeScreen(root=os.getcwd()))
+            if Path.home() == Path.cwd():
+                app.notify(
+                    "❌ Cannot scan root directory! Please run `tdtui` in a more specific directory to avoid scanning your entire home path.",
+                    severity="error",
+                )
+            else:
+                app.push_screen(textual_screens.PyFileTreeScreen(root=os.getcwd()))
             return
 
         if label == "Exit":

@@ -71,10 +71,6 @@ class NestedMenuApp(App):
         super().__init__(**kwargs)
         self.session = start_session()[0]
         instance = query_session(self.session, Instance)
-        for inst in instance:
-            logging.info(
-                {c.name: getattr(inst, c.name) for c in inst.__table__.columns}
-            )
 
     def on_mount(self) -> None:
         # start with a MainMenu instance
