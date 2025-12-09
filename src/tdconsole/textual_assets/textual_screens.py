@@ -164,13 +164,6 @@ class BSOD(Screen):
 
 from tdconsole.core import instance_tasks
 
-logging.basicConfig(
-    filename="/Users/danieladayev/test-tui/tabsdata-tui/logger.log",
-    level=logging.INFO,
-    format="%(message)s",
-    force=True,
-)
-
 
 class InstanceWidget(Static):
     """Rich panel showing the current working instance."""
@@ -184,10 +177,6 @@ class InstanceWidget(Static):
     def _make_instance_panel(self) -> Panel:
 
         inst = self.inst
-        try:
-            logging.info([(i, inst[i]) for i in inst])
-        except:
-            pass
 
         if inst is None:
             status_color = "#e4e4e6"
@@ -302,7 +291,6 @@ class ListScreenTemplate(Screen):
 
     def on_list_view_selected(self, event: ListView.Selected) -> None:
         selected = event.item.label
-        logging.info(type(self.screen).__name__)
         if selected not in ["Asset Management", "Register a Function"]:
             self.app.handle_api_response(self, selected)  # push instance
 
@@ -756,7 +744,6 @@ class SequentialTasksScreenTemplate(Screen):
 
         if self.log_widget:
             self.log_widget.write(line)
-        logging.info(line)
 
     async def run_logged_subprocess(
         self,

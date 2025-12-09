@@ -7,9 +7,7 @@ class ScreenTemplate(Screen):
         self.header = header
 
     def compose(self) -> ComposeResult:
-        logging.info(self.app.instance_start_configuration)
         instance = self.app.instance_start_configuration.get("name")
-        logging.info(f"instance chosen is {instance} at type {type(instance)}")
         with VerticalScroll():
             if self.header is not None:
                 yield Label(self.header, id="listHeader")
@@ -25,6 +23,4 @@ class ScreenTemplate(Screen):
         self.set_focus(self.list)
 
     def on_list_view_selected(self, event: ListView.Selected) -> None:
-        selected = event.item.label
-        logging.info(type(self.screen).__name__)
         process_response(self, selected)  # push instance

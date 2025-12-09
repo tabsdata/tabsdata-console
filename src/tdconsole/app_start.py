@@ -39,12 +39,6 @@ install(
     suppress=[textual, sqlalchemy],
 )
 
-logging.basicConfig(
-    filename="/Users/danieladayev/test-tui/tabsdata-tui/logger.log",
-    level=logging.INFO,
-    format="%(message)s",
-)
-
 
 class NestedMenuApp(App):
     CSS = """

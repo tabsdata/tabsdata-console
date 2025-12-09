@@ -20,7 +20,7 @@ A CLI Utility that introduces a TUI (Terminal User Interface) for interacting wi
 ## Install (from GitHub)
 
 ```bash
-pip install git+https://github.com/tabsdata/tabsdata-tui.git
+pip install git+https://github.com/tabsdata/tabsdata-console.git
 ```
 ---
 ### How to use 

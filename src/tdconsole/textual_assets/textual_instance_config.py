@@ -11,16 +11,9 @@ from rich.text import Text
 from tdconsole.core.find_instances import (
     sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
 )
-import logging
+
 from pathlib import Path
 from textual import events
-
-
-logging.basicConfig(
-    filename=Path(__file__).resolve().parent / "log.log",
-    level=logging.INFO,
-    format="%(message)s",
-)
 
 
 def validate_port(port_str: str) -> bool:
