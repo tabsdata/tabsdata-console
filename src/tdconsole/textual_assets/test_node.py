@@ -12,4 +12,4 @@ def _dir_has_py(path: Path) -> bool:
     return False
 
 
-# print(_dir_has_py("/Users/danieladayev/test-tui/tabsdata-tui/src/tdtui.egg-info"))
+# print(_dir_has_py("/Users/danieladayev/test-tui/tabsdata-tui/src/tdconsole.egg-info"))

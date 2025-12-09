@@ -1,8 +1,8 @@
-# tdtui/core/tasks/instance_tasks.py
+# tdconsole/core/tasks/instance_tasks.py
 
 from pathlib import Path
-from tdtui.core.yaml_getter_setter import set_yaml_value
-from tdtui.core.find_instances import manage_working_instance
+from tdconsole.core.yaml_getter_setter import set_yaml_value
+from tdconsole.core.find_instances import manage_working_instance
 
 
 # ------------------------------------------------------------

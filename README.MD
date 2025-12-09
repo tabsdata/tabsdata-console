@@ -12,10 +12,10 @@ pip install git+https://github.com/tabsdata/tabsdata-tui.git
 ---
 ### How to use 
 
-### 2. Run the tdtui command
+### 2. Run the tdconsole command
 
 ```bash
-tdtui
+tdconsole
 ```
 
 The TUI allows for arrow based or mouse based navigation. 

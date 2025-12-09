@@ -1,6 +1,6 @@
 from textual.screen import Screen
-from tdtui.textual_assets import textual_screens
-from tdtui.core.find_instances import instance_name_to_instance
+from tdconsole.textual_assets import textual_screens
+from tdconsole.core.find_instances import instance_name_to_instance
 import os
 from pathlib import Path
 
@@ -64,7 +64,7 @@ def process_response(screen: Screen, label=None):
         if label == "Asset Management":
             if Path.home() == Path.cwd():
                 app.notify(
-                    "❌ Cannot scan root directory! Please run `tdtui` in a more specific directory to avoid scanning your entire home path.",
+                    "❌ Cannot scan root directory! Please run `tdconsole` in a more specific directory to avoid scanning your entire home path.",
                     severity="error",
                 )
             else:

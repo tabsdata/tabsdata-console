@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from tdtui.core.models import Base, Instance, ApiResponse  # your ORM models
-from tdtui.core.find_instances import sync_filesystem_instances_to_db, query_session
+from tdconsole.core.models import Base, Instance, ApiResponse  # your ORM models
+from tdconsole.core.find_instances import sync_filesystem_instances_to_db, query_session
 
 
 def start_session():

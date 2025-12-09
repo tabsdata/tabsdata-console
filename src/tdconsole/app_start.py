@@ -3,8 +3,8 @@ from textual import on
 from textual.screen import Screen
 from textual.widgets import ListView, ListItem, Label, Static
 from pathlib import Path
-from tdtui.textual_assets.api_processor import process_response
-from tdtui.core.find_instances import (
+from tdconsole.textual_assets.api_processor import process_response
+from tdconsole.core.find_instances import (
     sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
 )
 import logging
@@ -27,9 +27,9 @@ from textual.app import App, ComposeResult
 from textual.screen import Screen
 from textual.containers import Horizontal, VerticalScroll
 from textual.widgets import Static
-from tdtui.core.db import start_session
-from tdtui.core.find_instances import query_session
-from tdtui.core.models import Instance, get_model_by_tablename
+from tdconsole.core.db import start_session
+from tdconsole.core.find_instances import query_session
+from tdconsole.core.models import Instance, get_model_by_tablename
 from rich.traceback import install
 import textual
 import sqlalchemy

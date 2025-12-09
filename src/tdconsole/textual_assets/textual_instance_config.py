@@ -8,7 +8,7 @@ from textual.widgets import Input, Label, Static, Footer
 from textual.containers import Vertical, VerticalScroll
 from rich.text import Text
 
-from tdtui.core.find_instances import (
+from tdconsole.core.find_instances import (
     sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
 )
 import logging

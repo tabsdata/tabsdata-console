@@ -3,16 +3,16 @@ from textual.app import App, ComposeResult
 from textual.screen import Screen
 from textual.widgets import ListView, ListItem, Label, Static, Button
 from pathlib import Path
-from tdtui.textual_assets.spinners import SpinnerWidget
+from tdconsole.textual_assets.spinners import SpinnerWidget
 from typing import Awaitable, Callable, List, Iterable
 from textual.widgets import RichLog, DirectoryTree, Pretty, Tree
 from textual.containers import Center
-from tdtui.core import input_validators
+from tdconsole.core import input_validators
 from textual import on
 
 import ast
 
-from tdtui.core.find_instances import (
+from tdconsole.core.find_instances import (
     sync_filesystem_instances_to_db,
     instance_name_to_instance,
     manage_working_instance,
@@ -52,21 +52,21 @@ from typing import Optional, Dict, List, Union
 import asyncio.subprocess
 import random
 import asyncio
-from tdtui.core.yaml_getter_setter import get_yaml_value, set_yaml_value
+from tdconsole.core.yaml_getter_setter import get_yaml_value, set_yaml_value
 from functools import partial
 
-from tdtui.core.find_instances import (
+from tdconsole.core.find_instances import (
     sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
 )
 import logging
 from pathlib import Path
-from tdtui.textual_assets.textual_instance_config import (
+from tdconsole.textual_assets.textual_instance_config import (
     name_in_use,
     port_in_use,
     get_running_ports,
     validate_port,
 )
-from tdtui.core.models import Instance
+from tdconsole.core.models import Instance
 
 
 from textual.app import ComposeResult
@@ -94,10 +94,10 @@ class BSOD(Screen):
         background: blue;
         color: white;
         align: center middle;
+        width: auto;
     }
 
     #wrapper {
-        width: 80;
         align: center middle;
     }
 
@@ -162,7 +162,7 @@ class BSOD(Screen):
         self.query_one("#exit-btn", Button).focus()
 
 
-from tdtui.core import instance_tasks
+from tdconsole.core import instance_tasks
 
 logging.basicConfig(
     filename="/Users/danieladayev/test-tui/tabsdata-tui/logger.log",

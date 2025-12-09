@@ -1,5 +1,5 @@
 from textual.validation import Function, Number, ValidationResult, Validator
-from tdtui.textual_assets import textual_instance_config
+from tdconsole.textual_assets import textual_instance_config
 
 
 class ValidInstanceName(Validator):

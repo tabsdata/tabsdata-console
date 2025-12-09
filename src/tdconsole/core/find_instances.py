@@ -1,15 +1,15 @@
 from pathlib import Path
 import os
 from os import listdir
-from tdtui.core.yaml_getter_setter import (
+from tdconsole.core.yaml_getter_setter import (
     get_yaml_value,
 )
 import psutil
 from dataclasses import dataclass
-from tdtui.core.td_dataclasses import TabsdataInstance, FieldChange
+from tdconsole.core.td_dataclasses import TabsdataInstance, FieldChange
 from pathlib import Path
 from typing import Optional, Dict, List, Union
-from tdtui.core.models import Instance
+from tdconsole.core.models import Instance
 from textual.app import App
 
 
@@ -116,9 +116,9 @@ def find_sockets(instance_name: str, pid=None):
     }
 
 
-from tdtui.core.models import Instance as InstanceRow  # avoid name clash
+from tdconsole.core.models import Instance as InstanceRow  # avoid name clash
 
-from tdtui.core.models import Instance  # ORM model
+from tdconsole.core.models import Instance  # ORM model
 
 
 def instance_name_to_instance(instance_name: str) -> Instance:
