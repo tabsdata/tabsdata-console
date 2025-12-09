@@ -2,7 +2,6 @@ README.md
 pyproject.toml
 src/tdconsole/__init__.py
 src/tdconsole/app_start.py
-src/tdconsole.egg-info/05_master_categorize_trf.py
 src/tdconsole.egg-info/PKG-INFO
 src/tdconsole.egg-info/SOURCES.txt
 src/tdconsole.egg-info/dependency_links.txt

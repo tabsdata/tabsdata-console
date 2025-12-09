@@ -1,9 +1,10 @@
 from textual.app import App, ComposeResult
+from textual import on
 from textual.screen import Screen
 from textual.widgets import ListView, ListItem, Label, Static
 from pathlib import Path
-from tdtui.textual_assets.api_processor import process_response
-from tdtui.core.find_instances import (
+from tdconsole.textual_assets.api_processor import process_response
+from tdconsole.core.find_instances import (
     sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
 )
 import logging
@@ -26,9 +27,9 @@ from textual.app import App, ComposeResult
 from textual.screen import Screen
 from textual.containers import Horizontal, VerticalScroll
 from textual.widgets import Static
-from tdtui.core.db import start_session
-from tdtui.core.find_instances import query_session
-from tdtui.core.models import Instance, get_model_by_tablename
+from tdconsole.core.db import start_session
+from tdconsole.core.find_instances import query_session
+from tdconsole.core.models import Instance, get_model_by_tablename
 from rich.traceback import install
 import textual
 import sqlalchemy
@@ -51,7 +52,7 @@ class NestedMenuApp(App):
    height: auto;
     }
     ListView {
-    height: 1fr;
+    height: auto;
 }
     VerticalScroll {
         width: 1fr;
@@ -70,10 +71,6 @@ class NestedMenuApp(App):
         super().__init__(**kwargs)
         self.session = start_session()[0]
         instance = query_session(self.session, Instance)
-        for inst in instance:
-            logging.info(
-                {c.name: getattr(inst, c.name) for c in inst.__table__.columns}
-            )
 
     def on_mount(self) -> None:
         # start with a MainMenu instance
@@ -91,6 +88,13 @@ class NestedMenuApp(App):
         session = self.session
         query = query_session(session, model, limit, *conditions, **filters)
         return query
+
+    @on(ListView.Highlighted)
+    async def on_select_highlighted(self, event: ListView.Highlighted):
+        # Scroll the highlighted list itself into view
+        item = event.list_view.highlighted_child
+        if item:
+            item.scroll_visible()
 
 
 def run_app():

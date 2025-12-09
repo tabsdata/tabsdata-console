@@ -1,4 +1,4 @@
-from tdtui.core.models import ApiResponse
+from tdconsole.core.models import ApiResponse
 
 
 def sync_api_rules(app) -> list[ApiResponse]:

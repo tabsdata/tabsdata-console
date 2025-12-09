@@ -3,16 +3,19 @@ from textual.app import App, ComposeResult
 from textual.screen import Screen
 from textual.widgets import ListView, ListItem, Label, Static, Button
 from pathlib import Path
-from tdtui.textual_assets.spinners import SpinnerWidget
-from typing import Awaitable, Callable, List
-from textual.widgets import RichLog
+from tdconsole.textual_assets.spinners import SpinnerWidget
+from typing import Awaitable, Callable, List, Iterable
+from textual.widgets import RichLog, DirectoryTree, Pretty, Tree
 from textual.containers import Center
+from tdconsole.core import input_validators
+from textual import on
 
-from tdtui.core.find_instances import (
+import ast
+
+from tdconsole.core.find_instances import (
     sync_filesystem_instances_to_db,
     instance_name_to_instance,
     manage_working_instance,
-    print_all_instance_data,
     sync_filesystem_instances_to_db,
 )
 import logging
@@ -49,21 +52,21 @@ from typing import Optional, Dict, List, Union
 import asyncio.subprocess
 import random
 import asyncio
-from tdtui.core.yaml_getter_setter import get_yaml_value, set_yaml_value
+from tdconsole.core.yaml_getter_setter import get_yaml_value, set_yaml_value
 from functools import partial
 
-from tdtui.core.find_instances import (
+from tdconsole.core.find_instances import (
     sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
 )
 import logging
 from pathlib import Path
-from tdtui.textual_assets.textual_instance_config import (
+from tdconsole.textual_assets.textual_instance_config import (
     name_in_use,
     port_in_use,
     get_running_ports,
     validate_port,
 )
-from tdtui.core.models import Instance
+from tdconsole.core.models import Instance
 
 
 from textual.app import ComposeResult
@@ -75,6 +78,8 @@ from textual.app import ComposeResult
 from textual.screen import Screen
 from textual.widgets import Static, Button
 from textual.containers import Horizontal, Vertical
+import os
+from textual.widgets._tree import TreeNode
 
 
 class BSOD(Screen):
@@ -89,10 +94,10 @@ class BSOD(Screen):
         background: blue;
         color: white;
         align: center middle;
+        width: auto;
     }
 
     #wrapper {
-        width: 80;
         align: center middle;
     }
 
@@ -157,7 +162,7 @@ class BSOD(Screen):
         self.query_one("#exit-btn", Button).focus()
 
 
-from tdtui.core import instance_tasks
+from tdconsole.core import instance_tasks
 
 logging.basicConfig(
     filename="/Users/danieladayev/test-tui/tabsdata-tui/logger.log",
@@ -266,8 +271,11 @@ class LabelItem(ListItem):
         yield self.front
 
 
-class ScreenTemplate(Screen):
-    def __init__(self, choices=None, id=None, header="Select an Option: "):
+# push instance
+
+
+class ListScreenTemplate(Screen):
+    def __init__(self, choices=None, id=None, header="Select a File: "):
         super().__init__()
         self.choices = choices
         if id is not None:
@@ -295,7 +303,8 @@ class ScreenTemplate(Screen):
     def on_list_view_selected(self, event: ListView.Selected) -> None:
         selected = event.item.label
         logging.info(type(self.screen).__name__)
-        self.app.handle_api_response(self, selected)  # push instance
+        if selected not in ["Asset Management", "Register a Function"]:
+            self.app.handle_api_response(self, selected)  # push instance
 
 
 class InstanceSelectionScreen(Screen):
@@ -377,21 +386,50 @@ class InstanceSelectionScreen(Screen):
             pass
 
 
-class MainScreen(ScreenTemplate):
+class MainScreen(ListScreenTemplate):
 
     def __init__(self):
         super().__init__(
             choices=[
                 "Instance Management",
+                "Asset Management",
                 "Workflow Management (Not Built Yet)",
-                "Asset Management (Not Built Yet)",
                 "Config Management (Not Built Yet)",
                 "Exit",
             ],
         )
 
+    @on(ListView.Selected)
+    def handle_api_response(self, event: ListView.Selected):
+        value = event.item.label
+        if value == "Asset Management":
+            self.app.push_screen(AssetManagementScreen())
 
-class InstanceManagementScreen(ScreenTemplate):
+
+class AssetManagementScreen(ListScreenTemplate):
+
+    def __init__(self):
+        super().__init__(
+            choices=[
+                "Register a Function",
+                "Update a Function",
+                "Delete a Function",
+                "Create a Collection",
+                "Delete a Collection",
+                "Delete a Table",
+                "Sample Table Schema",
+                "Sample Table Data" "Exit",
+            ],
+        )
+
+    @on(ListView.Selected)
+    def handle_api_response(self, event: ListView.Selected):
+        value = event.item.label
+        if value == "Register a Function":
+            self.app.push_screen(PyFileTreeScreen())
+
+
+class InstanceManagementScreen(ListScreenTemplate):
     def __init__(self):
         super().__init__(
             choices=[
@@ -428,6 +466,10 @@ class PortConfigScreen(Screen):
         height: 1fr;
         overflow-y: auto;
     }
+
+#     Input {
+#   height: 5;      
+# }
     """
 
     def __init__(self, instance) -> None:
@@ -444,63 +486,89 @@ class PortConfigScreen(Screen):
     def compose(self) -> ComposeResult:
         yield VerticalScroll(
             CurrentInstanceWidget(self.instance),
-            Label(
-                "What Would Like to call your Tabsdata Instance:",
-                id="title-instance",
+            Vertical(
+                Horizontal(
+                    Label(
+                        "What Would Like to call your Tabsdata Instance:",
+                        id="title-instance",
+                    ),
+                    Input(
+                        placeholder=self.placeholder,
+                        validate_on=["submitted"],
+                        validators=[
+                            input_validators.ValidInstanceName(self.app, self.instance)
+                        ],
+                        id="instance-input",
+                        classes="inputs",
+                    ),
+                ),
+                Pretty("", id="instance-message"),
+                id="instance-container",
+                classes="input_container",
             ),
-            Input(placeholder=self.placeholder, id="instance-input"),
-            Label("", id="instance-error"),
-            Label("", id="instance-confirm"),
-            Label("Configure Tabsdata ports", id="title"),
-            Label("External port:", id="ext-label"),
-            Input(
-                placeholder=str(self.instance.arg_ext or ""),
-                id="ext-input",
+            Vertical(
+                Horizontal(
+                    Label("External port:", id="ext-label"),
+                    Input(
+                        placeholder=str(self.instance.arg_ext or ""),
+                        restrict=r"\d*",
+                        max_length=5,
+                        validate_on=["submitted"],
+                        validators=[
+                            input_validators.ValidExtPort(self.app, self.instance)
+                        ],
+                        id="ext-input",
+                        classes="inputs",
+                    ),
+                ),
+                Pretty("", id="ext-message"),
+                id="ext-container",
+                classes="input_container",
             ),
-            Label("", id="ext-error"),
-            Label("", id="ext-confirm"),
-            Label("Internal port:", id="int-label"),
-            Input(
-                placeholder=str(self.instance.arg_int or ""),
-                id="int-input",
+            Vertical(
+                Horizontal(
+                    Label("Internal port:", id="int-label"),
+                    Input(
+                        placeholder=str(self.instance.arg_int or ""),
+                        validate_on=["submitted"],
+                        restrict=r"\d*",
+                        max_length=5,
+                        validators=[
+                            input_validators.ValidIntPort(self.app, self.instance)
+                        ],
+                        id="int-input",
+                        classes="inputs",
+                    ),
+                ),
+                Pretty("", id="int-message"),
+                id="int-container",
+                classes="input_container",
             ),
-            Label("", id="int-error"),
-            Label("", id="int-confirm"),
             Static(""),
         )
-
         yield Footer()
 
-    def set_visibility(self) -> None:
-        """Decide which step to show first and hide later steps."""
-        is_existing = (
-            self.instance is not None and self.instance.name != "_Create_Instance"
-        )
+    def set_visibility(self):
+        input_containers = self.query(".input_container")
+        instance_container = self.query_one("#instance-container")
+        ext_container = self.query_one("#ext-container")
+        int_container = self.query_one("#int-container")
 
-        # Instance name step
-        show_instance_name = not is_existing
-        self.query_one("#title-instance", Label).display = show_instance_name
-        self.query_one("#instance-input", Input).display = show_instance_name
-        self.query_one("#instance-error", Label).display = show_instance_name
-        self.query_one("#instance-confirm", Label).display = show_instance_name
+        instance_input = self.query_one("#instance-input")
+        ext_input = self.query_one("#ext-input")
+        int_input = self.query_one("#int-input")
 
-        # External port step is hidden until instance name is chosen for new instances
-        show_ext = is_existing
-        self.query_one("#title", Label).display = show_ext
-        self.query_one("#ext-label", Label).display = show_ext
-        self.query_one("#ext-input", Input).display = show_ext
-        self.query_one("#ext-error", Label).display = show_ext
-        self.query_one("#ext-confirm", Label).display = show_ext
+        for i in input_containers:
+            i.display = False
 
-        # Internal port step starts hidden
-        for wid in ("#int-label", "#int-input", "#int-error", "#int-confirm"):
-            self.query_one(wid, Static | Label | Input).display = False
+        if self.instance.name == "_Create_Instance":
+            instance_container.display = True
+            self.set_focus(instance_input)
+            return
 
-        # Focus
-        if show_instance_name:
-            self.set_focus(self.query_one("#instance-input", Input))
-        else:
-            self.set_focus(self.query_one("#ext-input", Input))
+        ext_container.display = True
+        self.set_focus(ext_input)
+        return
 
     def on_mount(self) -> None:
         self.set_visibility()
@@ -508,130 +576,71 @@ class PortConfigScreen(Screen):
     def on_screen_resume(self, event) -> None:
         self.set_visibility()
 
-    def on_input_submitted(self, event: Input.Submitted) -> None:
-        input_id = event.input.id
-        if input_id == "ext-input":
-            self._handle_port("ext", event.input, require_diff=False)
-        elif input_id == "int-input":
-            self._handle_port("int", event.input, require_diff=True)
-        elif input_id == "instance-input":
-            self._handle_instance_name_submitted(event.input)
-
-    # ---------------------------
-    # Shared port flow
-    # ---------------------------
-
-    def _handle_port(self, kind: str, port_input: Input, require_diff: bool) -> None:
-        """
-        kind: "ext" or "int"
-        require_diff: True for internal port, which must differ from arg_ext.
-        """
-        error_label = self.query_one(f"#{kind}-error", Label)
-        confirm_label = self.query_one(f"#{kind}-confirm", Label)
-
-        error_label.update("")
-        confirm_label.update("")
-
-        # Current value on instance, e.g. arg_ext or arg_int
-        current_value = getattr(self.instance, f"arg_{kind}", None)
-
-        value = port_input.value.strip()
+    @on(Input.Submitted, "#instance-input")
+    def handle_instance_input(self, event: Input.Submitted) -> None:
+        value = event.value
         if value == "":
-            value = current_value
-
-        if not validate_port(value):
-            error_label.update("That is not a valid port number. Please enter 1–65535.")
-            self.set_focus(port_input)
-            port_input.clear()
-            return
-
-        port = int(value)
-
-        # Internal must not equal external
-        if (
-            require_diff
-            and self.instance.arg_ext is not None
-            and port == self.instance.arg_ext
-        ):
-            error_label.update(
-                "Internal port must not be the same as external port. "
-                "Please choose another port."
-            )
-            self.set_focus(port_input)
-            port_input.clear()
-            return
-
-        in_use_by = port_in_use(
-            app=self.app,
-            port=port,
-            current_instance_name=self.instance.name,
-        )
-
-        if in_use_by is not None:
-            error_label.update(
-                f"Port {port} is already in use by instance '{in_use_by}'. "
-                "Please choose a different port."
-            )
-            self.set_focus(port_input)
-            port_input.clear()
-            return
-
-        # Valid, distinct, and free
-        setattr(self.instance, f"arg_{kind}", port)
-        confirm_label.update(
-            Text(
-                f"Selected {'external' if kind == 'ext' else 'internal'} port: {port}",
-                style="bold #22c55e",
-            )
-        )
-
-        # If we just set external, reveal internal inputs
-        if kind == "ext":
-            self.query_one("#int-label", Label).display = True
-            self.query_one("#int-input", Input).display = True
-            self.query_one("#int-error", Label).display = True
-            self.query_one("#int-confirm", Label).display = True
-            self.set_focus(self.query_one("#int-input", Input))
+            value = "tabsdata"
+            event.input.value = value  # update UI
+            validation_result = event.input.validate(
+                value
+            )  # re-run validators with new value
         else:
-            # Done with both ports, return instance to app
-            self.app.handle_api_response(self, self.instance)
+            validation_result = event.validation_result
 
-    # ---------------------------
-    # Instance Name flow
-    # ---------------------------
+        if not validation_result.is_valid:
+            ext_message = self.query_one("#instance-message")
+            ext_message.update(validation_result.failure_descriptions)
+            event.input.clear()
+        else:
+            self.instance.name = value
+            ext_message = self.query_one("#instance-message")
+            ext_message.update(f"Instance Name Set to {value}")
+            ext_container = self.query_one("#ext-container")
+            ext_input = self.query_one("#ext-input")
+            ext_container.display = True
+            self.set_focus(ext_input)
 
-    def _handle_instance_name_submitted(self, instance_input: Input) -> None:
-        instance_error = self.query_one("#instance-error", Label)
-        instance_confirm = self.query_one("#instance-confirm", Label)
-
-        instance_error.update("")
-        instance_confirm.update("")
-
-        value = instance_input.value.strip() or "tabsdata"
-
-        if name_in_use(self.app, value):
-            instance_error.update("That Name is Already in Use. Please Try Another:")
-            self.set_focus(instance_input)
-            instance_input.clear()
+    @on(Input.Submitted, "#ext-input")
+    async def handle_ext_input(self, event: Input.Submitted) -> None:
+        value = event.value
+        if value == "":
+            value = self.instance.arg_ext
+            event.input.value = value
+            await event.input.action_submit()
             return
 
-        # Valid and free
-        self.instance.name = value
-        instance_confirm.update(
-            Text(
-                f"Defined an Instance with the following Name: {value}",
-                style="bold #22c55e",
-            )
-        )
+        if not event.validation_result.is_valid:
+            ext_message = self.query_one("#ext-message")
+            ext_message.update(event.validation_result.failure_descriptions)
+            event.input.clear()
+        else:
+            self.instance.arg_ext = value
+            ext_message = self.query_one("#ext-message")
+            ext_message.update(f"External Port Set to {value}")
+            int_container = self.query_one("#int-container")
+            int_input = self.query_one("#int-input")
+            int_container.display = True
+            self.set_focus(int_input)
 
-        # Reveal external port step and move focus there
-        self.query_one("#title", Label).display = True
-        self.query_one("#ext-label", Label).display = True
-        self.query_one("#ext-input", Input).display = True
-        self.query_one("#ext-error", Label).display = True
-        self.query_one("#ext-confirm", Label).display = True
+    @on(Input.Submitted, "#int-input")
+    async def handle_int_input(self, event: Input.Submitted) -> None:
+        value = event.value
+        if value == "":
+            value = self.instance.arg_int
+            event.input.value = value
+            await event.input.action_submit()
+            return
 
-        self.set_focus(self.query_one("#ext-input", Input))
+        if not event.validation_result.is_valid:
+            ext_message = self.query_one("#int-message")
+            ext_message.update(event.validation_result.failure_descriptions)
+            event.input.clear()
+        else:
+            self.instance.arg_int = value
+            ext_message = self.query_one("#int-message")
+            ext_message.update(f"External Port Set to {value}")
+            self.app.handle_api_response(self, self.instance)
 
 
 @dataclass
@@ -654,26 +663,31 @@ class TaskRow(Horizontal):
         self.query_one(f"#{self.id}-spinner").display = True
         self.query_one(f"#{self.id}-label", Label).update(self.description)
 
-    def set_done(self) -> None:
+    def set_done(self, exit_code: Optional[int] = None) -> None:
         self.query_one(f"#{self.id}-spinner").display = False
-        self.query_one(f"#{self.id}-label", Label).update(f"✅ {self.description}")
+        print(self.description, exit_code)
+        if exit_code == 0 or exit_code is None:
+            self.query_one(f"#{self.id}-label", Label).update(f"✅ {self.description}")
+        else:
+            self.query_one(f"#{self.id}-label", Label).update(f"❌ {self.description}")
 
 
 class SequentialTasksScreenTemplate(Screen):
     BINDINGS = [
         ("enter", "press_close", "Done"),
     ]
+
     CSS = """
         * {
-  height: auto;
-    }
-    #tasks-header { padding: 1 2; text-style: bold; }
-    .task-row { height: 1; content-align: left middle; }
-    .task-spinner { width: 3; }
-    .task-label { padding-left: 1; }
-    #task-log { padding: 1 2; border: round $accent; overflow-y: auto; height: 20; width: 80%;}
-    #task-box {align: center top;}
-    VerticalScroll { height: 1fr; overflow-y: auto; }
+            height: auto;
+        }
+        #tasks-header { padding: 1 2; text-style: bold; }
+        .task-row { height: 1; content-align: left middle; }
+        .task-spinner { width: 3; }
+        .task-label { padding-left: 1; }
+        #task-log { padding: 1 2; border: round $accent; overflow-y: auto; height: 20; width: 80%;}
+        #task-box {align: center top;}
+        VerticalScroll { height: 1fr; overflow-y: auto; }
     """
 
     COLOR_PALETTE = [
@@ -696,6 +710,10 @@ class SequentialTasksScreenTemplate(Screen):
             task.description: random.choice(self.COLOR_PALETTE) for task in self.tasks
         }
 
+        # fail-fast state
+        self.failed: bool = False
+        self._background_tasks: list[asyncio.Task] = []
+
     def compose(self) -> ComposeResult:
         for index, task in enumerate(self.tasks):
             row = TaskRow(task.description, task_id=f"task-{index}")
@@ -717,7 +735,7 @@ class SequentialTasksScreenTemplate(Screen):
             ),
         )
 
-    def conclude_tasks(self):
+    def conclude_tasks(self) -> None:
         self.query_one(VerticalScroll).scroll_end(animate=False)
 
     async def on_mount(self) -> None:
@@ -765,18 +783,62 @@ class SequentialTasksScreenTemplate(Screen):
         self.log_line(label, f"Exited with code {code}")
         return code
 
-    async def run_single_task(self, idx: int, task: TaskSpec) -> None:
+    async def run_single_task(self, idx: int, task: TaskSpec) -> int | None:
+        """
+        Run a single task and return its exit code.
+        Success = 0 or None.
+        Failure = any other int.
+        """
         row = self.task_rows[idx]
         row.set_running()
         self.log_line(task.description, "Starting")
+        code: int | None
+
         try:
-            await task.func(task.description)
+            # allow task.func to return either None or an int
+            result = await task.func(task.description)
+            code = result if isinstance(result, int) else None
             self.log_line(task.description, "Finished")
         except Exception as e:
             self.log_line(task.description, f"Error: {e!r}")
-            raise
+            code = 1  # treat exception as failure
         finally:
-            row.set_done()
+            row.set_done(code)
+
+        return code
+
+    async def abort_all_tasks(self) -> None:
+        """Fail-fast: cancel all background tasks and mark remaining rows as failed."""
+        if self.failed:
+            return  # idempotent
+
+        self.failed = True
+        self.log_line(None, "❌ Aborting remaining tasks due to failure.")
+
+        # Cancel background tasks
+        for task in self._background_tasks:
+            if not task.done():
+                task.cancel()
+
+        # Mark any still-running rows as failed
+        for row in self.task_rows:
+            spinner = row.query_one(f"#{row.id}-spinner")
+            if getattr(spinner, "display", False):
+                # If spinner is still visible, treat it as failed
+                row.set_done(exit_code=1)
+
+        self.conclude_tasks()
+
+    async def _background_wrapper(self, idx: int, task: TaskSpec) -> None:
+        """Wrapper for background tasks so they can trigger fail-fast."""
+        try:
+            code = await self.run_single_task(idx, task)
+        except asyncio.CancelledError:
+            self.log_line(task.description, "Cancelled")
+            return
+
+        if code not in (0, None):
+            await self.abort_all_tasks()
 
     def action_press_close(self) -> None:
         # Only act if the button exists
@@ -787,18 +849,37 @@ class SequentialTasksScreenTemplate(Screen):
         btn.press()
 
     async def run_tasks(self) -> None:
-        background = []
+        # Start background tasks first
+        self._background_tasks = []
         for i, t in enumerate(self.tasks):
             if t.background:
                 self.log_line(t.description, "Scheduling background task")
-                background.append(asyncio.create_task(self.run_single_task(i, t)))
+                self._background_tasks.append(
+                    asyncio.create_task(self._background_wrapper(i, t))
+                )
+
+        # Run foreground tasks sequentially
         for i, t in enumerate(self.tasks):
+            if self.failed:
+                break  # already failed; stop starting new tasks
+
             if not t.background:
-                await self.run_single_task(i, t)
-        if background:
-            await asyncio.gather(*background)
-        self.log_line(None, "🎉 All tasks complete.")
-        self.conclude_tasks()
+                code = await self.run_single_task(i, t)
+                if code not in (0, None):
+                    await self.abort_all_tasks()
+                    break
+
+        # Wait for background tasks to finish / cancel
+        if self._background_tasks:
+            await asyncio.gather(*self._background_tasks, return_exceptions=True)
+
+        if self.failed:
+            self.log_line(None, "⚠️ Tasks aborted due to failure.")
+        else:
+            self.log_line(None, "🎉 All tasks complete.")
+            self.conclude_tasks()
+
+        # Show “Done” button either way
         footer = self.query_one(Footer)
         button = await self.mount(Button("Done", id="close-btn"), before=footer)
         button.focus()
@@ -834,7 +915,7 @@ class BindAndStartInstance(SequentialTasksScreenTemplate):
 
         super().__init__(tasks)
 
-    def conclude_tasks(self):
+    def conclude_tasks(self, status=None):
         super().conclude_tasks()
         manage_working_instance(self.app.session, self.instance)
         self.app.session.merge(self.instance)
@@ -884,10 +965,6 @@ class StopInstance(SequentialTasksScreenTemplate):
                 "Checking Server Status",
                 partial(instance_tasks.run_tdserver_status, self, self.instance),
             ),
-            TaskSpec(
-                "Logging you Out",
-                partial(instance_tasks.tabsdata_logout, self, self.instance),
-            ),
         ]
 
         super().__init__(tasks)
@@ -897,3 +974,212 @@ class StopInstance(SequentialTasksScreenTemplate):
         self.instance.working = False
         self.app.session.merge(self.instance)
         self.app.session.commit()
+
+
+class PyOnlyDirectoryTree(DirectoryTree):
+    """DirectoryTree that:
+    - only shows .py files (but keeps directories)
+    - only shows .py files that contain td publisher/subscriber/transformer
+    - only shows directories that (recursively) contain such .py files
+    - limits recursive search to `auto_expand_depth` levels
+    - auto-expands the first `auto_expand_depth` levels on mount
+    """
+
+    DEFAULT_CSS = """
+    DirectoryTree {
+        
+        & > .directory-tree--folder {
+            text-style: bold;
+            color: green;
+        }
+
+        & > .directory-tree--extension {
+            text-style: italic;
+        }
+        
+        & > .directory-tree--file {
+            text-style: italic;
+            color: green;
+        }
+
+        & > .directory-tree--hidden {
+            text-style: dim;
+        }
+
+        &:ansi {
+        
+            & > .tree--guides {
+               color: transparent;              
+            }
+        
+            & > .directory-tree--folder {
+                text-style: bold;
+            }
+
+            & > .directory-tree--extension {
+                text-style: italic;
+            }
+
+            & > .directory-tree--hidden {
+                color: ansi_default;
+                text-style: dim;
+            }
+        }
+
+    }
+    """
+
+    def __init__(
+        self,
+        path: str | Path,
+        *,
+        auto_expand_depth: int = 5,  # <- 3 levels on first mount
+        **kwargs,
+    ) -> None:
+        self.auto_expand_depth = auto_expand_depth
+        super().__init__(path, **kwargs)
+
+    # ---------- filtering ----------
+
+    def filter_paths(self, paths: Iterable[Path]) -> Iterable[Path]:
+        """Keep only:
+        - .py files that match _file_is_tabsdata_function
+        - directories that (within depth) contain at least one such file
+        """
+        result: list[Path] = []
+        for p in paths:
+            if p.is_file() and p.suffix == ".py":
+                if self._file_is_tabsdata_function(p):
+                    result.append(p)
+            elif p.is_dir():
+                if self._dir_has_py(p, depth=0, max_depth=self.auto_expand_depth):
+                    result.append(p)
+
+        return result
+
+    def _file_is_tabsdata_function(self, path: Path) -> bool:
+        """Return True if the .py file contains a td.publisher/subscriber/transformer-decorated function."""
+        if path.suffix != ".py":
+            return False
+
+        try:
+            source = path.read_text()
+        except OSError:
+            return False
+
+        try:
+            tree = ast.parse(source, filename=str(path))
+        except SyntaxError:
+            return False
+
+        for node in ast.walk(tree):
+            if isinstance(node, ast.FunctionDef):  # or ast.AsyncFunctionDef
+                for deco in node.decorator_list:
+                    func = deco.func if isinstance(deco, ast.Call) else deco
+                    if isinstance(func, ast.Attribute) and isinstance(
+                        func.value, ast.Name
+                    ):
+                        if func.value.id == "td" and func.attr in {
+                            "publisher",
+                            "subscriber",
+                            "transformer",
+                        }:
+                            return True
+        return False
+
+    def _dir_has_py(self, path: Path, depth: int = 0, max_depth: int = 5) -> bool:
+        """Return True if directory contains a matching .py file within max_depth levels."""
+        if depth > max_depth:
+            return False
+
+        try:
+            for entry in path.iterdir():
+                if entry.is_file() and entry.suffix == ".py":
+                    if self._file_is_tabsdata_function(entry):
+                        return True
+                elif entry.is_dir():
+                    if self._dir_has_py(entry, depth + 1, max_depth):
+                        return True
+        except PermissionError:
+            return False
+
+        return False
+
+    # ---------- auto expand on mount ----------
+
+    async def on_mount(self) -> None:
+        """When the tree is first mounted, auto-expand N levels."""
+        await self._expand_to_depth(
+            self.root, depth=0, max_depth=self.auto_expand_depth
+        )
+
+    async def _expand_to_depth(
+        self, node: TreeNode, depth: int, max_depth: int
+    ) -> None:
+        """Recursively expand nodes up to `max_depth` levels deep."""
+        if depth >= max_depth:
+            return
+
+        await self._add_to_load_queue(node)
+
+        # Recurse into child directories only
+        for child in node.children:
+            data = child.data
+            if data is None:
+                continue
+
+            path = getattr(data, "path", None)
+            if isinstance(path, Path) and path.is_dir():
+                await self._expand_to_depth(child, depth + 1, max_depth)
+
+    @on(DirectoryTree.NodeExpanded)
+    def set_file_color(self, event: DirectoryTree.NodeExpanded):
+        for i in event.node.children:
+            if i.data.path.is_file():
+                i.label.stylize("green")
+        self.refresh()
+
+
+class PyFileTreeScreen(Screen):
+    """ListScreenTemplate variant that shows a DirectoryTree of .py files."""
+
+    def __init__(
+        self, id=None, header="Select a Python file: ", root: str | Path = "."
+    ):
+        # Reuse ListScreenTemplate init, but choices are irrelevant for the tree
+        super().__init__()
+        self.root = Path(root)
+        self.header = header
+
+    def compose(self) -> ComposeResult:
+        """Same layout as ListScreenTemplate, but with a DirectoryTree instead of ListView."""
+        with VerticalScroll():
+            if self.header is not None:
+                yield Label(self.header, id="listHeader")
+
+            # Reuse your existing "current instance" widget
+            yield CurrentInstanceWidget(self.app.working_instance)
+
+            # Swap ListView for a DirectoryTree rooted at CWD, filtered to .py files
+            self.dirtree = PyOnlyDirectoryTree(
+                self.root,
+                id="py-directory-tree",
+            )
+            self.dirtree.show_guides = True
+            self.dirtree.guide_depth = 2
+            self.dirtree.show_root = True
+            yield self.dirtree
+
+            yield Footer()
+
+    def on_show(self) -> None:
+        """Focus the directory tree when the screen is shown."""
+        self.set_focus(self.dirtree)
+
+    def on_directory_tree_file_selected(
+        self, event: DirectoryTree.FileSelected
+    ) -> None:
+        """Handle selection of a file in the directory tree."""
+        selected_path: Path = event.path
+        print(event.path)
+        self.app.handle_api_response(self, event.path)
