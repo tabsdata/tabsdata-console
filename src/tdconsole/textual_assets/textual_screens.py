@@ -178,12 +178,12 @@ class InstanceWidget(Static):
 
         inst = self.inst
 
-        if inst is None:
-            status_color = "#e4e4e6"
-            status_line = f"○ No Instance Selected"
-            line1 = f"No External Running Port"
-            line2 = f"No Internal Running Port"
-        elif inst.name == "_Create_Instance":
+        status_color = "#e4e4e6"
+        status_line = f"○ No Instance Selected"
+        line1 = f"No External Running Port"
+        line2 = f"No Internal Running Port"
+
+        if inst.name == "_Create_Instance":
             status_color = "#1F66D1"
             status_line = f"Create a New Instance"
             line1 = f""
