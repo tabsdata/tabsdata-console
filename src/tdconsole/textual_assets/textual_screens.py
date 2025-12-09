@@ -416,7 +416,13 @@ class AssetManagementScreen(ListScreenTemplate):
     def handle_api_response(self, event: ListView.Selected):
         value = event.item.label
         if value == "Register a Function":
-            self.app.push_screen(PyFileTreeScreen())
+            if Path.home() == Path.cwd():
+                self.app.notify(
+                    "❌ Cannot scan root directory! Please run `tdconsole` in a more specific directory to avoid scanning your entire home path.",
+                    severity="error",
+                )
+            else:
+                self.app.push_screen(PyFileTreeScreen())
 
 
 class InstanceManagementScreen(ListScreenTemplate):
