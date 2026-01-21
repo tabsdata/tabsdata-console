@@ -1,87 +1,47 @@
 from __future__ import annotations
-from textual.app import App, ComposeResult
-from textual.screen import Screen
-from textual.widgets import ListView, ListItem, Label, Static, Button
-from pathlib import Path
-from tdconsole.textual_assets.spinners import SpinnerWidget
-from typing import Awaitable, Callable, List, Iterable
-from textual.widgets import RichLog, DirectoryTree, Pretty, Tree
-from textual.containers import Center
-from tdconsole.core import input_validators
-from textual import on
-from sqlalchemy.orm import Session
-from textual.events import Key, ScreenResume
-from textual.reactive import reactive
 
 import ast
-
-from tdconsole.core.find_instances import (
-    sync_filesystem_instances_to_db,
-    instance_name_to_instance,
-    sync_filesystem_instances_to_db,
-)
-import logging
-from typing import Optional, Dict, Any, List
-from textual.containers import VerticalScroll, Container
+import asyncio
+import asyncio.subprocess
+import random
 from dataclasses import dataclass
+from functools import partial
+from pathlib import Path
+from typing import Awaitable, Callable, Iterable, List, Optional
 
-from textual.widgets import Static
-
+from rich.align import Align
 from rich.console import Group, RenderableType
 from rich.panel import Panel
 from rich.text import Text
-from rich.align import Align
-
-from textual.app import App, ComposeResult
-from textual.binding import Binding
-from textual.widgets import Footer
-
-from textual.app import App, ComposeResult
-from textual.screen import Screen
-from textual.containers import Horizontal, VerticalScroll
-from textual.widgets import Static
-
-
-from typing import Optional, Dict, Any, List
-
+from sqlalchemy.orm import Session
+from textual import on
 from textual.app import ComposeResult
+from textual.containers import Center, Container, Horizontal, Vertical, VerticalScroll
+from textual.events import Key, ScreenResume
+from textual.reactive import reactive
 from textual.screen import Screen
-from textual.widgets import Input, Label, Static, Footer, Checkbox
-from textual.containers import Vertical, VerticalScroll
-from rich.text import Text
-from typing import Optional, Dict, List, Union
-
-import asyncio.subprocess
-import random
-import asyncio
-from tdconsole.core.yaml_getter_setter import get_yaml_value, set_yaml_value
-from functools import partial
-
-from tdconsole.core.find_instances import (
-    sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
+from textual.widgets import (
+    Button,
+    Checkbox,
+    DirectoryTree,
+    Footer,
+    Input,
+    Label,
+    ListItem,
+    ListView,
+    Pretty,
+    RichLog,
+    Static,
 )
-import logging
-from pathlib import Path
-from tdconsole.textual_assets.textual_instance_config import (
-    name_in_use,
-    port_in_use,
-    get_running_ports,
-    validate_port,
+from textual.widgets._tree import TreeNode
+
+from tdconsole.core import input_validators
+from tdconsole.core.find_instances import (
+    instance_name_to_instance,
+    sync_filesystem_instances_to_db,
 )
 from tdconsole.core.models import Instance
-
-
-from textual.app import ComposeResult
-from textual.screen import Screen
-from textual.widgets import Static
-
-
-from textual.app import ComposeResult
-from textual.screen import Screen
-from textual.widgets import Static, Button
-from textual.containers import Horizontal, Vertical
-import os
-from textual.widgets._tree import TreeNode
+from tdconsole.textual_assets.spinners import SpinnerWidget
 
 
 class BSOD(Screen):
@@ -181,17 +141,17 @@ class InstanceWidget(Static):
         inst = self.inst
 
         status_color = "#e4e4e6"
-        status_line = f"○ No Instance Selected"
-        line1 = f"No External Running Port"
-        line2 = f"No Internal Running Port"
+        status_line = "○ No Instance Selected"
+        line1 = "No External Running Port"
+        line2 = "No Internal Running Port"
 
         if inst is None:
             pass
         elif inst.name == "_Create_Instance":
             status_color = "#1F66D1"
-            status_line = f"Create a New Instance"
-            line1 = f""
-            line2 = f""
+            status_line = "Create a New Instance"
+            line1 = ""
+            line2 = ""
         elif inst.status == "Running":
             status_color = "#22c55e"
             status_line = f"{inst.name}  ● Running"
@@ -618,9 +578,6 @@ Checkbox:focus > .toggle--button {
         ext_input = self.query_one("#ext-input")
         int_input = self.query_one("#int-input")
 
-        # for i in input_containers:
-        #     i.display = False
-
         for i in input_messages:
             i.display = False
 
@@ -649,13 +606,18 @@ Checkbox:focus > .toggle--button {
             )
             self.set_focus(self.input_fields[next_index])
 
+    def validate_input(self, input: Input, value):
+        if value == "":
+            value = input.placeholder
+        validation_result = input.validate(value)
+        return validation_result
+
     @on(Input.Submitted, ".inputs")
-    def validate_input(self, event: Input.Submitted):
+    def handle_input_submission(self, event: Input.Submitted):
         value = event.value
         input_widget = event.input
-        if value == "":
-            value = input_widget.placeholder
-        validation_result = input_widget.validate(value)
+        validation_result = self.validate_input(input_widget, value)
+
         if validation_result.is_valid == False:
             self.app.notify(
                 f"❌ {validation_result.failure_descriptions}.",
@@ -675,12 +637,16 @@ Checkbox:focus > .toggle--button {
     @on(Button.Pressed, "#submit-button")
     def handle_submission_request(self, event: Button.Pressed):
         fields = [i for i in self.query("Input") if len(i.validators) > 0]
+        print(fields)
+        if self.instance.name != "_Create_Instance":
+            fields = [i for i in fields if i.id != "instance-input"]
+
         validation_passed = True
         new = {}
         for i in fields:
             i: Input
-            validation_result = i.validate(value=i.value)
-            if validation_result.is_valid == False:
+            validation_result = self.validate_input(i, i.value)
+            if validation_result.is_valid is False:
                 self.app.notify(
                     f"❌ {validation_result.failure_descriptions}.",
                     severity="error",
@@ -689,6 +655,11 @@ Checkbox:focus > .toggle--button {
                 message.update(validation_result.failure_descriptions)
                 message.display = True
                 validation_passed = False
+            else:
+                message = i.parent.query_one("Pretty")
+                message.update("[Validation Passed]")
+                message.display = True
+
         if validation_passed:
             values = [
                 i.value if i.value != "" else i.placeholder
