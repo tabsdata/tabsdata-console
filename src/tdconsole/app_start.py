@@ -1,43 +1,21 @@
-from textual.app import App, ComposeResult
+import sqlalchemy
+import textual
+from rich.traceback import install
+from sqlalchemy import inspect
 from textual import on
+from textual.app import App
+from textual.reactive import reactive
 from textual.screen import Screen
-from textual.widgets import ListView, ListItem, Label, Static
-from pathlib import Path
-from tdconsole.textual_assets.api_processor import process_response
+from textual.widgets import Button, ListView
+
+from tdconsole.core import tabsdata_api
+from tdconsole.core.db import start_session
+from tdconsole.core.find_instances import query_session, resolve_working_instance
 from tdconsole.core.find_instances import (
     sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
 )
-from textual.reactive import reactive
-import logging
-from typing import Optional, Dict, Any, List
-from textual.events import ScreenResume, Key
-from textual.containers import VerticalScroll
-
-from textual.widgets import Static
-
-from rich.console import Group, RenderableType
-from rich.panel import Panel
-from rich.text import Text
-from rich.align import Align
-
-from textual.app import App, ComposeResult
-from textual.binding import Binding
-from textual.widgets import Footer
-
-
-from textual.app import App, ComposeResult
-from textual.screen import Screen
-from textual.containers import Horizontal, VerticalScroll
-from textual.widgets import Static
-from tdconsole.core.db import start_session
-from tdconsole.core.find_instances import query_session
-from tdconsole.core.models import Instance, get_model_by_tablename
-from rich.traceback import install
-import textual
-import sqlalchemy
-from sqlalchemy import inspect
-from tdconsole.core import events
-from tdconsole.core import tabsdata_api
+from tdconsole.core.models import get_model_by_tablename
+from tdconsole.textual_assets.api_processor import process_response
 
 install(
     show_locals=False,  # or True if you like locals
@@ -71,6 +49,8 @@ class NestedMenuApp(App):
         super().__init__(**kwargs)
         self.session = start_session()[0]
         self.session.info["app"] = self
+        self.working_instance = resolve_working_instance(app=self, session=self.session)
+        self.handle_tabsdata_server_connection()
 
     def on_mount(self) -> None:
         # start with a MainMenu instance
@@ -107,9 +87,8 @@ class NestedMenuApp(App):
                 for attr in inspect(new).mapper.column_attrs
             }
         )
-        if new != old and new != None:
+        if new != old and new is not None:
             self.handle_tabsdata_server_connection()
-            print(self.tabsdata_server)
 
     def handle_tabsdata_server_connection(self):
         self.tabsdata_server = tabsdata_api.initialize_tabsdata_server_connection(self)
@@ -120,6 +99,10 @@ class NestedMenuApp(App):
         item = event.list_view.highlighted_child
         if item:
             item.scroll_visible()
+
+    @on(Button.Pressed, "#exit-btn")
+    def on_exit_pressed(self, event: Button.Pressed) -> None:
+        self.exit()
 
 
 def run_app():

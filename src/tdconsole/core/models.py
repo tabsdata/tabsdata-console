@@ -1,7 +1,7 @@
-from datetime import datetime
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
 
@@ -22,12 +22,18 @@ class Instance(Base):
     public_ip = Column(String, nullable=True, default="127.0.0.1")
     use_https = Column(Boolean, nullable=True, default=False)
 
+    collections = relationship(
+        "Collection",
+        back_populates="instance",
+        cascade="all, delete-orphan",
+    )
+
     @hybrid_property
     def ext_socket(self):
         return f"{self.public_ip}:{self.arg_ext}"
 
     @ext_socket.expression
-    def socket(cls):
+    def ext_socket(cls):
         return cls.public_ip + ":" + cls.arg_ext.cast(String)
 
     @hybrid_property
@@ -35,8 +41,54 @@ class Instance(Base):
         return f"{self.private_ip}:{self.arg_int}"
 
     @int_socket.expression
-    def socket(cls):
+    def int_socket(cls):
         return cls.private_ip + ":" + cls.arg_int.cast(String)
+
+
+class Collection(Base):
+    __tablename__ = "collections"
+
+    name = Column(String, nullable=True, primary_key=True)
+
+    instance_name = Column(
+        String, ForeignKey("instances.name"), nullable=False, primary_key=True
+    )
+    instance = relationship("Instance", back_populates="collections")
+
+    functions = relationship(
+        "Function",
+        back_populates="collection",
+        cascade="all, delete-orphan",
+    )
+    tables = relationship(
+        "Table",
+        back_populates="collection",
+        cascade="all, delete-orphan",
+    )
+
+
+class Function(Base):
+    __tablename__ = "functions"
+
+    collection_name = Column(
+        String, ForeignKey("collections.name"), nullable=False, primary_key=True
+    )
+    collection = relationship("Collection", back_populates="functions")
+    instance_name = association_proxy("collection", "instance_name")
+
+    name = Column(String, nullable=True, primary_key=True)
+
+
+class Table(Base):
+    __tablename__ = "tables"
+
+    collection_name = Column(
+        String, ForeignKey("collections.name"), nullable=False, primary_key=True
+    )
+    collection = relationship("Collection", back_populates="tables")
+    instance_name = association_proxy("collection", "instance_name")
+
+    name = Column(String, nullable=True, primary_key=True)
 
 
 class ApiResponse(Base):

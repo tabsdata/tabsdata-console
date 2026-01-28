@@ -1,4 +1,6 @@
-from textual.validation import Function, Number, ValidationResult, Validator
+from tabsdata.api.tabsdata_server import Collection, TabsdataServer
+from textual.validation import ValidationResult, Validator
+
 from tdconsole.textual_assets import textual_instance_config
 
 
@@ -16,6 +18,25 @@ class ValidInstanceName(Validator):
             == True
         ):
             return self.failure(f"{value} is Already in Use. Please Try Another.")
+
+        return self.success()
+
+
+class ValidCollectionName(Validator):
+    def __init__(self, app, server: Collection, failure_description: str | None = None):
+        super().__init__(failure_description=failure_description)
+        self.app = app
+        self.server = server
+
+    def validate(self, value: str) -> ValidationResult:
+        if value == "":
+            return self.failure("Your Collection Name Cannot be Empty")
+        server: TabsdataServer = self.server
+        collections = server.list_collections()
+        collection_names = [i.name for i in collections]
+
+        if value in collection_names:
+            return self.failure(f"The collection with name {value} already exists")
 
         return self.success()
 
@@ -45,6 +66,11 @@ class ValidExtPort(Validator):
             )
         else:
             return self.success()
+
+
+class PlaeholderValidator(Validator):
+    def validate(self, value: int) -> ValidationResult:
+        return self.success()
 
 
 class ValidIntPort(ValidExtPort):

@@ -1,19 +1,10 @@
 from __future__ import annotations
 
-from typing import Optional, Dict, Any, List
-
-from textual.app import ComposeResult
-from textual.screen import Screen
-from textual.widgets import Input, Label, Static, Footer
-from textual.containers import Vertical, VerticalScroll
-from rich.text import Text
+from typing import Any, Dict, List, Optional
 
 from tdconsole.core.find_instances import (
     sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
 )
-
-from pathlib import Path
-from textual import events
 
 
 def validate_port(port_str: str) -> bool:

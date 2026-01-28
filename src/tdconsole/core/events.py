@@ -16,7 +16,7 @@ def manage_working_instance(mapper, connection, target):
 
         if old is False and new is True:
             session = object_session(target)
-            app = session.info.get("app")
+            app = session.info.get("app") if session is not None else None
             stmt = (
                 update(Instance)
                 .where(
@@ -28,7 +28,8 @@ def manage_working_instance(mapper, connection, target):
                 .values(working=False)
             )
             connection.execute(stmt)
-            app.working_instance = target
+            if app is not None:
+                app.working_instance = target
             return
 
     if target.working is True:
@@ -40,6 +41,7 @@ def manage_working_instance(mapper, connection, target):
         if not changed:
             return
         session = object_session(target)
-        app = session.info.get("app")
-        app.working_instance = target
+        app = session.info.get("app") if session is not None else None
+        if app is not None:
+            app.working_instance = target
         return

@@ -1,16 +1,15 @@
-from pathlib import Path
+import json
 import os
 from os import listdir
+from pathlib import Path
+from urllib.parse import urlparse
+
+import psutil
+
+from tdconsole.core.models import Instance
 from tdconsole.core.yaml_getter_setter import (
     get_yaml_value,
 )
-import psutil
-from dataclasses import dataclass
-from tdconsole.core.td_dataclasses import TabsdataInstance, FieldChange
-from pathlib import Path
-from typing import Optional, Dict, List, Union
-from tdconsole.core.models import Instance
-from textual.app import App
 
 
 def define_root(*parts):
@@ -116,11 +115,6 @@ def find_sockets(instance_name: str, pid=None):
     }
 
 
-from tdconsole.core.models import Instance as InstanceRow  # avoid name clash
-
-from tdconsole.core.models import Instance  # ORM model
-
-
 def instance_name_to_instance(instance_name: str) -> Instance:
     """
     Build an Instance ORM object from filesystem state only.
@@ -152,13 +146,42 @@ def instance_name_to_instance(instance_name: str) -> Instance:
         name=instance_name,
         pid=pid,
         status=sockets["status"],
-        cfg_ext=sockets["cfg_ext"],
-        cfg_int=sockets["cfg_int"],
+        cfg_ext=sockets["cfg_ext"].split(":")[-1],
+        cfg_int=sockets["cfg_int"].split(":")[-1],
         arg_ext=public_port,
         arg_int=private_port,
         public_ip=public_ip,
         private_ip=private_ip,
     )
+
+
+def resolve_working_instance(app=None, session=None):
+
+    if session is not None:
+        pass
+    elif hasattr(app, "session"):
+        session = app.session
+    else:
+        raise TypeError("Expected either an app or session to be provided")
+
+    current_td_login = resolve_login_credentials()
+    current_session_url, current_session_port = (
+        current_td_login["url"],
+        current_td_login["port"],
+    )
+
+    current_working_instance = (
+        session.query(Instance)
+        .filter_by(status="Running", arg_ext=current_session_port)
+        .first()
+    )
+    if current_working_instance:
+        working_instance = current_working_instance
+    elif session.query(Instance).filter_by(working=True, status="Running").first():
+        working_instance = session.query(Instance).filter_by(working=True).first()
+    else:
+        working_instance = None
+    return working_instance
 
 
 def sync_filesystem_instances_to_db(app=None, session=None) -> list[Instance]:
@@ -171,12 +194,13 @@ def sync_filesystem_instances_to_db(app=None, session=None) -> list[Instance]:
     elif hasattr(app, "session"):
         session = app.session
     else:
-        raise TypeError(f"Expected either an app or session to be provided")
+        raise TypeError("Expected either an app or session to be provided")
 
     instance_names = find_tabsdata_instance_names()
 
+    working_instance = resolve_working_instance(app, session)
+
     with session as session:
-        working_instance = session.query(Instance).filter_by(working=True).first()
         for name in instance_names:
             # Instance from filesystem only
             fs_instance = instance_name_to_instance(name)
@@ -185,6 +209,8 @@ def sync_filesystem_instances_to_db(app=None, session=None) -> list[Instance]:
                 and fs_instance.name == working_instance.name
             ):
                 fs_instance.working = True
+            else:
+                fs_instance.working = False
 
             # Try to find existing record in DB
             db_instance = session.query(Instance).filter_by(name=name).first()
@@ -198,6 +224,17 @@ def sync_filesystem_instances_to_db(app=None, session=None) -> list[Instance]:
         session.query(Instance).filter(~Instance.name.in_(instance_names)).delete(
             synchronize_session=False
         )
+        if hasattr(app, "working_instance"):
+            working_instance = app.working_instance
+            if hasattr(working_instance, "name"):
+                working_instance_name = working_instance.name
+                db_instance = (
+                    session.query(Instance)
+                    .filter_by(name=working_instance_name)
+                    .first()
+                )
+                if db_instance.status == "Not Running":
+                    app.working_instance = None
 
         session.commit()
 
@@ -205,9 +242,6 @@ def sync_filesystem_instances_to_db(app=None, session=None) -> list[Instance]:
         instances_in_db = session.query(Instance).order_by(Instance.name).all()
 
     return instances_in_db
-
-
-from sqlalchemy import and_, or_
 
 
 def query_session(session, model, limit=None, *conditions, **filters):
@@ -228,31 +262,11 @@ def query_session(session, model, limit=None, *conditions, **filters):
     return query.all()
 
 
-# def manage_working_instance(session, instance):
-#     # Make sure we have a session-attached object
-#     db_instance = session.merge(instance)
-
-#     # Clear working on all others
-#     (
-#         session.query(Instance)
-#         .filter(Instance.name != db_instance.name, Instance.working.is_(True))
-#         .update({Instance.working: False}, synchronize_session=False)
-#     )
-
-#     db_instance.working = True
-#     session.commit()
-#     return True
-
-
-# session = start_session()
-# sync_filesystem_instances_to_db(session)
-# x = query_session(session, Instance, status="Running")
-# for inst in x:
-#     print({c.name: getattr(inst, c.name) for c in inst.__table__.columns})
-
-
-# def print_all_instance_data(session):
-#     sync_filesystem_instances_to_db(session=session)
-#     x = query_session(session, Instance)
-#     for inst in x:
-#         print({c.name: getattr(inst, c.name) for c in inst.__table__.columns})
+def resolve_login_credentials(app=None):
+    json_path = os.path.expanduser("~/.tabsdata/connection.json")
+    url = json.load(open(json_path))["url"] if os.path.exists(json_path) else None
+    port = urlparse(url).port
+    if app:
+        app.working_url = url
+        app.working_port = port
+    return {"url": url, "port": port}

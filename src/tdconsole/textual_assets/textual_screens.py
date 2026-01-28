@@ -1,87 +1,113 @@
 from __future__ import annotations
-from textual.app import App, ComposeResult
-from textual.screen import Screen
-from textual.widgets import ListView, ListItem, Label, Static, Button
-from pathlib import Path
-from tdconsole.textual_assets.spinners import SpinnerWidget
-from typing import Awaitable, Callable, List, Iterable
-from textual.widgets import RichLog, DirectoryTree, Pretty, Tree
-from textual.containers import Center
-from tdconsole.core import input_validators
-from textual import on
-from sqlalchemy.orm import Session
-from textual.events import Key, ScreenResume
-from textual.reactive import reactive
 
 import ast
-
-from tdconsole.core.find_instances import (
-    sync_filesystem_instances_to_db,
-    instance_name_to_instance,
-    sync_filesystem_instances_to_db,
-)
-import logging
-from typing import Optional, Dict, Any, List
-from textual.containers import VerticalScroll, Container
+import asyncio
+import asyncio.subprocess
+import random
 from dataclasses import dataclass
-
-from textual.widgets import Static
+from functools import partial
+from pathlib import Path
+from typing import Awaitable, Callable, Iterable, List, Optional
 
 from rich.console import Group, RenderableType
 from rich.panel import Panel
 from rich.text import Text
-from rich.align import Align
-
-from textual.app import App, ComposeResult
-from textual.binding import Binding
-from textual.widgets import Footer
-
-from textual.app import App, ComposeResult
-from textual.screen import Screen
-from textual.containers import Horizontal, VerticalScroll
-from textual.widgets import Static
-
-
-from typing import Optional, Dict, Any, List
-
+from sqlalchemy.orm import Session
+from tabsdata.api.tabsdata_server import Collection, Function, TabsdataServer
+from textual import events, on, work
 from textual.app import ComposeResult
-from textual.screen import Screen
-from textual.widgets import Input, Label, Static, Footer, Checkbox
-from textual.containers import Vertical, VerticalScroll
-from rich.text import Text
-from typing import Optional, Dict, List, Union
-
-import asyncio.subprocess
-import random
-import asyncio
-from tdconsole.core.yaml_getter_setter import get_yaml_value, set_yaml_value
-from functools import partial
-
-from tdconsole.core.find_instances import (
-    sync_filesystem_instances_to_db as sync_filesystem_instances_to_db,
+from textual.containers import Center, Container, Horizontal, Vertical, VerticalScroll
+from textual.events import Key, ScreenResume
+from textual.reactive import reactive
+from textual.screen import ModalScreen, Screen
+from textual.widgets import (
+    Button,
+    Checkbox,
+    DirectoryTree,
+    Footer,
+    Input,
+    Label,
+    ListItem,
+    ListView,
+    Pretty,
+    RichLog,
+    Static,
 )
-import logging
-from pathlib import Path
-from tdconsole.textual_assets.textual_instance_config import (
-    name_in_use,
-    port_in_use,
-    get_running_ports,
-    validate_port,
+from textual.widgets._tree import TreeNode
+
+from tdconsole.core import input_validators, instance_tasks, tabsdata_api
+from tdconsole.core.find_instances import (
+    instance_name_to_instance,
+    sync_filesystem_instances_to_db,
 )
 from tdconsole.core.models import Instance
+from tdconsole.textual_assets.spinners import SpinnerWidget
 
 
-from textual.app import ComposeResult
-from textual.screen import Screen
-from textual.widgets import Static
+class ExitBar(Container):
+    DEFAULT_CSS = """
+    ExitBar {
+        width: 3;
+        min-width: 3;
+        height: 1;
+    }
+    #exit-btn {
+        color: white;
+        background: transparent;
+        width: 3;
+        min-width: 3;
+        height: 1;
+        padding: 0 1;
+    }
+    .exit-spacer {
+        width: 1fr;
+    }
+    """
+
+    def __init__(self, *, mode=None, **kwargs):
+        super().__init__(**kwargs)
+        self.mode = mode  # "exit" or "pop"
+
+    def compose(self) -> ComposeResult:
+        yield Button("x", id="exit-btn")
+
+    @on(Button.Pressed, "#exit-btn")
+    def on_exit_pressed(self, event: Button.Pressed) -> None:
+        if self.mode == "dismiss":
+            self.app.screen.dismiss(None)
+        else:
+            self.app.exit()
 
 
-from textual.app import ComposeResult
-from textual.screen import Screen
-from textual.widgets import Static, Button
-from textual.containers import Horizontal, Vertical
-import os
-from textual.widgets._tree import TreeNode
+class RefreshBar(Container):
+    DEFAULT_CSS = """
+    RefreshBar {
+        width: 3;
+        min-width: 3;
+        height: 1;
+    }
+    #refresh-btn {
+        color: white;
+        background: transparent;
+        width: 3;
+        min-width: 3;
+        height: 1;
+        padding: 0 1;
+    }
+    .refresh-spacer {
+        width: 1fr;
+    }
+    """
+
+    def compose(self) -> ComposeResult:
+        yield Button("↻", id="refresh-btn")
+
+    @on(Button.Pressed, "#refresh-btn")
+    def on_refresh_pressed(self, event: Button.Pressed) -> None:
+        try:
+            self.screen.query_one(InstanceInfoPanel).refresh(recompose=True)
+        except:
+            pass
 
 
 class BSOD(Screen):
@@ -136,6 +162,7 @@ class BSOD(Screen):
         )
 
     def compose(self) -> ComposeResult:
+        yield ExitBar()
         with VerticalScroll(id="wrapper"):
             yield Static(" Bad News :() ", id="title")
 
@@ -164,9 +191,6 @@ class BSOD(Screen):
         self.query_one("#exit-btn", Button).focus()
 
 
-from tdconsole.core import instance_tasks
-
-
 class InstanceWidget(Static):
     """Rich panel showing the current working instance."""
 
@@ -181,24 +205,24 @@ class InstanceWidget(Static):
         inst = self.inst
 
         status_color = "#e4e4e6"
-        status_line = f"○ No Instance Selected"
-        line1 = f"No External Running Port"
-        line2 = f"No Internal Running Port"
+        status_line = "○ No Instance Selected"
+        line1 = "No External Running Port"
+        line2 = "No Internal Running Port"
 
         if inst is None:
             pass
         elif inst.name == "_Create_Instance":
             status_color = "#1F66D1"
-            status_line = f"Create a New Instance"
-            line1 = f""
-            line2 = f""
+            status_line = "Create a New Instance"
+            line1 = ""
+            line2 = ""
         elif inst.status == "Running":
             status_color = "#22c55e"
             status_line = f"{inst.name}  ● Running"
             line1 = f"running on → ext: {inst.arg_ext}"
             line2 = f"running on → int: {inst.arg_int}"
         elif inst.status == "Not Running":
-            status_color = "#ef4444"
+            status_color = "#4c4c4c"
             status_line = f"{inst.name}  ○ Not running"
             line1 = f"configured on → ext: {inst.cfg_ext}"
             line2 = f"configured on → int: {inst.cfg_int}"
@@ -218,47 +242,540 @@ class InstanceWidget(Static):
         return instance_panel
 
 
-class CurrentInstanceWidget(InstanceWidget):
-    inst = reactive(None)
+from textual import on
+from textual.containers import Container
+from textual.widgets import Static
 
-    def __init__(self, instance: Optional[str] = None, **kwargs):
-        super().__init__(**kwargs)
-        self.instance = instance
 
-    def render(self) -> RenderableType:
+class CollectionModal(ModalScreen):
+    CSS = """
+    CollectionModal {
+        width: 100%;
+        height: 100%;
+        align: center middle;
+        background: rgba(0,0,0,0.25);
+    }
 
-        # inner instance panel
-        instance_panel = self._make_instance_panel()
+    #popup {
+        width: 60%;
+        height: 80%;
+        border: round $primary;
+        background: $panel;
+        padding: 1 2;
+    }
 
-        header = Align.center(Text("Current Working Instance:", style="bold #22c55e"))
+    #title {
+        margin-bottom: 1;
+    }
 
-        inner = Group(
-            header,  # spacer
-            Align.center(instance_panel),
-        )
+    #popup > ListView {
+        width: 100%;
+        height: 1fr;
+    }
+    """
 
-        outer = Panel(
-            inner,
-            border_style="#0f766e",
-            expand=False,
-        )
-        return Align.center(outer)
+    def __init__(self, server, collection) -> None:
+        super().__init__()
+        self.server = server
+        self.collection = collection
+
+    def compose(self) -> ComposeResult:
+        with Container(id="popup"):
+            yield ExitBar(mode="dismiss")
+            if isinstance(self.collection, Collection):
+                options = ["Delete Collection"]
+                yield Static(
+                    f"What would you like to do with the {self.collection.name} collection?",
+                    id="title",
+                )
+                yield ListView(*[LabelItem(o) for o in options])
+            else:
+                yield Static(
+                    "What would you like to call your collection?",
+                    id="title",
+                )
+                yield Input(
+                    validate_on=["submitted"],
+                    validators=[
+                        input_validators.ValidCollectionName(
+                            self.app, self.app.tabsdata_server
+                        )
+                    ],
+                )
+
+    @on(ListView.Selected)
+    def _picked(self, event: ListView.Selected) -> None:
+        selected = event.item.label
+        if selected == "Delete Collection":
+            server: TabsdataServer = self.server
+            delete_collection = server.delete_collection(self.collection.name)
+        self.dismiss(delete_collection)
+
+    @on(Input.Submitted)
+    def _inputed(self, event: Input.Submitted) -> None:
+        value = event.input.value
+        if event.validation_result.is_valid:
+            server: TabsdataServer = self.server
+            print(value)
+            create_collection = server.create_collection(value)
+            self.dismiss(create_collection)
+        else:
+            self.app.notify(f"{event.validation_result.failure_descriptions}")
+
+
+class FunctionModal(ModalScreen):
+    CSS = """
+    FunctionModal {
+        width: 100%;
+        height: 100%;
+        align: center middle;
+        background: rgba(0,0,0,0.25);
+    }
+
+    #popup {
+        width: 60%;
+        height: 80%;
+        border: round $primary;
+        background: $panel;
+        padding: 1 2;
+    }
+
+    #title {
+        margin-bottom: 1;
+    }
+
+    #popup > ListView {
+        width: 100%;
+        height: 1fr;
+    }
+    """
+
+    def __init__(self, server, collection, function) -> None:
+        super().__init__()
+        self.server = server
+        self.collection = collection
+        self.function = function
+        self.collection_name = "No Collection provided"
+        if self.collection is not None:
+            self.collection_name = self.collection.name
+
+    def compose(self) -> ComposeResult:
+        with Container(id="popup"):
+            yield ExitBar(mode="dismiss")
+            if isinstance(self.collection, Function):
+                options = ["Delete Function", "Trigger Function"]
+                yield Static(
+                    f"What would you like to do with the {self.function.name} function?",
+                    id="title",
+                )
+                yield ListView(*[LabelItem(o) for o in options])
+            else:
+                yield Static(
+                    "What would you like to call your function?",
+                    id="title",
+                )
+                yield Vertical(
+                    Horizontal(
+                        Label(
+                            "Collection Name:",
+                            id="collection-name-label",
+                        ),
+                        Input(
+                            placeholder=self.collection_name,
+                            disabled=True,
+                            compact=True,
+                            id="collection-name-input",
+                            classes="inputs",
+                        ),
+                        Pretty("", id="collection-message"),
+                    ),
+                    id="collection-container",
+                    classes="input_container",
+                )
+                yield Vertical(
+                    Horizontal(
+                        Label("Function Name", id="function-name-label"),
+                        Input(
+                            compact=True,
+                            validate_on=["submitted"],
+                            validators=[input_validators.PlaeholderValidator()],
+                            id="function-name-input",
+                            classes="inputs",
+                        ),
+                        Pretty("", id="function-name-message"),
+                    ),
+                    id="function-name-container",
+                    classes="input_container",
+                )
+                yield Vertical(
+                    Horizontal(
+                        Label("Function Path", id="function-path-label"),
+                        Input(
+                            compact=True,
+                            validate_on=["submitted"],
+                            validators=[input_validators.PlaeholderValidator()],
+                            id="function-path-input",
+                            classes="inputs",
+                        ),
+                        Pretty("", id="function-path-message"),
+                    ),
+                    id="function-path-container",
+                    classes="input_container",
+                )
+                yield Vertical(
+                    Horizontal(
+                        Label("Function Body Name", id="function-body-name-label"),
+                        Input(
+                            compact=True,
+                            validate_on=["submitted"],
+                            validators=[input_validators.PlaeholderValidator()],
+                            id="function-vody-name-input",
+                            classes="inputs",
+                        ),
+                        Pretty("", id="function-body-name-message"),
+                    ),
+                    id="function-body-name-container",
+                    classes="input_container",
+                )
+                yield Vertical(
+                    Button(
+                        label="Submit",
+                        id="submit-button",
+                        classes="submit-button",
+                    ),
+                    id="submit-container",
+                    classes="button_container",
+                )
+
+    @on(ListView.Selected)
+    def _picked(self, event: ListView.Selected) -> None:
+        selected = event.item.label
+        if selected == "Delete Collection":
+            server: TabsdataServer = self.server
+            delete_collection = server.delete_collection(self.collection.name)
+        self.dismiss(delete_collection)
+
+    @on(Input.Submitted)
+    def _inputed(self, event: Input.Submitted) -> None:
+        value = event.input.value
+        if event.validation_result.is_valid:
+            server: TabsdataServer = self.server
+            print(value)
+            create_collection = server.create_collection(value)
+            self.dismiss(create_collection)
+        else:
+            self.app.notify(f"{event.validation_result.failure_descriptions}")
+
+
+class InstanceInfoPanel(Horizontal):
+    DEFAULT_CSS = """
+InstanceInfoPanel > Horizontal {
+    height: 10;
+}
+InstanceInfoPanel {
+max-height: 70%;}
+
+InstanceInfoPanel .box {
+    height: 1fr;
+    width: 1fr;
+    layout: vertical;
+}
+
+InstanceInfoPanel .box > ListView {
+    height: 1fr;
+}
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.tabsdata_server = None
+        self.instance = None
+        self.collection_list = []
+        self.selected_collection = None
+        self.selected_function = None
+        self.function_list = []
+        self.selected_function = None
+        self.table_list = []
+        self.selected_table = None
+        self.recompile_td_data()
+        tabsdata_api.sync_instance_to_db(self.app)
 
     def resolve_working_instance(self, instance=None):
         if isinstance(instance, str):
             instance = instance_name_to_instance(instance)
         sync_filesystem_instances_to_db(app=self.app)
-        working_instance = self.app.app_query_session("instances", working=True)
-        if working_instance is None:
-            self.inst = instance
-        else:
-            self.inst = working_instance
+        working_instance = self.app.app_query_session(
+            "instances", limit=1, working=True
+        )
+        return working_instance or instance
+
+    def refresh_widget(self):
+        self.recompile_td_data()
+        self.selected_collection = None
+        self.selected_function = None
+        self.selected_table = None
+        self.refresh(recompose=True)
+
+    def recompile_td_data(self):
+        self.instance = self.resolve_working_instance()
+        self.tabsdata_server = self.app.tabsdata_server
+        self.tabsdata_server: TabsdataServer
+        try:
+            self.collection_list = self.tabsdata_server.list_collections()
+
+            if (
+                self.selected_collection in self.collection_list
+                and self.tabsdata_server
+            ):
+                self.function_list = self.tabsdata_server.list_functions(
+                    self.selected_collection.name
+                )
+                self.table_list = self.tabsdata_server.list_tables(
+                    self.selected_collection.name
+                )
+            else:
+                self.function_list = []
+                self.table_list = []
+        except:
+            self.function_list = []
+            self.table_list = []
+
+    @on(
+        events.Click,
+        "CurrentCollectionsWidget Label, CurrentCollectionsWidget LabelItem",
+    )
+    async def handle_double_click_collection(self, event: events.Click):
+        if event.button == 1 and getattr(event, "chain", 1) >= 2:
+            if isinstance(event.widget, LabelItem):
+                label = event.widget
+            else:
+                label = event.widget.parent
+            if isinstance(label.label, (Collection, str)):
+                collection = self.handle_collection_modal_response(
+                    self.app.tabsdata_server, label
+                )
+                print(collection)
+                self.refresh(recompose=True)
+
+    @on(
+        events.Click,
+        "CurrentFunctionsWidget Label, CurrentFunctionsWidget LabelItem",
+    )
+    async def handle_double_click_function(self, event: events.Click):
+        if event.button == 1 and getattr(event, "chain", 1) >= 2:
+            if isinstance(event.widget, LabelItem):
+                label = event.widget
+            else:
+                label = event.widget.parent
+            if isinstance(label.label, (Function, str)):
+                collection = self.handle_function_modal_response(
+                    self.app.tabsdata_server, label
+                )
+                print(collection)
+                self.refresh(recompose=True)
+
+    @work
+    async def handle_collection_modal_response(self, server, label) -> None:
+        print("label is")
+        print(label)
+        print(label.label)
+        result = await self.app.push_screen_wait(
+            CollectionModal(self.app.tabsdata_server, label.label)
+        )
+        return result
+
+    @work
+    async def handle_function_modal_response(self, server, label) -> None:
+        print("label is")
+        print(label)
+        print(label.label)
+        print(self.selected_collection)
+        result = await self.app.push_screen_wait(
+            FunctionModal(
+                self.app.tabsdata_server,
+                getattr(label.label, "collection", self.selected_collection),
+                label.label,
+            )
+        )
+
+        return result
+
+    def compose(self) -> ComposeResult:
+        yield CurrentInstanceWidget(title="Current Instance", classes="box")
+        yield CurrentCollectionsWidget(title="Current Collection", classes="box")
+        yield CurrentFunctionsWidget(
+            title="Available Functions", classes="box collection_dependent"
+        )
+        yield CurrentTablesWidget(
+            title="Available Tables", classes="box collection_dependent"
+        )
+
+    def watch_working_instance(self, old, new):
+        pass
+
+
+class CurrentStateWidgetTemplate(Static):
+    DEFAULT_CSS = """
+    CurrentStateWidgetTemplate {
+        border: round #0f766e;
+        border-title-align: center;
+        border-title-color: #0f766e;
+        content-align: center middle;
+    }
+
+    ListView {
+    max-height: 100%;
+    }
+
+
+    CurrentStateWidgetTemplate > .inner {
+        width: auto;
+    }
+    VerticalScroll { height: 1fr; }
+    ListView ListItem.--highlight {
+        background: #0f766e;
+        color: white;
+    }
+    """
+
+    inst = reactive(None, recompose=True)
+
+    def __init__(
+        self,
+        instance: Optional[str] = None,
+        title: str = "Current Working Instance:",
+        dependency=None,
+        **kwargs,
+    ):
+        super().__init__(**kwargs)
+        self.instance = instance
+        self.title = title
+        self.dependency = dependency
+
+    def generate_internals(self):
+        return Static("null", classes="inner")
+
+    def compose(self):
+        self.border_title = self.title
+        yield self.generate_internals()
+
+
+class CurrentInstanceWidget(CurrentStateWidgetTemplate):
+    def generate_internals(self):
+        instance = self.app.working_instance
+
+        status_color = "#e4e4e6"
+        status_line = "○ No Instance Selected"
+        line1 = "No External Running Port"
+        line2 = "No Internal Running Port"
+
+        if instance is None:
+            pass
+        elif instance.name == "_Create_Instance":
+            status_color = "#1F66D1"
+            status_line = "Create a New Instance"
+            line1 = ""
+            line2 = ""
+        elif instance.status == "Running":
+            status_color = "#22c55e"
+            status_line = f"{instance.name}  ● Running"
+            line1 = f"running on → ext: {instance.arg_ext}"
+            line2 = f"running on → int: {instance.arg_int}"
+        elif instance.status == "Not Running":
+            status_color = "#4c4c4c"
+            status_line = f"{instance.name}  ○ Not running"
+            line1 = f"configured on → ext: {instance.cfg_ext}"
+            line2 = f"configured on → int: {instance.cfg_int}"
+
+        header = Text(status_line, style=f"bold {status_color}")
+        body = Text(f"{line1}\n{line2}", style="#f9f9f9")
+
+        return Static(
+            Panel(Group(header, body), border_style=status_color, expand=False),
+            classes="inner",
+        )
+
+
+class CurrentCollectionsWidget(CurrentStateWidgetTemplate):
+    def generate_internals(self, collections=None):
+        """Converts List to a ListView"""
+        server: TabsdataServer = self.app.tabsdata_server
+        collections = server.list_collections()
+        collections.append("Create a Collection")
+        choiceLabels = [
+            LabelItem(getattr(i, "name", "Create a Collection"), i) for i in collections
+        ]
+        self.list = ListView(*choiceLabels)
+        return self.list
+
+    @on(ListView.Selected)
+    def handle_collection_selected(self, event: ListView.Selected):
+        event.stop()
+        collection = event.item.label
+        self.parent.selected_collection = collection
+        self.parent.recompile_td_data()
+        widgets_to_refresh = self.screen.query(".collection_dependent")
+        for i in widgets_to_refresh:
+            i.refresh(recompose=True)
+
+
+class CurrentFunctionsWidget(CurrentStateWidgetTemplate):
+
+    def generate_internals(self, functions=None):
+        """Converts List to a ListView"""
+        server: TabsdataServer = self.app.tabsdata_server
+        selected_collection = self.parent.selected_collection
+        try:
+            functions = server.list_functions(selected_collection.name)
+        except:
+            functions = []
+
+        functions.append("Create a Function")
+        choiceLabels = [
+            LabelItem(getattr(i, "name", "Create a Function"), i) for i in functions
+        ]
+        self.list = ListView(*choiceLabels)
+        return self.list
+
+    @on(ListView.Selected)
+    def handle_function_selected(self, event: ListView.Selected):
+        event.stop()
+
+
+class CurrentTablesWidget(CurrentStateWidgetTemplate):
+    DEFAULT_CSS = """
+    CurrentTablesWidget ListItem.--highlight {
+        background: #0f766e;
+        color: white;
+    }
+    """
+
+    def generate_internals(self, collections=None):
+        """Converts List to a ListView"""
+        server: TabsdataServer = self.app.tabsdata_server
+        selected_collection = self.parent.selected_collection
+
+        try:
+            tables = server.list_tables(selected_collection.name)
+        except:
+            tables = []
+
+        tables.append("Create a Table")
+        choiceLabels = [
+            LabelItem(getattr(i, "name", "Create a Function"), i) for i in tables
+        ]
+        self.list = ListView(*choiceLabels)
+        return self.list
+
+    @on(ListView.Selected)
+    def handle_table_selected(self, event: ListView.Selected):
+        event.stop()
 
 
 class LabelItem(ListItem):
     def __init__(self, label: str, override_label=None) -> None:
         super().__init__()
-        if type(label) == str:
+        if type(label) is str:
             self.front = Label(label)
         else:
             self.front = label
@@ -282,11 +799,8 @@ class ListScreenTemplate(Screen):
 
     def compose(self) -> ComposeResult:
         with VerticalScroll():
-            if self.header is not None:
-                yield Label(self.header, id="listHeader")
-            yield CurrentInstanceWidget(
-                self.app.working_instance, id="CurrentInstanceWidget"
-            )
+            yield Horizontal(ExitBar(), Label("   "), RefreshBar())
+            yield InstanceInfoPanel()
             yield self.list_items()
             yield Footer()
 
@@ -303,7 +817,9 @@ class ListScreenTemplate(Screen):
 
     def on_list_view_selected(self, event: ListView.Selected) -> None:
         selected = event.item.label
-        if selected in self.choices and self.choice_dict[selected] is not None:
+        if selected == "Exit":
+            self.app.exit()
+        elif selected in self.choices and self.choice_dict[selected] is not None:
             screen = self.choice_dict[selected]
             self.app.push_screen(screen())
         else:
@@ -311,8 +827,7 @@ class ListScreenTemplate(Screen):
 
     @on(ScreenResume)
     def refresh_current_instance_widget(self, event: ScreenResume):
-        widget = self.query_one("#CurrentInstanceWidget")
-        widget.resolve_working_instance()
+        self.query_one(InstanceInfoPanel).refresh_widget()
 
 
 class InstanceSelectionScreen(ListScreenTemplate):
@@ -513,8 +1028,9 @@ Checkbox:focus > .toggle--button {
         self.instance = instance
 
     def compose(self) -> ComposeResult:
+        yield ExitBar()
         yield VerticalScroll(
-            CurrentInstanceWidget(),
+            InstanceInfoPanel(),
             Vertical(
                 Horizontal(
                     Label(
@@ -618,9 +1134,6 @@ Checkbox:focus > .toggle--button {
         ext_input = self.query_one("#ext-input")
         int_input = self.query_one("#int-input")
 
-        # for i in input_containers:
-        #     i.display = False
-
         for i in input_messages:
             i.display = False
 
@@ -649,13 +1162,18 @@ Checkbox:focus > .toggle--button {
             )
             self.set_focus(self.input_fields[next_index])
 
+    def validate_input(self, input: Input, value):
+        if value == "":
+            value = input.placeholder
+        validation_result = input.validate(value)
+        return validation_result
+
     @on(Input.Submitted, ".inputs")
-    def validate_input(self, event: Input.Submitted):
+    def handle_input_submission(self, event: Input.Submitted):
         value = event.value
         input_widget = event.input
-        if value == "":
-            value = input_widget.placeholder
-        validation_result = input_widget.validate(value)
+        validation_result = self.validate_input(input_widget, value)
+
         if validation_result.is_valid == False:
             self.app.notify(
                 f"❌ {validation_result.failure_descriptions}.",
@@ -675,12 +1193,16 @@ Checkbox:focus > .toggle--button {
     @on(Button.Pressed, "#submit-button")
     def handle_submission_request(self, event: Button.Pressed):
         fields = [i for i in self.query("Input") if len(i.validators) > 0]
+
+        if self.instance.name != "_Create_Instance":
+            fields = [i for i in fields if i.id != "instance-input"]
+
         validation_passed = True
         new = {}
         for i in fields:
             i: Input
-            validation_result = i.validate(value=i.value)
-            if validation_result.is_valid == False:
+            validation_result = self.validate_input(i, i.value)
+            if validation_result.is_valid is False:
                 self.app.notify(
                     f"❌ {validation_result.failure_descriptions}.",
                     severity="error",
@@ -689,6 +1211,11 @@ Checkbox:focus > .toggle--button {
                 message.update(validation_result.failure_descriptions)
                 message.display = True
                 validation_passed = False
+            else:
+                message = i.parent.query_one("Pretty")
+                message.update("[Validation Passed]")
+                message.display = True
+
         if validation_passed:
             values = [
                 i.value if i.value != "" else i.placeholder
@@ -795,6 +1322,7 @@ class SequentialTasksScreenTemplate(Screen):
             row = TaskRow(task.description, task_id=f"task-{index}")
             self.task_rows.append(row)
 
+        yield ExitBar()
         yield VerticalScroll(
             Vertical(
                 Label("Running setup tasks...", id="tasks-header"),
@@ -995,8 +1523,9 @@ class BindAndStartInstance(SequentialTasksScreenTemplate):
     def conclude_tasks(self, status=None):
         super().conclude_tasks()
         self.instance.working = True
-        self.app.session.merge(self.instance)
+        merged_instance = self.app.session.merge(self.instance)
         self.app.session.commit()
+        self.app.working_instance = merged_instance
 
 
 class StartInstance(SequentialTasksScreenTemplate):
@@ -1264,6 +1793,7 @@ class PyFileTreeScreen(Screen):
 
     def compose(self) -> ComposeResult:
         """Same layout as ListScreenTemplate, but with a DirectoryTree instead of ListView."""
+        yield ExitBar()
         with VerticalScroll():
             if self.header is not None:
                 yield Label(self.header, id="listHeader")
