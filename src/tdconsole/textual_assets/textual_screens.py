@@ -4,6 +4,7 @@ import ast
 import asyncio
 import asyncio.subprocess
 import fcntl
+import ipaddress
 import os
 import pty
 import random
@@ -36,6 +37,7 @@ from textual.events import Key, ScreenResume
 from textual.geometry import Offset, Region, Spacing
 from textual.reactive import reactive
 from textual.screen import ModalScreen, Screen
+from textual.worker import Worker, WorkerState
 from textual.widgets import (
     Button,
     Checkbox,
@@ -47,7 +49,10 @@ from textual.widgets import (
     ListItem,
     ListView,
     Pretty,
+    RadioButton,
+    RadioSet,
     RichLog,
+    Select,
     Static,
     Tab,
     Tabs,
@@ -58,10 +63,19 @@ from textual_autocomplete._autocomplete import DropdownItem, TargetState
 from tdconsole.core import input_validators, instance_tasks, tabsdata_api
 from tdconsole.core.construct_command_trie import CliAutoComplete, Node
 from tdconsole.core.find_instances import (
+    find_tabsdata_instance_names,
     instance_name_to_instance,
-    sync_filesystem_instances_to_db,
+    is_forwarded_instance_name,
+    is_remote_instance_name,
+    make_forwarded_instance_name,
+    make_remote_instance_name,
+    resolve_login_credentials,
 )
 from tdconsole.core.models import Instance
+from tdconsole.core.system_environment import (
+    detect_os_name,
+    detect_vm_type,
+)
 from tdconsole.textual_assets.spinners import SpinnerWidget
 
 
@@ -197,6 +211,83 @@ class BackBar(Container):
                 pass
 
 
+class SystemEnvironmentDropdown(Container):
+    DEFAULT_CSS = """
+    SystemEnvironmentDropdown {
+        width: auto;
+        min-width: 38;
+        height: auto;
+        margin: 0 1 0 0;
+        layout: horizontal;
+        align: right middle;
+    }
+    #system-type-select {
+        width: 15;
+        min-width: 13;
+        height: auto;
+        margin: 0 1 0 0;
+    }
+    #vm-type-select {
+        width: 20;
+        min-width: 16;
+        height: auto;
+    }
+    """
+
+    SYSTEM_OPTIONS: tuple[str, ...] = ("macOS", "Linux", "Windows", "Unknown")
+    VM_TYPE_OPTIONS: tuple[str, ...] = ("EC2", "Not Available")
+
+    def _resolved_system_value(self) -> str:
+        cached = getattr(self.app, "_system_type_selected", None)
+        if cached in self.SYSTEM_OPTIONS:
+            return cached
+        detected = detect_os_name()
+        if detected not in self.SYSTEM_OPTIONS:
+            detected = "Unknown"
+        self.app._system_type_selected = detected
+        return detected
+
+    def _resolved_vm_type_value(self) -> str:
+        cached = getattr(self.app, "_vm_type_selected", None)
+        if cached in self.VM_TYPE_OPTIONS:
+            return cached
+        detected = detect_vm_type()
+        if detected not in self.VM_TYPE_OPTIONS:
+            detected = "Not Available"
+        self.app._vm_type_selected = detected
+        return detected
+
+    def compose(self) -> ComposeResult:
+        system_default = self._resolved_system_value()
+        vm_default = self._resolved_vm_type_value()
+        system_options = [(name, name) for name in self.SYSTEM_OPTIONS]
+        vm_options = [(name, name) for name in self.VM_TYPE_OPTIONS]
+        yield Select(
+            options=system_options,
+            value=system_default,
+            allow_blank=False,
+            id="system-type-select",
+        )
+        yield Select(
+            options=vm_options,
+            value=vm_default,
+            allow_blank=False,
+            id="vm-type-select",
+        )
+
+    @on(Select.Changed, "#system-type-select")
+    def on_system_type_changed(self, event: Select.Changed) -> None:
+        value = str(event.value)
+        if value in self.SYSTEM_OPTIONS:
+            self.app._system_type_selected = value
+
+    @on(Select.Changed, "#vm-type-select")
+    def on_vm_type_changed(self, event: Select.Changed) -> None:
+        value = str(event.value)
+        if value in self.VM_TYPE_OPTIONS:
+            self.app._vm_type_selected = value
+
+
 class WindowControls(Horizontal):
     DEFAULT_CSS = """
     WindowControls {
@@ -210,6 +301,7 @@ class WindowControls(Horizontal):
 
     def compose(self) -> ComposeResult:
         yield Static("", classes="window-controls-spacer")
+        yield SystemEnvironmentDropdown()
         yield BackBar()
         yield RefreshBar()
         yield ExitBar()
@@ -352,6 +444,11 @@ class InstanceWidget(Static):
             status_line = "Create a New Instance"
             line1 = ""
             line2 = ""
+        elif inst.status == "Remote" or is_remote_instance_name(inst.name):
+            status_color = "#f59e0b"
+            status_line = f"{inst.name}  ◉ Remote"
+            line1 = f"remote host → {inst.public_ip}"
+            line2 = f"remote ports → ext: {inst.arg_ext} int: {inst.arg_int}"
         elif inst.status == "Running":
             status_color = "#22c55e"
             status_line = f"{inst.name}  ● Running"
@@ -613,16 +710,21 @@ class FunctionModal(ModalScreen):
 
 class InstanceInfoPanel(Horizontal):
     DEFAULT_CSS = """
-InstanceInfoPanel > Horizontal {
-    height: 10;
-}
 InstanceInfoPanel {
-max-height: 70%;}
+    height: 8;
+    max-height: 60%;
+    margin: 1 0 0 0;
+}
 
 InstanceInfoPanel .box {
     height: 1fr;
     width: 1fr;
     layout: vertical;
+    margin: 0 1 0 0;
+}
+
+InstanceInfoPanel .box:last-child {
+    margin: 0;
 }
 
 InstanceInfoPanel .box > ListView {
@@ -644,13 +746,10 @@ InstanceInfoPanel .box > ListView {
         self.table_list = []
         self.selected_table = None
         self.selected_table_name = None
-        self.recompile_td_data()
-        tabsdata_api.sync_instance_to_db(self.app)
 
     def resolve_working_instance(self, instance=None):
         if isinstance(instance, str):
             instance = instance_name_to_instance(instance)
-        sync_filesystem_instances_to_db(app=self.app)
         working_instance = self.app.app_query_session(
             "instances", limit=1, working=True
         )
@@ -658,36 +757,93 @@ InstanceInfoPanel .box > ListView {
 
     def refresh_widget(self):
         self.recompile_td_data()
-        self.refresh(recompose=True)
 
     def recompile_td_data(self):
         self.instance = self.resolve_working_instance()
         self.tabsdata_server = self.app.tabsdata_server
-        self.tabsdata_server: TabsdataServer
+        self._load_instance_panel_data_worker(self.selected_collection_name)
+
+    def on_mount(self) -> None:
+        self.recompile_td_data()
+
+    @work(
+        thread=True,
+        exclusive=True,
+        group="instance-info-panel",
+        exit_on_error=False,
+    )
+    def _load_instance_panel_data_worker(
+        self, selected_collection_name: str | None
+    ) -> dict:
+        server = self.app.tabsdata_server
+        if server is None:
+            return {
+                "collection_list": [],
+                "function_list": [],
+                "table_list": [],
+                "selected_collection_name": None,
+            }
+
         try:
-            self.collection_list = self.tabsdata_server.list_collections()
-            self.selected_collection = None
-            if self.selected_collection_name is not None:
-                self.selected_collection = next(
+            collection_list = server.list_collections()
+            selected_collection = None
+            if selected_collection_name is not None:
+                selected_collection = next(
                     (
                         item
-                        for item in self.collection_list
-                        if getattr(item, "name", item) == self.selected_collection_name
+                        for item in collection_list
+                        if getattr(item, "name", item) == selected_collection_name
                     ),
                     None,
                 )
 
-            if self.selected_collection and self.tabsdata_server:
-                coll_name = getattr(self.selected_collection, "name", None)
-                self.function_list = self.tabsdata_server.list_functions(coll_name)
-                self.table_list = self.tabsdata_server.list_tables(coll_name)
-            else:
-                self.function_list = []
-                self.table_list = []
-        except:
-            self.function_list = []
-            self.table_list = []
-            self.selected_collection = None
+            function_list = []
+            table_list = []
+            if selected_collection is not None:
+                coll_name = getattr(selected_collection, "name", None)
+                function_list = server.list_functions(coll_name)
+                table_list = server.list_tables(coll_name)
+
+            return {
+                "collection_list": collection_list,
+                "function_list": function_list,
+                "table_list": table_list,
+                "selected_collection_name": (
+                    getattr(selected_collection, "name", selected_collection)
+                    if selected_collection is not None
+                    else None
+                ),
+            }
+        except Exception:
+            return {
+                "collection_list": [],
+                "function_list": [],
+                "table_list": [],
+                "selected_collection_name": None,
+            }
+
+    def on_worker_state_changed(self, event: Worker.StateChanged) -> None:
+        if event.worker.group != "instance-info-panel":
+            return
+        if event.state != WorkerState.SUCCESS:
+            return
+
+        payload = event.worker.result or {}
+        self.collection_list = list(payload.get("collection_list", []))
+        self.function_list = list(payload.get("function_list", []))
+        self.table_list = list(payload.get("table_list", []))
+        self.selected_collection_name = payload.get("selected_collection_name")
+        self.selected_collection = None
+        if self.selected_collection_name is not None:
+            self.selected_collection = next(
+                (
+                    item
+                    for item in self.collection_list
+                    if getattr(item, "name", item) == self.selected_collection_name
+                ),
+                None,
+            )
+        self.refresh(recompose=True)
 
     @on(
         events.Click,
@@ -734,8 +890,6 @@ InstanceInfoPanel .box > ListView {
             else:
                 label = event.widget.parent
             table = label.label
-            if isinstance(table, str) and table == "Create a Table":
-                return
             table_name = getattr(table, "name", str(table))
             collection_name = (
                 getattr(self.selected_collection, "name", None)
@@ -812,7 +966,7 @@ InstanceInfoPanel .box > ListView {
 
     def compose(self) -> ComposeResult:
         yield CurrentInstanceWidget(title="Current Instance", classes="box")
-        yield CurrentCollectionsWidget(title="Current Collection", classes="box")
+        yield CurrentCollectionsWidget(title="Current Collections", classes="box")
         yield CurrentFunctionsWidget(
             title="Available Functions", classes="box collection_dependent"
         )
@@ -830,7 +984,8 @@ class CurrentStateWidgetTemplate(Static):
         border: round #0f766e;
         border-title-align: center;
         border-title-color: #0f766e;
-        content-align: center middle;
+        content-align: left top;
+        padding: 0 1;
     }
 
     ListView {
@@ -891,6 +1046,13 @@ class CurrentInstanceWidget(CurrentStateWidgetTemplate):
             status_line = "Create a New Instance"
             line1 = ""
             line2 = ""
+        elif instance.status == "Remote" or is_remote_instance_name(instance.name):
+            login = resolve_login_credentials()
+            remote_url = str(login.get("url") or "").strip()
+            status_color = "#38bdf8"
+            status_line = "Remote connection  ● Connected"
+            line1 = remote_url if remote_url else f"{instance.public_ip}:{instance.arg_ext}"
+            line2 = ""
         elif instance.status == "Running":
             status_color = "#22c55e"
             status_line = f"{instance.name}  ● Running"
@@ -916,13 +1078,14 @@ class CurrentCollectionsWidget(CurrentStateWidgetTemplate):
         """Converts List to a ListView"""
         collections = list(self.parent.collection_list or [])
         choiceLabels = [LabelItem(getattr(i, "name", ""), i) for i in collections]
-        self.list = ListView(*choiceLabels)
         selected_name = self.parent.selected_collection_name
+        selected_index = 0
         if selected_name:
             for idx, item in enumerate(collections):
                 if getattr(item, "name", item) == selected_name:
-                    self.list.index = idx
+                    selected_index = idx
                     break
+        self.list = ListView(*choiceLabels, initial_index=selected_index)
         return Vertical(self.list, classes="inner")
 
     @on(ListView.Selected)
@@ -937,9 +1100,6 @@ class CurrentCollectionsWidget(CurrentStateWidgetTemplate):
         self.parent.selected_table = None
         self.parent.selected_table_name = None
         self.parent.recompile_td_data()
-        widgets_to_refresh = self.screen.query(".collection_dependent")
-        for i in widgets_to_refresh:
-            i.refresh(recompose=True)
 
 
 class CurrentFunctionsWidget(CurrentStateWidgetTemplate):
@@ -948,10 +1108,7 @@ class CurrentFunctionsWidget(CurrentStateWidgetTemplate):
         """Converts List to a ListView"""
         functions = list(self.parent.function_list or [])
 
-        functions.append("Create a Function")
-        choiceLabels = [
-            LabelItem(getattr(i, "name", "Create a Function"), i) for i in functions
-        ]
+        choiceLabels = [LabelItem(getattr(i, "name", ""), i) for i in functions]
         self.list = ListView(*choiceLabels)
         selected_name = self.parent.selected_function_name
         if selected_name:
@@ -981,10 +1138,7 @@ class CurrentTablesWidget(CurrentStateWidgetTemplate):
         """Converts List to a ListView"""
         tables = list(self.parent.table_list or [])
 
-        tables.append("Create a Table")
-        choiceLabels = [
-            LabelItem(getattr(i, "name", "Create a Function"), i) for i in tables
-        ]
+        choiceLabels = [LabelItem(getattr(i, "name", ""), i) for i in tables]
         self.list = ListView(*choiceLabels)
         selected_name = self.parent.selected_table_name
         if selected_name:
@@ -1200,9 +1354,21 @@ class InstanceSelectionScreen(ListScreenTemplate):
             temp_list.extend(instance_list)
         elif self.app.flow_mode == "start":
             temp_list = [instance_name_to_instance("_Create_Instance")]
-            temp_list.extend(instance_list)
+            temp_list.extend(
+                [
+                    i
+                    for i in instance_list
+                    if not is_remote_instance_name(i.name)
+                    and not is_forwarded_instance_name(i.name)
+                ]
+            )
         elif self.app.flow_mode == "stop":
-            temp_list = session.query(Instance).filter_by(status="Running").all()
+            temp_list = [
+                i
+                for i in session.query(Instance).filter_by(status="Running").all()
+                if not is_remote_instance_name(i.name)
+                and not is_forwarded_instance_name(i.name)
+            ]
             new = new = {
                 "name": False,
                 "arg_ext": False,
@@ -1214,7 +1380,12 @@ class InstanceSelectionScreen(ListScreenTemplate):
             }
             return return_list
         elif self.app.flow_mode == "delete":
-            temp_list = session.query(Instance).all()
+            temp_list = [
+                i
+                for i in session.query(Instance).all()
+                if not is_remote_instance_name(i.name)
+                and not is_forwarded_instance_name(i.name)
+            ]
             new = new = {
                 "name": False,
                 "arg_ext": False,
@@ -1306,10 +1477,11 @@ class HomeTabbedScreen(Screen):
     CSS = """
     #home-topbar {
         width: 1fr;
-        height: 3;
-        min-height: 3;
-        max-height: 3;
+        height: 4;
+        min-height: 4;
+        max-height: 4;
         align: left middle;
+        margin: 0 0 1 0;
     }
     #home-tabs-nav {
         width: 1fr;
@@ -1339,9 +1511,10 @@ class HomeTabbedScreen(Screen):
     }
     #home-controls {
         width: auto;
-        height: 3;
+        height: 4;
         layout: horizontal;
         align: right middle;
+        padding-right: 1;
     }
     #home-switcher {
         height: 1fr;
@@ -1361,6 +1534,41 @@ class HomeTabbedScreen(Screen):
     #cli-log {
         height: 1fr;
         border: round $accent;
+    }
+    #status-log {
+        height: 1fr;
+        border: round $accent;
+    }
+    #status-error-box {
+        display: none;
+        border: round #a33d3d;
+        background: #341818;
+        padding: 1 2;
+        margin: 0 0 1 0;
+        height: auto;
+    }
+    #status-error-title {
+        color: #ffd4d4;
+        text-style: bold;
+        margin-bottom: 1;
+    }
+    #status-retry-btn {
+        width: 12;
+        border: round #e39a64;
+        background: #4a2b15;
+        color: #ffe7d2;
+    }
+    #status-retry-row {
+        width: 1fr;
+        align: center middle;
+    }
+    #status-retry-btn:hover {
+        border: round #f2ba8f;
+        background: #5a351a;
+    }
+    #status-retry-btn:focus {
+        border: round #ffd0aa;
+        background: #6a3f1f;
     }
     #cli-input {
         height: 3;
@@ -1383,6 +1591,7 @@ class HomeTabbedScreen(Screen):
         self._autocomplete_cache: dict[
             tuple[str, str | None], tuple[float, list[str]]
         ] = {}
+        self._autocomplete_refresh_in_flight = False
         self.main_choice_dict = {
             "Instance Management": InstanceManagementScreen,
             "Asset Management": AssetManagementScreen,
@@ -1394,6 +1603,13 @@ class HomeTabbedScreen(Screen):
         self.cli_prompt_widget: Static | None = None
         self.cli_log_widget: RichLog | None = None
         self.cli_input_widget: Input | None = None
+        self.status_prompt_widget: Static | None = None
+        self.status_log_widget: RichLog | None = None
+        self.status_error_box_widget: Vertical | None = None
+        self.status_error_title_widget: Static | None = None
+        self.status_retry_btn_widget: Button | None = None
+        self._status_watch_task: asyncio.Task | None = None
+        self._status_watch_instance: str | None = None
         self._cli_screen_lines: list[str] = [""]
         self._cli_cursor_row: int = 0
         self._cli_cursor_col: int = 0
@@ -1410,9 +1626,11 @@ class HomeTabbedScreen(Screen):
             yield Tabs(
                 Tab("Main", id="main-tab"),
                 Tab("CLI", id="cli-tab"),
+                Tab("Status", id="status-tab"),
                 id="home-tabs-nav",
             )
             with Horizontal(id="home-controls"):
+                yield SystemEnvironmentDropdown()
                 yield CreateMenuButton()
                 yield BackBar()
                 yield RefreshBar()
@@ -1438,15 +1656,35 @@ class HomeTabbedScreen(Screen):
                     yield BottomAwareCliAutoComplete(
                         input_widget, candidates=self.candidates_callback
                     )
+            with Vertical(id="status-panel"):
+                with Vertical(id="cli-pane"):
+                    yield Static("", id="status-prompt")
+                    with Vertical(id="status-error-box"):
+                        yield Static(
+                            "Server info isn't available for the selected instance.",
+                            id="status-error-title",
+                        )
+                        with Horizontal(id="status-retry-row"):
+                            yield Button("Retry", id="status-retry-btn")
+                    yield RichLog(
+                        id="status-log", wrap=False, highlight=True, markup=False
+                    )
         yield Footer()
 
     def on_mount(self) -> None:
         self.cli_prompt_widget = self.query_one("#cli-prompt", Static)
         self.cli_log_widget = self.query_one("#cli-log", RichLog)
         self.cli_input_widget = self.query_one("#cli-input", Input)
+        self.status_prompt_widget = self.query_one("#status-prompt", Static)
+        self.status_log_widget = self.query_one("#status-log", RichLog)
+        self.status_error_box_widget = self.query_one("#status-error-box", Vertical)
+        self.status_error_title_widget = self.query_one("#status-error-title", Static)
+        self.status_retry_btn_widget = self.query_one("#status-retry-btn", Button)
         self._refresh_prompt()
         self._log_line("Built-ins: cd, clear, pwd, exit")
+        self._start_status_watch(force_restart=True)
         self.query_one("#main-list", ListView).focus()
+        self._queue_autocomplete_refresh(force=True)
 
     @on(Button.Pressed, "#create-menu-btn")
     def on_create_menu_pressed(self, event: Button.Pressed) -> None:
@@ -1478,6 +1716,9 @@ class HomeTabbedScreen(Screen):
         elif label == "CLI":
             switcher.current = "cli-panel"
             self.query_one("#cli-input", Input).focus()
+        elif label == "Status":
+            switcher.current = "status-panel"
+            self._start_status_watch(force_restart=False)
 
     @on(ListView.Selected, "#main-list")
     def on_main_list_selected(self, event: ListView.Selected) -> None:
@@ -1493,8 +1734,13 @@ class HomeTabbedScreen(Screen):
     @on(ScreenResume)
     def refresh_current_instance_widget(self, event: ScreenResume):
         self.query_one(InstanceInfoPanel).refresh_widget()
+        self._queue_autocomplete_refresh(force=True)
+        self.refresh_status_tab()
         if self._pending_cli_command:
             self.call_after_refresh(self._execute_pending_cli)
+
+    def on_unmount(self) -> None:
+        self._stop_status_watch()
 
     def _execute_pending_cli(self) -> None:
         if not self._pending_cli_command:
@@ -1515,6 +1761,21 @@ class HomeTabbedScreen(Screen):
         self._log_line(f"$ {command}")
         await self._run_command(command)
         self._refresh_prompt()
+
+    def on_key(self, event: Key) -> None:
+        if event.key != "space":
+            return
+        if self.focused is None or getattr(self.focused, "id", None) != "cli-input":
+            return
+        input_widget = self.focused
+        if not isinstance(input_widget, Input):
+            return
+        cursor = input_widget.cursor_position
+        value = input_widget.value or ""
+        input_widget.value = f"{value[:cursor]} {value[cursor:]}"
+        input_widget.cursor_position = cursor + 1
+        event.stop()
+        event.prevent_default()
 
     async def _run_command(self, command: str, use_pty: bool = False) -> None:
         if command == "clear":
@@ -1629,6 +1890,125 @@ class HomeTabbedScreen(Screen):
     def _log_line(self, text: str) -> None:
         if self.cli_log_widget is not None:
             self.cli_log_widget.write(text)
+
+    def _working_instance_name(self) -> str | None:
+        working_instance = getattr(self.app, "working_instance", None)
+        return str(getattr(working_instance, "name", "") or "").strip() or None
+
+    @on(Button.Pressed, "#status-retry-btn")
+    async def on_status_retry_pressed(self, event: Button.Pressed) -> None:
+        instance_name = self._working_instance_name()
+        if not instance_name:
+            self._show_status_unavailable_banner("No working instance selected.")
+            return
+        self._show_status_unavailable_banner("Checking server status...")
+        ok, text = await self._run_status_command(instance_name)
+        if ok:
+            self._show_status_output(text)
+            self._start_status_watch(force_restart=True)
+            return
+        self._show_status_unavailable_banner(
+            "Server info isn't available for the selected instance."
+        )
+
+    def refresh_status_tab(self) -> None:
+        self._start_status_watch(force_restart=False)
+
+    def _stop_status_watch(self) -> None:
+        if self._status_watch_task is not None and not self._status_watch_task.done():
+            self._status_watch_task.cancel()
+        self._status_watch_task = None
+        self._status_watch_instance = None
+
+    def _show_status_unavailable_banner(self, message: str) -> None:
+        if self.status_error_box_widget is not None:
+            self.status_error_box_widget.display = True
+        if self.status_error_title_widget is not None:
+            self.status_error_title_widget.update(message)
+        if self.status_log_widget is not None:
+            self.status_log_widget.display = False
+
+    def _show_status_output(self, text: str) -> None:
+        if self.status_error_box_widget is not None:
+            self.status_error_box_widget.display = False
+        if self.status_log_widget is not None:
+            self.status_log_widget.display = True
+            self.status_log_widget.clear()
+            self.status_log_widget.write(text if text else " ")
+
+    def _status_output_is_error(self, text: str) -> bool:
+        lowered = text.lower()
+        return any(
+            marker in lowered
+            for marker in (
+                "not running",
+                "nopidfile",
+                "server status could not be loaded",
+                "failed",
+                "error",
+            )
+        )
+
+    async def _run_status_command(self, instance_name: str) -> tuple[bool, str]:
+        command = ("tdserver", "status", "--instance", instance_name)
+        try:
+            process = await asyncio.create_subprocess_exec(
+                *command,
+                cwd=str(self.cwd),
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.STDOUT,
+                env=os.environ.copy(),
+            )
+            output, _ = await process.communicate()
+        except asyncio.CancelledError:
+            raise
+        except Exception:
+            return False, ""
+
+        text = output.decode(errors="replace").rstrip("\n")
+        if process.returncode != 0:
+            return False, text
+        if self._status_output_is_error(text):
+            return False, text
+        return True, text
+
+    def _start_status_watch(self, force_restart: bool) -> None:
+        if self.status_prompt_widget is None or self.status_log_widget is None:
+            return
+        instance_name = self._working_instance_name()
+        if not instance_name:
+            self._stop_status_watch()
+            self.status_prompt_widget.update("No working instance selected")
+            self._show_status_unavailable_banner("No working instance selected.")
+            return
+        if (
+            force_restart is not True
+            and self._status_watch_task is not None
+            and not self._status_watch_task.done()
+            and self._status_watch_instance == instance_name
+        ):
+            return
+        self._stop_status_watch()
+        self._status_watch_instance = instance_name
+        self.status_prompt_widget.update(
+            f"watch -n 1 tdserver status --instance {instance_name}"
+        )
+        self._status_watch_task = asyncio.create_task(
+            self._status_watch_loop(instance_name)
+        )
+
+    async def _status_watch_loop(self, instance_name: str) -> None:
+        while True:
+            ok, text = await self._run_status_command(instance_name)
+            if not ok:
+                self._show_status_unavailable_banner(
+                    "Server info isn't available for the selected instance."
+                )
+                self._stop_status_watch()
+                return
+
+            self._show_status_output(text)
+            await asyncio.sleep(1)
 
     def _apply_ansi_chunk(self, chunk: str) -> None:
         # Minimal ANSI/CSI handling to keep live tables readable in RichLog.
@@ -2043,50 +2423,145 @@ class HomeTabbedScreen(Screen):
         self._autocomplete_cache[key] = (time.monotonic(), sorted_values)
         return list(sorted_values)
 
+    def _snapshot_db_instance_names(self) -> list[str]:
+        try:
+            session: Session = self.app.session
+            instances = session.query(Instance).order_by(Instance.name).all()
+            instance_names = {instance.name for instance in instances}
+            working_instance = getattr(self.app, "working_instance", None)
+            working_name = getattr(working_instance, "name", None)
+            if working_name:
+                instance_names.add(str(working_name))
+
+            login = resolve_login_credentials()
+            host = login.get("host")
+            port = login.get("port")
+            if login.get("logged_in") and host and port:
+                instance_names.add(make_remote_instance_name(str(host), str(port)))
+
+            return sorted(instance_names)
+        except Exception:
+            return []
+
+    def _queue_autocomplete_refresh(self, force: bool = False) -> None:
+        if self._autocomplete_refresh_in_flight and force is False:
+            return
+        self._autocomplete_refresh_in_flight = True
+        self._refresh_autocomplete_cache_worker(self._snapshot_db_instance_names())
+
+    @work(
+        thread=True,
+        exclusive=True,
+        group="cli-autocomplete-refresh",
+        exit_on_error=False,
+    )
+    def _refresh_autocomplete_cache_worker(
+        self, db_instance_names: list[str]
+    ) -> dict[str, object]:
+        collection_objects = tabsdata_api.pull_all_collections(self.app)
+        collection_names = sorted(
+            {getattr(item, "name", str(item)) for item in collection_objects}
+        )
+
+        function_map: dict[str, list[str]] = {}
+        table_map: dict[str, list[str]] = {}
+        for collection in collection_names:
+            function_objects = tabsdata_api.pull_functions_from_collection(
+                self.app, collection
+            )
+            table_objects = tabsdata_api.pull_tables_from_collection(self.app, collection)
+            function_map[collection] = sorted(
+                {getattr(item, "name", str(item)) for item in function_objects}
+            )
+            table_map[collection] = sorted(
+                {getattr(item, "name", str(item)) for item in table_objects}
+            )
+
+        filesystem_instances = find_tabsdata_instance_names()
+        instance_names = sorted(set(db_instance_names).union(filesystem_instances))
+
+        all_functions: set[str] = set()
+        all_tables: set[str] = set()
+        for values in function_map.values():
+            all_functions.update(values)
+        for values in table_map.values():
+            all_tables.update(values)
+
+        return {
+            "collections": collection_names,
+            "functions_by_collection": function_map,
+            "tables_by_collection": table_map,
+            "all_functions": sorted(all_functions),
+            "all_tables": sorted(all_tables),
+            "instances": instance_names,
+        }
+
+    def on_worker_state_changed(self, event: Worker.StateChanged) -> None:
+        if event.worker.group != "cli-autocomplete-refresh":
+            return
+
+        if event.state in {WorkerState.SUCCESS, WorkerState.ERROR, WorkerState.CANCELLED}:
+            self._autocomplete_refresh_in_flight = False
+        else:
+            return
+
+        if event.state != WorkerState.SUCCESS:
+            return
+
+        payload = event.worker.result or {}
+        now = time.monotonic()
+
+        collections = sorted(payload.get("collections", []))
+        self._autocomplete_cache[("collections", None)] = (now, collections)
+
+        all_functions = sorted(payload.get("all_functions", []))
+        self._autocomplete_cache[("functions", None)] = (now, all_functions)
+
+        all_tables = sorted(payload.get("all_tables", []))
+        self._autocomplete_cache[("tables", None)] = (now, all_tables)
+
+        instances = sorted(payload.get("instances", []))
+        self._autocomplete_cache[("instances", None)] = (now, instances)
+
+        function_map = payload.get("functions_by_collection", {})
+        if isinstance(function_map, dict):
+            for collection, names in function_map.items():
+                self._autocomplete_cache[("functions", str(collection))] = (
+                    now,
+                    sorted({str(name) for name in names}),
+                )
+
+        table_map = payload.get("tables_by_collection", {})
+        if isinstance(table_map, dict):
+            for collection, names in table_map.items():
+                self._autocomplete_cache[("tables", str(collection))] = (
+                    now,
+                    sorted({str(name) for name in names}),
+                )
+
     def _live_collection_names(self) -> list[str]:
         cache_key = ("collections", None)
         cached = self._get_cached_autocomplete(cache_key)
         if cached is not None:
             return cached
-        collections = tabsdata_api.pull_all_collections(self.app)
-        names = list({getattr(item, "name", str(item)) for item in collections})
-        return self._set_cached_autocomplete(cache_key, names)
+        self._queue_autocomplete_refresh()
+        return []
 
     def _live_function_names(self, collection: str | None) -> list[str]:
         cache_key = ("functions", collection)
         cached = self._get_cached_autocomplete(cache_key)
         if cached is not None:
             return cached
-
-        if collection:
-            functions = tabsdata_api.pull_functions_from_collection(
-                self.app, collection
-            )
-            names = list({getattr(item, "name", str(item)) for item in functions})
-            return self._set_cached_autocomplete(cache_key, names)
-
-        names: set[str] = set()
-        for coll in self._live_collection_names():
-            functions = tabsdata_api.pull_functions_from_collection(self.app, coll)
-            names.update(getattr(item, "name", str(item)) for item in functions)
-        return self._set_cached_autocomplete(cache_key, list(names))
+        self._queue_autocomplete_refresh()
+        return []
 
     def _live_table_names(self, collection: str | None) -> list[str]:
         cache_key = ("tables", collection)
         cached = self._get_cached_autocomplete(cache_key)
         if cached is not None:
             return cached
-
-        if collection:
-            tables = tabsdata_api.pull_tables_from_collection(self.app, collection)
-            names = list({getattr(item, "name", str(item)) for item in tables})
-            return self._set_cached_autocomplete(cache_key, names)
-
-        names: set[str] = set()
-        for coll in self._live_collection_names():
-            tables = tabsdata_api.pull_tables_from_collection(self.app, coll)
-            names.update(getattr(item, "name", str(item)) for item in tables)
-        return self._set_cached_autocomplete(cache_key, list(names))
+        self._queue_autocomplete_refresh()
+        return []
 
     def _filter_by_prefix(self, items: list[str], prefix: str) -> list[str]:
         if not prefix:
@@ -2138,17 +2613,12 @@ class HomeTabbedScreen(Screen):
         return False
 
     def _live_instance_names(self) -> list[str]:
-        try:
-            sync_filesystem_instances_to_db(app=self.app)
-        except Exception:
-            pass
-
-        try:
-            session: Session = self.app.session
-            instances = session.query(Instance).order_by(Instance.name).all()
-            return [instance.name for instance in instances]
-        except Exception:
-            return []
+        cache_key = ("instances", None)
+        cached = self._get_cached_autocomplete(cache_key)
+        if cached is not None:
+            return cached
+        self._queue_autocomplete_refresh()
+        return self._snapshot_db_instance_names()
 
 
 class AssetManagementScreen(ListScreenTemplate):
@@ -2245,10 +2715,50 @@ Checkbox:focus > .toggle--button {
             self.placeholder = instance.name
         self.instance = instance
 
+    def resolve_initial_https_cert_mode(self) -> str:
+        mode = str(getattr(self.instance, "https_cert_mode", "") or "").strip().lower()
+        if mode in {
+            instance_tasks.HTTPS_CERT_MODE_SELF_GENERATED,
+            instance_tasks.HTTPS_CERT_MODE_PROVIDED,
+        }:
+            return mode
+        if self.instance.status == "Remote" or is_remote_instance_name(self.instance.name):
+            return instance_tasks.HTTPS_CERT_MODE_PROVIDED
+        if str(getattr(self.instance, "https_cert_path", "") or "").strip():
+            return instance_tasks.HTTPS_CERT_MODE_PROVIDED
+        return instance_tasks.HTTPS_CERT_MODE_SELF_GENERATED
+
+    def selected_https_cert_mode(self) -> str:
+        provided_button = self.query_one("#cert-source-provided", RadioButton)
+        if bool(provided_button.value):
+            return instance_tasks.HTTPS_CERT_MODE_PROVIDED
+        return instance_tasks.HTTPS_CERT_MODE_SELF_GENERATED
+
     def compose(self) -> ComposeResult:
+        initial_cert_mode = self.resolve_initial_https_cert_mode()
         yield ExitBar()
         yield VerticalScroll(
             InstanceInfoPanel(),
+            Vertical(
+                Label("Bind target:", id="remote-label"),
+                RadioSet(
+                    RadioButton("Local", id="remote-mode-local", value=True),
+                    RadioButton("Remote", id="remote-mode-remote"),
+                    RadioButton("Forwarded", id="remote-mode-forwarded"),
+                    id="remote-mode-select",
+                    classes="inputs",
+                ),
+                Horizontal(
+                    Label(
+                        "Local manages an instance on this machine. "
+                        "Remote connects by IP/port. "
+                        "Forwarded connects via SSH port forward (always 127.0.0.1).",
+                        id="remote-help-label",
+                    ),
+                ),
+                id="remote-container",
+                classes="input_container",
+            ),
             Vertical(
                 Horizontal(
                     Label(
@@ -2269,6 +2779,28 @@ Checkbox:focus > .toggle--button {
                     Pretty("", id="instance-message"),
                 ),
                 id="instance-container",
+                classes="input_container",
+            ),
+            Vertical(
+                Horizontal(
+                    Label("Remote IP address:", id="remote-host-label"),
+                    Input(
+                        placeholder=(
+                            str(getattr(self.instance, "public_ip", "") or "")
+                            if (
+                                self.instance.status == "Remote"
+                                or is_remote_instance_name(self.instance.name)
+                            )
+                            else ""
+                        ),
+                        validate_on=["submitted"],
+                        compact=True,
+                        id="remote-host-input",
+                        classes="inputs",
+                    ),
+                    Pretty("", id="remote-host-message"),
+                ),
+                id="remote-host-container",
                 classes="input_container",
             ),
             Vertical(
@@ -2325,6 +2857,54 @@ Checkbox:focus > .toggle--button {
                 classes="input_container",
             ),
             Vertical(
+                Label("HTTPS certificate source:", id="cert-source-label"),
+                RadioSet(
+                    RadioButton(
+                        "Self-generated",
+                        id="cert-source-self",
+                        value=(
+                            initial_cert_mode
+                            == instance_tasks.HTTPS_CERT_MODE_SELF_GENERATED
+                        ),
+                    ),
+                    RadioButton(
+                        "Provide your own",
+                        id="cert-source-provided",
+                        value=(
+                            initial_cert_mode == instance_tasks.HTTPS_CERT_MODE_PROVIDED
+                        ),
+                    ),
+                    id="cert-source-select",
+                    classes="inputs",
+                ),
+                Horizontal(
+                    Label(
+                        "Self-generated creates cert.pem/key.pem automatically. Provide your own expects a PEM cert path.",
+                        id="cert-source-help-label",
+                    ),
+                ),
+                id="cert-source-container",
+                classes="input_container",
+            ),
+            Vertical(
+                Horizontal(
+                    Label("HTTPS cert PEM path:", id="cert-path-label"),
+                    Input(
+                        placeholder=(
+                            str(getattr(self.instance, "https_cert_path", "") or "")
+                            or str(Path.home() / "cert.pem")
+                        ),
+                        validate_on=["submitted"],
+                        compact=True,
+                        id="cert-path-input",
+                        classes="inputs",
+                    ),
+                    Pretty("", id="cert-path-message"),
+                ),
+                id="cert-path-container",
+                classes="input_container",
+            ),
+            Vertical(
                 Button(
                     label="Submit",
                     id="submit-button",
@@ -2337,14 +2917,36 @@ Checkbox:focus > .toggle--button {
 
         yield Footer()
 
+    def is_bind_mode(self) -> bool:
+        return self.app.flow_mode == "bind"
+
+    def is_remote_bind_selected(self) -> bool:
+        if self.is_bind_mode() is False:
+            return False
+        remote_button = self.query_one("#remote-mode-remote", RadioButton)
+        return bool(remote_button.value)
+
+    def is_forwarded_bind_selected(self) -> bool:
+        if self.is_bind_mode() is False:
+            return False
+        forwarded_button = self.query_one("#remote-mode-forwarded", RadioButton)
+        return bool(forwarded_button.value)
+
     def set_visibility(self):
-        input_containers = self.query(".input_container")
         instance_container = self.query_one("#instance-container")
-        ext_container = self.query_one("#ext-container")
-        int_container = self.query_one("#int-container")
-        self.input_fields = [
-            i for i in self.query("Input, Checkbox, Button") if i.disabled != True
-        ]
+        remote_container = self.query_one("#remote-container")
+        remote_mode_select = self.query_one("#remote-mode-select", RadioSet)
+        remote_mode_remote = self.query_one("#remote-mode-remote", RadioButton)
+        remote_mode_forwarded = self.query_one("#remote-mode-forwarded", RadioButton)
+        remote_host_container = self.query_one("#remote-host-container")
+        remote_host_input = self.query_one("#remote-host-input", Input)
+        https_checkbox = self.query_one("#https-checkbox", Checkbox)
+        cert_source_container = self.query_one("#cert-source-container")
+        cert_source_select = self.query_one("#cert-source-select", RadioSet)
+        cert_source_self = self.query_one("#cert-source-self", RadioButton)
+        cert_source_provided = self.query_one("#cert-source-provided", RadioButton)
+        cert_path_container = self.query_one("#cert-path-container")
+        cert_path_input = self.query_one("#cert-path-input", Input)
 
         input_messages = self.query(".input_container Pretty")
 
@@ -2355,18 +2957,117 @@ Checkbox:focus > .toggle--button {
         for i in input_messages:
             i.display = False
 
-        if self.instance.name == "_Create_Instance":
-            self.set_focus(instance_input)
-            instance_input.disabled = False
-            return
+        bind_mode = self.is_bind_mode()
+        existing_remote = (
+            self.instance.status == "Remote"
+            or is_remote_instance_name(self.instance.name)
+            or is_forwarded_instance_name(self.instance.name)
+        )
 
-        self.set_focus(ext_input)
-        return
+        remote_container.display = bind_mode
+        remote_host_container.display = False
+        remote_host_input.disabled = True
+        remote_mode_select.disabled = existing_remote
+
+        if existing_remote:
+            if is_forwarded_instance_name(self.instance.name):
+                remote_mode_forwarded.value = True
+            else:
+                remote_mode_remote.value = True
+
+        remote_selected = self.is_remote_bind_selected()
+        forwarded_selected = self.is_forwarded_bind_selected()
+        remote_like_selected = remote_selected or forwarded_selected
+
+        if remote_selected:
+            remote_host_container.display = True
+            remote_host_input.disabled = False
+
+        if self.instance.name == "_Create_Instance" and not remote_like_selected:
+            instance_input.disabled = False
+            instance_container.display = True
+            self.set_focus(instance_input)
+        else:
+            instance_input.disabled = True
+            instance_container.display = not remote_like_selected
+            self.set_focus(remote_host_input if remote_selected else ext_input)
+
+        https_selected = bool(https_checkbox.value)
+        cert_source_container.display = https_selected
+        cert_source_select.disabled = not https_selected
+
+        if remote_like_selected:
+            cert_source_self.disabled = True
+            cert_source_provided.disabled = not https_selected
+            if https_selected:
+                cert_source_provided.value = True
+        else:
+            cert_source_self.disabled = not https_selected
+            cert_source_provided.disabled = not https_selected
+
+        cert_mode = self.selected_https_cert_mode()
+        show_cert_path = https_selected and (
+            remote_like_selected
+            or cert_mode == instance_tasks.HTTPS_CERT_MODE_PROVIDED
+        )
+        cert_path_container.display = show_cert_path
+        cert_path_input.disabled = not show_cert_path
+
+        self.input_fields = [
+            i
+            for i in self.query("Input, Checkbox, RadioButton, Button")
+            if i.disabled is not True
+        ]
+        if not remote_like_selected:
+            int_input.placeholder = str(self.instance.arg_int or "")
+
+    def validate_remote_host(self, host: str):
+        if host == "":
+            return False, "Remote IP address is required."
+        try:
+            ipaddress.ip_address(host)
+        except ValueError:
+            return False, f"{host} is not a valid IP address."
+        return True, "[Validation Passed]"
+
+    def validate_port_range(self, value: str, label: str):
+        if value == "":
+            return False, f"{label} port is required."
+        if not value.isdigit():
+            return False, f"{label} port must be a number."
+        port = int(value)
+        if port < 1 or port > 65535:
+            return False, f"{label} port must be between 1 and 65535."
+        return True, "[Validation Passed]"
+
+    def validate_cert_path(self, cert_path: str):
+        if cert_path == "":
+            return False, "HTTPS certificate PEM path is required."
+        expanded = Path(cert_path).expanduser()
+        if expanded.exists() is False:
+            return False, f"Certificate file not found: {expanded}"
+        if expanded.is_file() is False:
+            return False, f"Certificate path is not a file: {expanded}"
+        if expanded.suffix.lower() != ".pem":
+            return False, f"Certificate must be a .pem file: {expanded}"
+        return True, "[Validation Passed]"
 
     def on_mount(self) -> None:
         self.set_visibility()
 
     def on_screen_resume(self, event) -> None:
+        self.set_visibility()
+
+    @on(RadioSet.Changed, "#remote-mode-select")
+    def on_remote_mode_toggle(self, event: RadioSet.Changed):
+        self.set_visibility()
+
+    @on(Checkbox.Changed, "#https-checkbox")
+    def on_https_mode_toggle(self, event: Checkbox.Changed):
+        self.set_visibility()
+
+    @on(RadioSet.Changed, "#cert-source-select")
+    def on_cert_source_toggle(self, event: RadioSet.Changed):
         self.set_visibility()
 
     def on_key(self, event):
@@ -2390,6 +3091,62 @@ Checkbox:focus > .toggle--button {
     def handle_input_submission(self, event: Input.Submitted):
         value = event.value
         input_widget = event.input
+        remote_mode = self.is_remote_bind_selected()
+
+        if input_widget.id == "remote-host-input":
+            candidate = value if value != "" else input_widget.placeholder
+            is_valid, msg = self.validate_remote_host(candidate.strip())
+            if is_valid is False:
+                self.app.notify(f"❌ {msg}.", severity="error")
+            message = input_widget.parent.query_one("Pretty")
+            message.update(msg)
+            message.display = True
+            if is_valid:
+                key_event = Key(key="down", character=None)
+                self.on_key(key_event)
+            return
+
+        if remote_mode and input_widget.id in {"ext-input", "int-input"}:
+            candidate = value if value != "" else input_widget.placeholder
+            label = "External" if input_widget.id == "ext-input" else "Internal"
+            is_valid, msg = self.validate_port_range(candidate, label)
+            message = input_widget.parent.query_one("Pretty")
+            if is_valid and input_widget.id == "int-input":
+                ext_input = self.query_one("#ext-input", Input)
+                ext_candidate = ext_input.value if ext_input.value != "" else ext_input.placeholder
+                if ext_candidate == candidate:
+                    is_valid = False
+                    msg = "Internal port must not be the same as external port."
+
+            message.update(msg)
+            message.display = True
+            if is_valid is False:
+                self.app.notify(f"❌ {msg}.", severity="error")
+            else:
+                key_event = Key(key="down", character=None)
+                self.on_key(key_event)
+            return
+
+        if input_widget.id == "cert-path-input":
+            cert_mode = self.selected_https_cert_mode()
+            requires_cert_path = (
+                remote_mode
+                or cert_mode == instance_tasks.HTTPS_CERT_MODE_PROVIDED
+            )
+            if requires_cert_path is False:
+                return
+            candidate = value if value != "" else input_widget.placeholder
+            is_valid, msg = self.validate_cert_path(candidate.strip())
+            message = input_widget.parent.query_one("Pretty")
+            message.update(msg)
+            message.display = True
+            if is_valid is False:
+                self.app.notify(f"❌ {msg}.", severity="error")
+            else:
+                key_event = Key(key="down", character=None)
+                self.on_key(key_event)
+            return
+
         validation_result = self.validate_input(input_widget, value)
 
         if validation_result.is_valid == False:
@@ -2410,10 +3167,18 @@ Checkbox:focus > .toggle--button {
 
     @on(Button.Pressed, "#submit-button")
     def handle_submission_request(self, event: Button.Pressed):
-        fields = [i for i in self.query("Input") if len(i.validators) > 0]
+        fields = [i for i in self.query("Input") if len(i.validators) > 0 and i.display]
+        remote_mode = self.is_remote_bind_selected()
+        forwarded_mode = self.is_forwarded_bind_selected()
+        remote_like_mode = remote_mode or forwarded_mode
+        remote_host_input = self.query_one("#remote-host-input", Input)
+        cert_path_input = self.query_one("#cert-path-input", Input)
+        cert_mode = self.selected_https_cert_mode()
 
-        if self.instance.name != "_Create_Instance":
+        if self.instance.name != "_Create_Instance" or remote_like_mode:
             fields = [i for i in fields if i.id != "instance-input"]
+        if remote_like_mode:
+            fields = [i for i in fields if i.id not in {"ext-input", "int-input"}]
 
         validation_passed = True
         new = {}
@@ -2434,28 +3199,162 @@ Checkbox:focus > .toggle--button {
                 message.update("[Validation Passed]")
                 message.display = True
 
+        remote_host = ""
+        if validation_passed and remote_like_mode:
+            ext_port = self.query_one("#ext-input", Input).value or str(
+                self.instance.arg_ext or ""
+            )
+            int_port = self.query_one("#int-input", Input).value or str(
+                self.instance.arg_int or ""
+            )
+            ext_valid, ext_msg = self.validate_port_range(ext_port, "External")
+            int_valid, int_msg = self.validate_port_range(int_port, "Internal")
+            ext_message_widget = self.query_one("#ext-message", Pretty)
+            int_message_widget = self.query_one("#int-message", Pretty)
+            ext_message_widget.update(ext_msg)
+            int_message_widget.update(int_msg)
+            ext_message_widget.display = True
+            int_message_widget.display = True
+            if ext_valid is False or int_valid is False:
+                self.app.notify("❌ Invalid remote port value.", severity="error")
+                validation_passed = False
+            elif ext_port == int_port:
+                int_message_widget.update(
+                    "Internal port must not be the same as external port."
+                )
+                int_message_widget.display = True
+                self.app.notify(
+                    "❌ Internal port must not match external port.",
+                    severity="error",
+                )
+                validation_passed = False
+
+            if forwarded_mode:
+                remote_host = "127.0.0.1"
+            else:
+                remote_host = (
+                    remote_host_input.value
+                    if remote_host_input.value != ""
+                    else remote_host_input.placeholder
+                ).strip()
+                host_valid, host_message = self.validate_remote_host(remote_host)
+                host_message_widget = remote_host_input.parent.query_one("Pretty")
+                host_message_widget.update(host_message)
+                host_message_widget.display = True
+                if host_valid is False:
+                    self.app.notify(f"❌ {host_message}.", severity="error")
+                    validation_passed = False
+
         if validation_passed:
-            values = [
-                i.value if i.value != "" else i.placeholder
-                for i in self.query("Input.inputs")
-            ]
-            values.append(self.query_one("Checkbox.inputs").value or False)
-            new = {
-                "name": values[0] != self.instance.name,
-                "arg_ext": values[1] != self.instance.arg_ext,
-                "arg_int": values[2] != self.instance.arg_int,
-                "use_https": values[3] != self.instance.use_https,
-            }
-            self.instance.name = values[0]
-            self.instance.arg_ext = values[1]
-            self.instance.arg_int = values[2]
-            self.instance.use_https = values[3]
+            use_https = self.query_one("#https-checkbox", Checkbox).value or False
+            cert_path = None
+            if use_https:
+                cert_message_widget = self.query_one("#cert-path-message", Pretty)
+                if (
+                    remote_like_mode
+                    and cert_mode == instance_tasks.HTTPS_CERT_MODE_SELF_GENERATED
+                ):
+                    invalid_mode_message = (
+                        "Remote HTTPS requires 'Provide your own' certificate."
+                    )
+                    cert_message_widget.update(invalid_mode_message)
+                    cert_message_widget.display = True
+                    self.app.notify(f"❌ {invalid_mode_message}", severity="error")
+                    validation_passed = False
+                elif (
+                    remote_like_mode
+                    or cert_mode == instance_tasks.HTTPS_CERT_MODE_PROVIDED
+                ):
+                    cert_path = (
+                        cert_path_input.value
+                        if cert_path_input.value != ""
+                        else cert_path_input.placeholder
+                    ).strip()
+                    cert_valid, cert_message = self.validate_cert_path(cert_path)
+                    cert_message_widget.update(cert_message)
+                    cert_message_widget.display = True
+                    if cert_valid is False:
+                        self.app.notify(f"❌ {cert_message}.", severity="error")
+                        validation_passed = False
+                    elif remote_like_mode is False:
+                        key_path = Path(cert_path).expanduser().parent / "key.pem"
+                        if key_path.exists() is False or key_path.is_file() is False:
+                            key_message = (
+                                f"Local HTTPS requires key.pem in the same directory ({key_path})."
+                            )
+                            cert_message_widget.update(key_message)
+                            cert_message_widget.display = True
+                            self.app.notify(f"❌ {key_message}", severity="error")
+                            validation_passed = False
+                else:
+                    cert_path = str(Path.home() / "cert.pem")
+            else:
+                cert_mode = None
+
+        if validation_passed:
+            instance_name = self.query_one("#instance-input", Input).value or self.placeholder
+            ext_port = self.query_one("#ext-input", Input).value or str(
+                self.instance.arg_ext or ""
+            )
+            int_port = self.query_one("#int-input", Input).value or str(
+                self.instance.arg_int or ""
+            )
+            use_https = self.query_one("#https-checkbox", Checkbox).value or False
+
+            if remote_like_mode:
+                if forwarded_mode:
+                    instance_name_val = make_forwarded_instance_name(ext_port)
+                else:
+                    instance_name_val = make_remote_instance_name(remote_host, ext_port)
+                target_instance = Instance(
+                    name=instance_name_val,
+                    status="Remote",
+                    cfg_ext=ext_port,
+                    cfg_int=int_port,
+                    arg_ext=ext_port,
+                    arg_int=int_port,
+                    public_ip=remote_host,
+                    private_ip=remote_host,
+                    use_https=use_https,
+                    https_cert_path=cert_path,
+                    https_cert_mode=cert_mode,
+                )
+                new = {
+                    "name": True,
+                    "arg_ext": True,
+                    "arg_int": True,
+                    "use_https": True,
+                    "https_cert_path": True,
+                    "https_cert_mode": True,
+                }
+            else:
+                target_instance = self.instance
+                new = {
+                    "name": instance_name != self.instance.name,
+                    "arg_ext": ext_port != self.instance.arg_ext,
+                    "arg_int": int_port != self.instance.arg_int,
+                    "use_https": use_https != self.instance.use_https,
+                    "https_cert_path": cert_path != getattr(self.instance, "https_cert_path", None),
+                    "https_cert_mode": cert_mode
+                    != getattr(self.instance, "https_cert_mode", None),
+                }
+                target_instance.name = instance_name
+                target_instance.arg_ext = ext_port
+                target_instance.arg_int = int_port
+                target_instance.use_https = use_https
+                target_instance.https_cert_path = cert_path
+                target_instance.https_cert_mode = cert_mode
+                target_instance.public_ip = "127.0.0.1"
+                target_instance.private_ip = "127.0.0.1"
+                if target_instance.status == "Remote":
+                    target_instance.status = "Not Running"
+
             if self.app.flow_mode == "bind":
                 self.app.push_screen(
-                    BindAndStartInstance(current=self.instance, new=new)
+                    BindAndStartInstance(current=target_instance, new=new)
                 )
             elif self.app.flow_mode == "start":
-                self.app.push_screen(StartInstance(current=self.instance, new=new))
+                self.app.push_screen(StartInstance(current=target_instance, new=new))
 
 
 @dataclass
@@ -2732,32 +3631,52 @@ class BindAndStartInstance(SequentialTasksScreenTemplate):
         self.new = new
         self.instance.working = True
 
-        tasks = [
-            TaskSpec(
-                "Preparing Instance",
-                partial(instance_tasks.prepare_instance, self, self.instance),
-            ),
-            TaskSpec(
-                "Checking Instance Version",
-                partial(instance_tasks.upgrade_instance, self, self.instance),
-            ),
-            TaskSpec(
-                "Binding Ports",
-                partial(instance_tasks.bind_ports, self, self.instance),
-            ),
-            TaskSpec(
-                "Connecting to Tabsdata instance",
-                partial(instance_tasks.connect_tabsdata, self, self.instance),
-            ),
-            TaskSpec(
-                "Checking Server Status",
-                partial(instance_tasks.run_tdserver_status, self, self.instance),
-            ),
-            TaskSpec(
-                "Logging you In",
-                partial(instance_tasks.tabsdata_login, self, self.instance),
-            ),
-        ]
+        if self.instance.status == "Remote" or is_remote_instance_name(self.instance.name):
+            tasks = [
+                TaskSpec(
+                    "Adding HTTPS Certificate",
+                    partial(instance_tasks.add_https_cert, self, self.instance),
+                ),
+                TaskSpec(
+                    "Connecting to Remote Tabsdata instance",
+                    partial(instance_tasks.connect_remote_tabsdata, self, self.instance),
+                ),
+            ]
+        else:
+            tasks = [
+                TaskSpec(
+                    "Preparing Instance",
+                    partial(instance_tasks.prepare_instance, self, self.instance),
+                ),
+                TaskSpec(
+                    "Checking Instance Version",
+                    partial(instance_tasks.upgrade_instance, self, self.instance),
+                ),
+                TaskSpec(
+                    "Binding Ports",
+                    partial(instance_tasks.bind_ports, self, self.instance),
+                ),
+                TaskSpec(
+                    "Configuring HTTPS Certificates",
+                    partial(instance_tasks.configure_https_cert, self, self.instance),
+                ),
+                TaskSpec(
+                    "Connecting to Tabsdata instance",
+                    partial(instance_tasks.connect_tabsdata, self, self.instance),
+                ),
+                TaskSpec(
+                    "Checking Server Status",
+                    partial(instance_tasks.run_tdserver_status, self, self.instance),
+                ),
+                TaskSpec(
+                    "Adding HTTPS Certificate",
+                    partial(instance_tasks.add_https_cert, self, self.instance),
+                ),
+                TaskSpec(
+                    "Logging you In",
+                    partial(instance_tasks.tabsdata_login, self, self.instance),
+                ),
+            ]
 
         super().__init__(tasks)
 
@@ -2785,12 +3704,20 @@ class StartInstance(SequentialTasksScreenTemplate):
                 partial(instance_tasks.bind_ports, self, self.instance),
             ),
             TaskSpec(
+                "Configuring HTTPS Certificates",
+                partial(instance_tasks.configure_https_cert, self, self.instance),
+            ),
+            TaskSpec(
                 "Connecting to Tabsdata instance",
                 partial(instance_tasks.connect_tabsdata, self, self.instance),
             ),
             TaskSpec(
                 "Checking Server Status",
                 partial(instance_tasks.run_tdserver_status, self, self.instance),
+            ),
+            TaskSpec(
+                "Adding HTTPS Certificate",
+                partial(instance_tasks.add_https_cert, self, self.instance),
             ),
         ]
 
@@ -2823,8 +3750,15 @@ class StopInstance(SequentialTasksScreenTemplate):
     def conclude_tasks(self):
         super().conclude_tasks()
         self.instance.working = False
-        self.app.session.merge(self.instance)
+        merged_instance = self.app.session.merge(self.instance)
         self.app.session.commit()
+        current_working = getattr(self.app, "working_instance", None)
+        if (
+            current_working is not None
+            and getattr(current_working, "name", None)
+            == getattr(merged_instance, "name", None)
+        ):
+            self.app.working_instance = None
 
 
 class DeleteInstance(SequentialTasksScreenTemplate):
@@ -2853,8 +3787,15 @@ class DeleteInstance(SequentialTasksScreenTemplate):
     def conclude_tasks(self):
         super().conclude_tasks()
         self.instance.working = False
-        self.app.session.merge(self.instance)
+        merged_instance = self.app.session.merge(self.instance)
         self.app.session.commit()
+        current_working = getattr(self.app, "working_instance", None)
+        if (
+            current_working is not None
+            and getattr(current_working, "name", None)
+            == getattr(merged_instance, "name", None)
+        ):
+            self.app.working_instance = None
 
 
 class PyOnlyDirectoryTree(DirectoryTree):
