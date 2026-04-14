@@ -12,14 +12,23 @@ from tdconsole.core.yaml_getter_setter import (
 )
 
 REMOTE_INSTANCE_PREFIX = "remote@"
+FORWARDED_INSTANCE_PREFIX = "forwarded@"
 
 
 def is_remote_instance_name(name: str | None) -> bool:
     return bool(name) and str(name).startswith(REMOTE_INSTANCE_PREFIX)
 
 
+def is_forwarded_instance_name(name: str | None) -> bool:
+    return bool(name) and str(name).startswith(FORWARDED_INSTANCE_PREFIX)
+
+
 def make_remote_instance_name(host: str, port: str | int) -> str:
     return f"{REMOTE_INSTANCE_PREFIX}{host}:{port}"
+
+
+def make_forwarded_instance_name(port: str | int) -> str:
+    return f"{FORWARDED_INSTANCE_PREFIX}127.0.0.1:{port}"
 
 
 def define_root(*parts):
@@ -148,6 +157,22 @@ def instance_name_to_instance(instance_name: str) -> Instance:
             private_ip=host,
         )
 
+    if is_forwarded_instance_name(instance_name):
+        forwarded_target = instance_name.removeprefix(FORWARDED_INSTANCE_PREFIX)
+        port = "2457"
+        if ":" in forwarded_target:
+            _, port = forwarded_target.rsplit(":", 1)
+        return Instance(
+            name=instance_name,
+            status="Remote",
+            cfg_ext=port,
+            cfg_int="2458",
+            arg_ext=port,
+            arg_int="2458",
+            public_ip="127.0.0.1",
+            private_ip="127.0.0.1",
+        )
+
     if instance_name not in available_instances and instance_name == "_Create_Instance":
         return Instance(
             name=instance_name,
@@ -192,27 +217,37 @@ def resolve_working_instance(app=None, session=None):
         raise TypeError("Expected either an app or session to be provided")
 
     current_td_login = resolve_login_credentials()
-    current_session_url, current_session_port = (
-        current_td_login["url"],
-        current_td_login["port"],
-    )
+    current_session_host = current_td_login["host"]
+    current_session_port = current_td_login["port"]
+    has_login = bool(current_td_login.get("logged_in"))
 
-    current_working_instance = (
-        session.query(Instance)
-        .filter_by(status="Running", arg_ext=current_session_port)
-        .first()
-    )
-    if current_working_instance:
-        working_instance = current_working_instance
-    elif session.query(Instance).filter_by(working=True, status="Running").first():
-        working_instance = session.query(Instance).filter_by(working=True).first()
-    elif session.query(Instance).filter_by(working=True, status="Remote").first():
-        working_instance = (
-            session.query(Instance).filter_by(working=True, status="Remote").first()
-        )
-    else:
-        working_instance = None
-    return working_instance
+    if has_login and current_session_host and current_session_port:
+        host = str(current_session_host).strip()
+        port = str(current_session_port).strip()
+        remote_name = make_remote_instance_name(host, port)
+
+        for candidate in (
+            session.query(Instance).filter_by(name=remote_name).first(),
+            session.query(Instance).filter_by(public_ip=host, arg_ext=port).first(),
+            session.query(Instance).filter_by(private_ip=host, arg_ext=port).first(),
+        ):
+            if candidate is not None:
+                candidate.working = True
+                return candidate
+
+        # Keep logged-in remote sessions visible even when no explicit remote
+        # instance has been created in local DB yet.
+        synthesized = instance_name_to_instance(remote_name)
+        synthesized.working = True
+        return synthesized
+
+    local_running = session.query(Instance).filter_by(status="Running").first()
+    if local_running is not None:
+        return local_running
+
+    if session.query(Instance).filter_by(working=True, status="Remote").first():
+        return session.query(Instance).filter_by(working=True, status="Remote").first()
+    return None
 
 
 def sync_filesystem_instances_to_db(app=None, session=None) -> list[Instance]:
@@ -252,10 +287,11 @@ def sync_filesystem_instances_to_db(app=None, session=None) -> list[Instance]:
             fs_instance.https_cert_mode = getattr(db_instance, "https_cert_mode", None)
             session.merge(fs_instance)
 
-    # Keep remote instances that are not represented on the local filesystem.
+    # Keep remote/forwarded instances not represented on the local filesystem.
     missing_local_instances = session.query(Instance).filter(
         ~Instance.name.in_(instance_names),
         ~Instance.name.like(f"{REMOTE_INSTANCE_PREFIX}%"),
+        ~Instance.name.like(f"{FORWARDED_INSTANCE_PREFIX}%"),
     )
     missing_local_instances.delete(synchronize_session=False)
     if hasattr(app, "working_instance"):
@@ -265,7 +301,12 @@ def sync_filesystem_instances_to_db(app=None, session=None) -> list[Instance]:
             db_instance = (
                 session.query(Instance).filter_by(name=working_instance_name).first()
             )
-            if db_instance is None or db_instance.status == "Not Running":
+            if db_instance is None and (
+                is_remote_instance_name(working_instance_name)
+                or is_forwarded_instance_name(working_instance_name)
+            ):
+                pass
+            elif db_instance is None or db_instance.status == "Not Running":
                 app.working_instance = None
 
     session.commit()
@@ -297,9 +338,27 @@ def query_session(session, model, limit=None, *conditions, **filters):
 
 def resolve_login_credentials(app=None):
     json_path = os.path.expanduser("~/.tabsdata/connection.json")
-    url = json.load(open(json_path))["url"] if os.path.exists(json_path) else None
-    port = urlparse(url).port
+    payload = {}
+    if os.path.exists(json_path):
+        with open(json_path) as handle:
+            payload = json.load(handle)
+        url = payload.get("url")
+    else:
+        url = None
+    parsed = urlparse(url) if url else None
+    host = parsed.hostname if parsed is not None else None
+    port = parsed.port if parsed is not None else None
+    bearer_token = payload.get("bearer_token")
+    refresh_token = payload.get("refresh_token")
+    logged_in = bool(url) and bool(bearer_token or refresh_token)
     if app:
         app.working_url = url
+        app.working_host = host
         app.working_port = port
-    return {"url": url, "port": port}
+        app.logged_in = logged_in
+    return {
+        "url": url,
+        "host": host,
+        "port": port,
+        "logged_in": logged_in,
+    }

@@ -65,8 +65,11 @@ from tdconsole.core.construct_command_trie import CliAutoComplete, Node
 from tdconsole.core.find_instances import (
     find_tabsdata_instance_names,
     instance_name_to_instance,
+    is_forwarded_instance_name,
     is_remote_instance_name,
+    make_forwarded_instance_name,
     make_remote_instance_name,
+    resolve_login_credentials,
 )
 from tdconsole.core.models import Instance
 from tdconsole.core.system_environment import (
@@ -887,8 +890,6 @@ InstanceInfoPanel .box > ListView {
             else:
                 label = event.widget.parent
             table = label.label
-            if isinstance(table, str) and table == "Create a Table":
-                return
             table_name = getattr(table, "name", str(table))
             collection_name = (
                 getattr(self.selected_collection, "name", None)
@@ -965,7 +966,7 @@ InstanceInfoPanel .box > ListView {
 
     def compose(self) -> ComposeResult:
         yield CurrentInstanceWidget(title="Current Instance", classes="box")
-        yield CurrentCollectionsWidget(title="Current Collection", classes="box")
+        yield CurrentCollectionsWidget(title="Current Collections", classes="box")
         yield CurrentFunctionsWidget(
             title="Available Functions", classes="box collection_dependent"
         )
@@ -1045,6 +1046,13 @@ class CurrentInstanceWidget(CurrentStateWidgetTemplate):
             status_line = "Create a New Instance"
             line1 = ""
             line2 = ""
+        elif instance.status == "Remote" or is_remote_instance_name(instance.name):
+            login = resolve_login_credentials()
+            remote_url = str(login.get("url") or "").strip()
+            status_color = "#38bdf8"
+            status_line = "Remote connection  ● Connected"
+            line1 = remote_url if remote_url else f"{instance.public_ip}:{instance.arg_ext}"
+            line2 = ""
         elif instance.status == "Running":
             status_color = "#22c55e"
             status_line = f"{instance.name}  ● Running"
@@ -1070,13 +1078,14 @@ class CurrentCollectionsWidget(CurrentStateWidgetTemplate):
         """Converts List to a ListView"""
         collections = list(self.parent.collection_list or [])
         choiceLabels = [LabelItem(getattr(i, "name", ""), i) for i in collections]
-        self.list = ListView(*choiceLabels)
         selected_name = self.parent.selected_collection_name
+        selected_index = 0
         if selected_name:
             for idx, item in enumerate(collections):
                 if getattr(item, "name", item) == selected_name:
-                    self.list.index = idx
+                    selected_index = idx
                     break
+        self.list = ListView(*choiceLabels, initial_index=selected_index)
         return Vertical(self.list, classes="inner")
 
     @on(ListView.Selected)
@@ -1099,10 +1108,7 @@ class CurrentFunctionsWidget(CurrentStateWidgetTemplate):
         """Converts List to a ListView"""
         functions = list(self.parent.function_list or [])
 
-        functions.append("Create a Function")
-        choiceLabels = [
-            LabelItem(getattr(i, "name", "Create a Function"), i) for i in functions
-        ]
+        choiceLabels = [LabelItem(getattr(i, "name", ""), i) for i in functions]
         self.list = ListView(*choiceLabels)
         selected_name = self.parent.selected_function_name
         if selected_name:
@@ -1132,10 +1138,7 @@ class CurrentTablesWidget(CurrentStateWidgetTemplate):
         """Converts List to a ListView"""
         tables = list(self.parent.table_list or [])
 
-        tables.append("Create a Table")
-        choiceLabels = [
-            LabelItem(getattr(i, "name", "Create a Function"), i) for i in tables
-        ]
+        choiceLabels = [LabelItem(getattr(i, "name", ""), i) for i in tables]
         self.list = ListView(*choiceLabels)
         selected_name = self.parent.selected_table_name
         if selected_name:
@@ -1352,13 +1355,19 @@ class InstanceSelectionScreen(ListScreenTemplate):
         elif self.app.flow_mode == "start":
             temp_list = [instance_name_to_instance("_Create_Instance")]
             temp_list.extend(
-                [i for i in instance_list if not is_remote_instance_name(i.name)]
+                [
+                    i
+                    for i in instance_list
+                    if not is_remote_instance_name(i.name)
+                    and not is_forwarded_instance_name(i.name)
+                ]
             )
         elif self.app.flow_mode == "stop":
             temp_list = [
                 i
                 for i in session.query(Instance).filter_by(status="Running").all()
                 if not is_remote_instance_name(i.name)
+                and not is_forwarded_instance_name(i.name)
             ]
             new = new = {
                 "name": False,
@@ -1375,6 +1384,7 @@ class InstanceSelectionScreen(ListScreenTemplate):
                 i
                 for i in session.query(Instance).all()
                 if not is_remote_instance_name(i.name)
+                and not is_forwarded_instance_name(i.name)
             ]
             new = new = {
                 "name": False,
@@ -1525,6 +1535,41 @@ class HomeTabbedScreen(Screen):
         height: 1fr;
         border: round $accent;
     }
+    #status-log {
+        height: 1fr;
+        border: round $accent;
+    }
+    #status-error-box {
+        display: none;
+        border: round #a33d3d;
+        background: #341818;
+        padding: 1 2;
+        margin: 0 0 1 0;
+        height: auto;
+    }
+    #status-error-title {
+        color: #ffd4d4;
+        text-style: bold;
+        margin-bottom: 1;
+    }
+    #status-retry-btn {
+        width: 12;
+        border: round #e39a64;
+        background: #4a2b15;
+        color: #ffe7d2;
+    }
+    #status-retry-row {
+        width: 1fr;
+        align: center middle;
+    }
+    #status-retry-btn:hover {
+        border: round #f2ba8f;
+        background: #5a351a;
+    }
+    #status-retry-btn:focus {
+        border: round #ffd0aa;
+        background: #6a3f1f;
+    }
     #cli-input {
         height: 3;
     }
@@ -1558,6 +1603,13 @@ class HomeTabbedScreen(Screen):
         self.cli_prompt_widget: Static | None = None
         self.cli_log_widget: RichLog | None = None
         self.cli_input_widget: Input | None = None
+        self.status_prompt_widget: Static | None = None
+        self.status_log_widget: RichLog | None = None
+        self.status_error_box_widget: Vertical | None = None
+        self.status_error_title_widget: Static | None = None
+        self.status_retry_btn_widget: Button | None = None
+        self._status_watch_task: asyncio.Task | None = None
+        self._status_watch_instance: str | None = None
         self._cli_screen_lines: list[str] = [""]
         self._cli_cursor_row: int = 0
         self._cli_cursor_col: int = 0
@@ -1574,11 +1626,12 @@ class HomeTabbedScreen(Screen):
             yield Tabs(
                 Tab("Main", id="main-tab"),
                 Tab("CLI", id="cli-tab"),
+                Tab("Status", id="status-tab"),
                 id="home-tabs-nav",
             )
             with Horizontal(id="home-controls"):
-                yield CreateMenuButton()
                 yield SystemEnvironmentDropdown()
+                yield CreateMenuButton()
                 yield BackBar()
                 yield RefreshBar()
                 yield ExitBar()
@@ -1603,14 +1656,33 @@ class HomeTabbedScreen(Screen):
                     yield BottomAwareCliAutoComplete(
                         input_widget, candidates=self.candidates_callback
                     )
+            with Vertical(id="status-panel"):
+                with Vertical(id="cli-pane"):
+                    yield Static("", id="status-prompt")
+                    with Vertical(id="status-error-box"):
+                        yield Static(
+                            "Server info isn't available for the selected instance.",
+                            id="status-error-title",
+                        )
+                        with Horizontal(id="status-retry-row"):
+                            yield Button("Retry", id="status-retry-btn")
+                    yield RichLog(
+                        id="status-log", wrap=False, highlight=True, markup=False
+                    )
         yield Footer()
 
     def on_mount(self) -> None:
         self.cli_prompt_widget = self.query_one("#cli-prompt", Static)
         self.cli_log_widget = self.query_one("#cli-log", RichLog)
         self.cli_input_widget = self.query_one("#cli-input", Input)
+        self.status_prompt_widget = self.query_one("#status-prompt", Static)
+        self.status_log_widget = self.query_one("#status-log", RichLog)
+        self.status_error_box_widget = self.query_one("#status-error-box", Vertical)
+        self.status_error_title_widget = self.query_one("#status-error-title", Static)
+        self.status_retry_btn_widget = self.query_one("#status-retry-btn", Button)
         self._refresh_prompt()
         self._log_line("Built-ins: cd, clear, pwd, exit")
+        self._start_status_watch(force_restart=True)
         self.query_one("#main-list", ListView).focus()
         self._queue_autocomplete_refresh(force=True)
 
@@ -1644,6 +1716,9 @@ class HomeTabbedScreen(Screen):
         elif label == "CLI":
             switcher.current = "cli-panel"
             self.query_one("#cli-input", Input).focus()
+        elif label == "Status":
+            switcher.current = "status-panel"
+            self._start_status_watch(force_restart=False)
 
     @on(ListView.Selected, "#main-list")
     def on_main_list_selected(self, event: ListView.Selected) -> None:
@@ -1660,8 +1735,12 @@ class HomeTabbedScreen(Screen):
     def refresh_current_instance_widget(self, event: ScreenResume):
         self.query_one(InstanceInfoPanel).refresh_widget()
         self._queue_autocomplete_refresh(force=True)
+        self.refresh_status_tab()
         if self._pending_cli_command:
             self.call_after_refresh(self._execute_pending_cli)
+
+    def on_unmount(self) -> None:
+        self._stop_status_watch()
 
     def _execute_pending_cli(self) -> None:
         if not self._pending_cli_command:
@@ -1682,6 +1761,21 @@ class HomeTabbedScreen(Screen):
         self._log_line(f"$ {command}")
         await self._run_command(command)
         self._refresh_prompt()
+
+    def on_key(self, event: Key) -> None:
+        if event.key != "space":
+            return
+        if self.focused is None or getattr(self.focused, "id", None) != "cli-input":
+            return
+        input_widget = self.focused
+        if not isinstance(input_widget, Input):
+            return
+        cursor = input_widget.cursor_position
+        value = input_widget.value or ""
+        input_widget.value = f"{value[:cursor]} {value[cursor:]}"
+        input_widget.cursor_position = cursor + 1
+        event.stop()
+        event.prevent_default()
 
     async def _run_command(self, command: str, use_pty: bool = False) -> None:
         if command == "clear":
@@ -1796,6 +1890,125 @@ class HomeTabbedScreen(Screen):
     def _log_line(self, text: str) -> None:
         if self.cli_log_widget is not None:
             self.cli_log_widget.write(text)
+
+    def _working_instance_name(self) -> str | None:
+        working_instance = getattr(self.app, "working_instance", None)
+        return str(getattr(working_instance, "name", "") or "").strip() or None
+
+    @on(Button.Pressed, "#status-retry-btn")
+    async def on_status_retry_pressed(self, event: Button.Pressed) -> None:
+        instance_name = self._working_instance_name()
+        if not instance_name:
+            self._show_status_unavailable_banner("No working instance selected.")
+            return
+        self._show_status_unavailable_banner("Checking server status...")
+        ok, text = await self._run_status_command(instance_name)
+        if ok:
+            self._show_status_output(text)
+            self._start_status_watch(force_restart=True)
+            return
+        self._show_status_unavailable_banner(
+            "Server info isn't available for the selected instance."
+        )
+
+    def refresh_status_tab(self) -> None:
+        self._start_status_watch(force_restart=False)
+
+    def _stop_status_watch(self) -> None:
+        if self._status_watch_task is not None and not self._status_watch_task.done():
+            self._status_watch_task.cancel()
+        self._status_watch_task = None
+        self._status_watch_instance = None
+
+    def _show_status_unavailable_banner(self, message: str) -> None:
+        if self.status_error_box_widget is not None:
+            self.status_error_box_widget.display = True
+        if self.status_error_title_widget is not None:
+            self.status_error_title_widget.update(message)
+        if self.status_log_widget is not None:
+            self.status_log_widget.display = False
+
+    def _show_status_output(self, text: str) -> None:
+        if self.status_error_box_widget is not None:
+            self.status_error_box_widget.display = False
+        if self.status_log_widget is not None:
+            self.status_log_widget.display = True
+            self.status_log_widget.clear()
+            self.status_log_widget.write(text if text else " ")
+
+    def _status_output_is_error(self, text: str) -> bool:
+        lowered = text.lower()
+        return any(
+            marker in lowered
+            for marker in (
+                "not running",
+                "nopidfile",
+                "server status could not be loaded",
+                "failed",
+                "error",
+            )
+        )
+
+    async def _run_status_command(self, instance_name: str) -> tuple[bool, str]:
+        command = ("tdserver", "status", "--instance", instance_name)
+        try:
+            process = await asyncio.create_subprocess_exec(
+                *command,
+                cwd=str(self.cwd),
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.STDOUT,
+                env=os.environ.copy(),
+            )
+            output, _ = await process.communicate()
+        except asyncio.CancelledError:
+            raise
+        except Exception:
+            return False, ""
+
+        text = output.decode(errors="replace").rstrip("\n")
+        if process.returncode != 0:
+            return False, text
+        if self._status_output_is_error(text):
+            return False, text
+        return True, text
+
+    def _start_status_watch(self, force_restart: bool) -> None:
+        if self.status_prompt_widget is None or self.status_log_widget is None:
+            return
+        instance_name = self._working_instance_name()
+        if not instance_name:
+            self._stop_status_watch()
+            self.status_prompt_widget.update("No working instance selected")
+            self._show_status_unavailable_banner("No working instance selected.")
+            return
+        if (
+            force_restart is not True
+            and self._status_watch_task is not None
+            and not self._status_watch_task.done()
+            and self._status_watch_instance == instance_name
+        ):
+            return
+        self._stop_status_watch()
+        self._status_watch_instance = instance_name
+        self.status_prompt_widget.update(
+            f"watch -n 1 tdserver status --instance {instance_name}"
+        )
+        self._status_watch_task = asyncio.create_task(
+            self._status_watch_loop(instance_name)
+        )
+
+    async def _status_watch_loop(self, instance_name: str) -> None:
+        while True:
+            ok, text = await self._run_status_command(instance_name)
+            if not ok:
+                self._show_status_unavailable_banner(
+                    "Server info isn't available for the selected instance."
+                )
+                self._stop_status_watch()
+                return
+
+            self._show_status_output(text)
+            await asyncio.sleep(1)
 
     def _apply_ansi_chunk(self, chunk: str) -> None:
         # Minimal ANSI/CSI handling to keep live tables readable in RichLog.
@@ -2214,7 +2427,19 @@ class HomeTabbedScreen(Screen):
         try:
             session: Session = self.app.session
             instances = session.query(Instance).order_by(Instance.name).all()
-            return [instance.name for instance in instances]
+            instance_names = {instance.name for instance in instances}
+            working_instance = getattr(self.app, "working_instance", None)
+            working_name = getattr(working_instance, "name", None)
+            if working_name:
+                instance_names.add(str(working_name))
+
+            login = resolve_login_credentials()
+            host = login.get("host")
+            port = login.get("port")
+            if login.get("logged_in") and host and port:
+                instance_names.add(make_remote_instance_name(str(host), str(port)))
+
+            return sorted(instance_names)
         except Exception:
             return []
 
@@ -2519,12 +2744,15 @@ Checkbox:focus > .toggle--button {
                 RadioSet(
                     RadioButton("Local", id="remote-mode-local", value=True),
                     RadioButton("Remote", id="remote-mode-remote"),
+                    RadioButton("Forwarded", id="remote-mode-forwarded"),
                     id="remote-mode-select",
                     classes="inputs",
                 ),
                 Horizontal(
                     Label(
-                        "Choose Local to manage an instance on this machine, or Remote to connect by host/port.",
+                        "Local manages an instance on this machine. "
+                        "Remote connects by IP/port. "
+                        "Forwarded connects via SSH port forward (always 127.0.0.1).",
                         id="remote-help-label",
                     ),
                 ),
@@ -2698,11 +2926,18 @@ Checkbox:focus > .toggle--button {
         remote_button = self.query_one("#remote-mode-remote", RadioButton)
         return bool(remote_button.value)
 
+    def is_forwarded_bind_selected(self) -> bool:
+        if self.is_bind_mode() is False:
+            return False
+        forwarded_button = self.query_one("#remote-mode-forwarded", RadioButton)
+        return bool(forwarded_button.value)
+
     def set_visibility(self):
         instance_container = self.query_one("#instance-container")
         remote_container = self.query_one("#remote-container")
         remote_mode_select = self.query_one("#remote-mode-select", RadioSet)
         remote_mode_remote = self.query_one("#remote-mode-remote", RadioButton)
+        remote_mode_forwarded = self.query_one("#remote-mode-forwarded", RadioButton)
         remote_host_container = self.query_one("#remote-host-container")
         remote_host_input = self.query_one("#remote-host-input", Input)
         https_checkbox = self.query_one("#https-checkbox", Checkbox)
@@ -2723,8 +2958,10 @@ Checkbox:focus > .toggle--button {
             i.display = False
 
         bind_mode = self.is_bind_mode()
-        existing_remote = self.instance.status == "Remote" or is_remote_instance_name(
-            self.instance.name
+        existing_remote = (
+            self.instance.status == "Remote"
+            or is_remote_instance_name(self.instance.name)
+            or is_forwarded_instance_name(self.instance.name)
         )
 
         remote_container.display = bind_mode
@@ -2733,27 +2970,33 @@ Checkbox:focus > .toggle--button {
         remote_mode_select.disabled = existing_remote
 
         if existing_remote:
-            remote_mode_remote.value = True
+            if is_forwarded_instance_name(self.instance.name):
+                remote_mode_forwarded.value = True
+            else:
+                remote_mode_remote.value = True
 
         remote_selected = self.is_remote_bind_selected()
+        forwarded_selected = self.is_forwarded_bind_selected()
+        remote_like_selected = remote_selected or forwarded_selected
+
         if remote_selected:
             remote_host_container.display = True
             remote_host_input.disabled = False
 
-        if self.instance.name == "_Create_Instance" and not remote_selected:
+        if self.instance.name == "_Create_Instance" and not remote_like_selected:
             instance_input.disabled = False
             instance_container.display = True
             self.set_focus(instance_input)
         else:
             instance_input.disabled = True
-            instance_container.display = not remote_selected
+            instance_container.display = not remote_like_selected
             self.set_focus(remote_host_input if remote_selected else ext_input)
 
         https_selected = bool(https_checkbox.value)
         cert_source_container.display = https_selected
         cert_source_select.disabled = not https_selected
 
-        if remote_selected:
+        if remote_like_selected:
             cert_source_self.disabled = True
             cert_source_provided.disabled = not https_selected
             if https_selected:
@@ -2764,7 +3007,7 @@ Checkbox:focus > .toggle--button {
 
         cert_mode = self.selected_https_cert_mode()
         show_cert_path = https_selected and (
-            remote_selected
+            remote_like_selected
             or cert_mode == instance_tasks.HTTPS_CERT_MODE_PROVIDED
         )
         cert_path_container.display = show_cert_path
@@ -2775,7 +3018,7 @@ Checkbox:focus > .toggle--button {
             for i in self.query("Input, Checkbox, RadioButton, Button")
             if i.disabled is not True
         ]
-        if not remote_selected:
+        if not remote_like_selected:
             int_input.placeholder = str(self.instance.arg_int or "")
 
     def validate_remote_host(self, host: str):
@@ -2926,13 +3169,15 @@ Checkbox:focus > .toggle--button {
     def handle_submission_request(self, event: Button.Pressed):
         fields = [i for i in self.query("Input") if len(i.validators) > 0 and i.display]
         remote_mode = self.is_remote_bind_selected()
+        forwarded_mode = self.is_forwarded_bind_selected()
+        remote_like_mode = remote_mode or forwarded_mode
         remote_host_input = self.query_one("#remote-host-input", Input)
         cert_path_input = self.query_one("#cert-path-input", Input)
         cert_mode = self.selected_https_cert_mode()
 
-        if self.instance.name != "_Create_Instance" or remote_mode:
+        if self.instance.name != "_Create_Instance" or remote_like_mode:
             fields = [i for i in fields if i.id != "instance-input"]
-        if remote_mode:
+        if remote_like_mode:
             fields = [i for i in fields if i.id not in {"ext-input", "int-input"}]
 
         validation_passed = True
@@ -2955,7 +3200,7 @@ Checkbox:focus > .toggle--button {
                 message.display = True
 
         remote_host = ""
-        if validation_passed and remote_mode:
+        if validation_passed and remote_like_mode:
             ext_port = self.query_one("#ext-input", Input).value or str(
                 self.instance.arg_ext or ""
             )
@@ -2984,18 +3229,21 @@ Checkbox:focus > .toggle--button {
                 )
                 validation_passed = False
 
-            remote_host = (
-                remote_host_input.value
-                if remote_host_input.value != ""
-                else remote_host_input.placeholder
-            ).strip()
-            host_valid, host_message = self.validate_remote_host(remote_host)
-            host_message_widget = remote_host_input.parent.query_one("Pretty")
-            host_message_widget.update(host_message)
-            host_message_widget.display = True
-            if host_valid is False:
-                self.app.notify(f"❌ {host_message}.", severity="error")
-                validation_passed = False
+            if forwarded_mode:
+                remote_host = "127.0.0.1"
+            else:
+                remote_host = (
+                    remote_host_input.value
+                    if remote_host_input.value != ""
+                    else remote_host_input.placeholder
+                ).strip()
+                host_valid, host_message = self.validate_remote_host(remote_host)
+                host_message_widget = remote_host_input.parent.query_one("Pretty")
+                host_message_widget.update(host_message)
+                host_message_widget.display = True
+                if host_valid is False:
+                    self.app.notify(f"❌ {host_message}.", severity="error")
+                    validation_passed = False
 
         if validation_passed:
             use_https = self.query_one("#https-checkbox", Checkbox).value or False
@@ -3003,7 +3251,7 @@ Checkbox:focus > .toggle--button {
             if use_https:
                 cert_message_widget = self.query_one("#cert-path-message", Pretty)
                 if (
-                    remote_mode
+                    remote_like_mode
                     and cert_mode == instance_tasks.HTTPS_CERT_MODE_SELF_GENERATED
                 ):
                     invalid_mode_message = (
@@ -3014,7 +3262,7 @@ Checkbox:focus > .toggle--button {
                     self.app.notify(f"❌ {invalid_mode_message}", severity="error")
                     validation_passed = False
                 elif (
-                    remote_mode
+                    remote_like_mode
                     or cert_mode == instance_tasks.HTTPS_CERT_MODE_PROVIDED
                 ):
                     cert_path = (
@@ -3028,7 +3276,7 @@ Checkbox:focus > .toggle--button {
                     if cert_valid is False:
                         self.app.notify(f"❌ {cert_message}.", severity="error")
                         validation_passed = False
-                    elif remote_mode is False:
+                    elif remote_like_mode is False:
                         key_path = Path(cert_path).expanduser().parent / "key.pem"
                         if key_path.exists() is False or key_path.is_file() is False:
                             key_message = (
@@ -3053,10 +3301,13 @@ Checkbox:focus > .toggle--button {
             )
             use_https = self.query_one("#https-checkbox", Checkbox).value or False
 
-            if remote_mode:
-                remote_name = make_remote_instance_name(remote_host, ext_port)
+            if remote_like_mode:
+                if forwarded_mode:
+                    instance_name_val = make_forwarded_instance_name(ext_port)
+                else:
+                    instance_name_val = make_remote_instance_name(remote_host, ext_port)
                 target_instance = Instance(
-                    name=remote_name,
+                    name=instance_name_val,
                     status="Remote",
                     cfg_ext=ext_port,
                     cfg_int=int_port,

@@ -140,6 +140,11 @@ class NestedMenuApp(App):
                 pass
 
             try:
+                screen.refresh_status_tab()
+            except Exception:
+                pass
+
+            try:
                 from tdconsole.textual_assets.textual_screens import InstanceInfoPanel
 
                 panel = screen.query_one(InstanceInfoPanel)
